@@ -7,9 +7,10 @@ void main() {
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Health app',
-      home: Text('Health app demo'),
+    return SafeArea(
+      child: Scaffold(
+        body: Text('Health app demo', style: TextStyle(fontSize: 25),),
+      )
     );
   }
 }
