@@ -1,17 +1,22 @@
 import 'package:flutter/material.dart';
+import 'home_page.dart';
 
 void main() {
   runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
+  const MyApp({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Scaffold(
-        body: Text('Health app demo', style: TextStyle(fontSize: 25),),
+    return MaterialApp(
+      title: "Health app",
+      home: SafeArea(
+        child:  HomePage(),
       )
     );
   }
 }
+
+
 
