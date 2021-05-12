@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'Diet.dart';
+import 'package:health/Programs.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -18,10 +19,7 @@ class _HomePage extends State<HomePage> {
   static const TextStyle optionStyle =
   TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
   static  List<Widget> _widgetOptions = <Widget>[
-    Text(
-      'Go Fitness',
-      style: optionStyle,
-    ),
+    Programs(),
     Diet(),
     Text(
       'Go Favorite',

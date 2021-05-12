@@ -11,6 +11,9 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: "Health app",
+      theme: ThemeData(
+        fontFamily: 'PatrickHand',
+      ),
       home: SafeArea(
         child:  HomePage(),
       )
