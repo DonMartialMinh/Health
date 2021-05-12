@@ -15,13 +15,13 @@ class Diet extends StatelessWidget {
               elevation: 0,
               backgroundColor: Colors.white,
               flexibleSpace: Header(
-                'Diet',
+                'Food',
                 rightSide: Container(
                   height: 35.0,
                   padding: EdgeInsets.symmetric(horizontal: 16.0),
                   margin: EdgeInsets.only(right: 20.0),
                   decoration: BoxDecoration(
-                    color: Color.fromRGBO(100, 140, 255, 1.0),
+                    color: Colors.green,
                     borderRadius: BorderRadius.circular(20.0),
                   ),
                   child: Center(

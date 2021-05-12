@@ -1,62 +1,116 @@
-import 'package:health/models/exercise.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:health/models/food.dart';
 import 'package:flutter/material.dart';
+import 'package:health/components/detail_food_page.dart';
 
 class ImageCardWithBasicFooter extends StatelessWidget {
-  final Exercise exercise;
+  final Food food;
   final String tag;
   final double imageWidth;
 
   ImageCardWithBasicFooter({
-    required this.exercise,
+    required this.food,
     required this.tag,
     required this.imageWidth,
   });
 
   @override
   Widget build(BuildContext context) {
-    Size size = MediaQuery.of(context).size;
-    double localWidth = size.width * 0.75;
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: <Widget>[
-        Hero(
-          tag: this.tag,
-          child: Container(
-            width: this.imageWidth != null ? this.imageWidth : localWidth,
-            height: 160.0,
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.all(
-                Radius.circular(20.0),
-              ),
-              image: DecorationImage(
-                image: AssetImage(this.exercise.image),
-                fit: BoxFit.cover,
-              ),
-            ),
-          ),
-        ),
-        Container(
-          width: this.imageWidth != null ? this.imageWidth : localWidth,
-          margin: EdgeInsets.only(top: 10.0),
-          child: Text(
-            this.exercise.title,
-            textAlign: TextAlign.left,
-            style: TextStyle(fontSize: 14.0),
-          ),
-        ),
-        Container(
-          width: this.imageWidth != null ? this.imageWidth : localWidth,
-          margin: EdgeInsets.only(top: 5.0),
-          child: Text(
-            '${this.exercise.time}    |    ${this.exercise.difficult}',
-            style: TextStyle(
-              fontSize: 12.0,
-              color: Colors.grey,
-            ),
-          ),
-        ),
-      ],
+    String _complexity = food.complexity.toString().split('.').last;
+    return  InkWell(
+        onTap: () {
+      Navigator.of(context).push(
+          MaterialPageRoute(builder: (context) => DetailFoodPage(food: food,))
+      );
+    },
+       child: Column(
+         crossAxisAlignment: CrossAxisAlignment.start,
+         children: [
+           Stack(
+             children: <Widget>[
+               Container(
+                 padding: EdgeInsets.all(0),
+                 child: ClipRRect(
+                   borderRadius: BorderRadius.circular(10),
+                   clipBehavior: Clip.hardEdge,
+                   child: Center(
+                     child: FadeInImage.assetNetwork(
+                         placeholder: 'assets/images/loading.gif',
+                         image: food.urlImage
+                     ),
+                   ),
+                 ),
+               ),
+               Positioned(
+                 top: 10,left: 10,
+                 child: Container(
+                   padding: EdgeInsets.all(5),
+                   decoration: BoxDecoration(
+                       color: Colors.black45,
+                       borderRadius: BorderRadius.circular(10),
+                       border: Border.all(color: Colors.white, width: 2)
+                   ),
+                   child: Row(
+                     children: <Widget>[
+                       Icon(Icons.timer, color: Colors.white, size: 25,),
+                       Text('${food.duration.inMinutes} minutes',
+                         style: TextStyle(fontSize: 22, color: Colors.white),),
+                     ],
+                   ),
+                 ),
+               ),
+               Positioned(
+                 top: 10,right: 10,
+                 child: Container(
+                   padding: EdgeInsets.all(5),
+                   decoration: BoxDecoration(
+                     color: _complexity == 'Simple' ? Colors.greenAccent : (_complexity == 'Medium' ? Colors.yellowAccent : Colors.pinkAccent),
+                     borderRadius: BorderRadius.circular(10),
+
+                   ),
+                   child: Row(
+                     children: <Widget>[
+                       Text('${food.complexity.toString().split('.').last}',
+                         style: TextStyle(fontSize: 22, color: Colors.black),),
+                     ],
+                   ),
+                 ),
+               ),
+               Positioned(
+                 bottom: 10,right: 10,
+                 child: Container(
+                   padding: EdgeInsets.all(5),
+                   decoration: BoxDecoration(
+                     color: Colors.black45,
+                     borderRadius: BorderRadius.circular(10),
+
+                   ),
+                   child: Text('${food.name}',
+                     style: TextStyle(fontSize: 30, color: Colors.white),),
+                 ),
+               ),
+             ],
+           ),
+           Container(
+             width: this.imageWidth,
+             margin: EdgeInsets.only(top: 10.0),
+             child: Text(
+               this.food.name,
+               textAlign: TextAlign.left,
+               style: TextStyle(fontSize: 15.0),
+             ),
+           ),
+           Container(
+             width: this.imageWidth,
+             margin: EdgeInsets.only(top: 5.0),
+             child: Text('${food.duration.inMinutes} minutes    |    ${this.food.calorie} Kcal',
+             style: TextStyle(
+               fontSize: 12.0,
+               color: Colors.grey,
+             ),),
+           )
+         ]
+       )
     );
   }
 }

@@ -9,7 +9,7 @@ var FAKE_FOODS = [
       calorie: 500,
       complexity: Complexity.Simple,
       ingredients: ['Banh my', 'Thit heo', 'Rau cu', 'Nuoc sot', 'Cha lua', 'Pate'],
-      categoryId: 1
+      category: 'Breakfast'
   ),
   Food(name: 'Banh my trung',
       urlImage: 'https://media-cdn.tripadvisor.com/media/photo-s/0a/8b/d4/11/banh-mi-pate-tr-ng.jpg',
@@ -17,7 +17,7 @@ var FAKE_FOODS = [
       calorie: 600,
       complexity: Complexity.Simple,
       ingredients: ['Banh my', 'Trung ga', 'Rau cu', 'Nuoc sot', 'Cha lua', 'Pate'],
-      categoryId: 1
+      category: 'Breakfast'
   ),
   Food(name: 'Banh my xa xiu',
       urlImage: 'https://static.wixstatic.com/media/c34839_12fb60bc0382498fbf777e084cf9228f~mv2.png/v1/fill/w_561,h_373,al_c,lg_1,q_85/c34839_12fb60bc0382498fbf777e084cf9228f~mv2.webp',
@@ -25,7 +25,7 @@ var FAKE_FOODS = [
       calorie: 369,
       complexity: Complexity.Simple,
       ingredients: ['Banh my', 'Thit xa xiu', 'Rau cu', 'Nuoc sot', 'Cha lua', 'Pate'],
-      categoryId: 4
+      category: 'Breakfast'
   ),
   // Bun thit nuong
   Food(name: 'Bun thit nuong truyen thong',
@@ -34,7 +34,7 @@ var FAKE_FOODS = [
       calorie: 215,
       complexity: Complexity.Medium,
       ingredients: ['Bun tuoi', 'Nuoc mam', 'Rau cu', 'Ot', 'hanh phi', 'Hanh tim', 'Top mo', 'Dua leo'],
-      categoryId: 2
+      category: 'Lunch'
   ),
   Food(name: 'Bun thit nuong cha ram',
       urlImage: 'https://www.cet.edu.vn/wp-content/uploads/2018/03/bun-thit-nuong-kieu-mien-nam.jpg',
@@ -42,7 +42,7 @@ var FAKE_FOODS = [
       calorie: 576,
       complexity: Complexity.Medium,
       ingredients: ['Bun tuoi', 'Nuoc mam', 'Rau cu', 'Ot', 'hanh phi', 'Hanh tim', 'top mo', 'Dua leo', 'Cha ram'],
-      categoryId: 2
+      category: 'Lunch'
   ),
   // Banh Canh
   Food(name: 'Banh canh gio heo',
@@ -51,7 +51,7 @@ var FAKE_FOODS = [
       calorie: 411,
       complexity: Complexity.Hard,
       ingredients: ['Banh canh tuoi', 'Nuoc mam', 'Rau cu', 'Ot', 'hanh phi', 'Gio Heo', 'top mo', 'Hanh la', 'Nam rom'],
-      categoryId: 3
+      category: 'Dinner'
   ),
   Food(name: 'Banh canh ca loc',
       urlImage: 'https://monngonchuabenh.com/wp-content/uploads/2019/03/cach-lam-banh-canh-ca-loc-hue.jpg',
@@ -59,6 +59,6 @@ var FAKE_FOODS = [
       calorie: 451,
       complexity: Complexity.Hard,
       ingredients: ['Banh canh tuoi', 'Nuoc mam', 'Rau cu', 'Ot', 'hanh phi', 'Ca loc', 'Sa te', 'Hanh la'],
-      categoryId: 3
+      category: 'Dinner'
   ),
 ];

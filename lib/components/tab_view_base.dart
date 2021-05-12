@@ -1,7 +1,7 @@
 import 'package:health/components/image_card_with_basic_footer.dart';
-import 'package:health/data/Dishes.dart';
-import 'package:health/models/exercise.dart';
+import 'package:health/data/fake_data.dart';
 import 'package:flutter/material.dart';
+import 'package:health/models/food.dart';
 
 class TabViewBase extends StatelessWidget {
   final String tabName;
@@ -9,18 +9,22 @@ class TabViewBase extends StatelessWidget {
   TabViewBase({required this.tabName});
 
   List<Widget> _renderItem(Size size) {
-    return List<Widget>.generate(dishes.length, (index) {
-      var tag = dishes[index]['title'] + index.toString();
-      Exercise exercise = Exercise(
-        image: dishes[index]['image'],
-        title: dishes[index]['title'],
-        time: dishes[index]['time'],
-        difficult: dishes[index]['calories'],
+    List<Food> foods = FAKE_FOODS.where((foods) => foods.category == this.tabName).toList();
+    return List<Widget>.generate(foods.length, (index) {
+      var tag = foods[index].name + index.toString();
+      Food food = Food(
+        name: foods[index].name,
+        urlImage: foods[index].urlImage,
+        duration: foods[index].duration,
+        calorie: foods[index].calorie,
+        complexity: foods[index].complexity,
+        ingredients: foods[index].ingredients,
+        category: foods[index].category
       );
       return Container(
-        margin: EdgeInsets.symmetric(vertical: 20.0),
+        margin: EdgeInsets.only(top: 20.0),
         child: ImageCardWithBasicFooter(
-          exercise: exercise,
+          food: food,
           tag: tag,
           imageWidth: size.width,
         ),
