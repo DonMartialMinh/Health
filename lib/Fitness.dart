@@ -13,7 +13,7 @@ import 'package:health/components/activity_detail.dart';
 import 'package:flutter/material.dart';
 
 class Programs extends StatelessWidget {
-  final List<Exercise> exercises = [
+  final List<Exercise> exercisesFatBurning = [
     Exercise(
       image: 'assets/images/image001.jpg',
       title: 'Easy Start',
@@ -34,10 +34,37 @@ class Programs extends StatelessWidget {
     )
   ];
 
-  List<Widget> generateList(BuildContext context) {
-    List<Widget> list = [];
+  final List<Exercise> exercisesYoga = [
+    Exercise(
+      image: 'assets/images/yoga1.jpeg',
+      title: 'Cat pose',
+      time: '5 min',
+      difficult: 'Low',
+    ),
+    Exercise(
+      image: 'assets/images/yoga2.jpeg',
+      title: 'Cobra pose',
+      time: '5 min',
+      difficult: 'Low',
+    ),
+    Exercise(
+      image: 'assets/images/yoga3.jpeg',
+      title: 'Cow pose',
+      time: '5 min',
+      difficult: 'Low',
+    ),
+    Exercise(
+      image: 'assets/images/yoga4.jpeg',
+      title: 'Child pose',
+      time: '5 min',
+      difficult: 'Medium',
+    )
+  ];
+
+  List<Widget> generateCard(BuildContext context, List<Exercise> list) {
+    List<Widget> _list = [];
     int count = 0;
-    exercises.forEach((exercise) {
+    list.forEach((exercise) {
       Widget element = Container(
         margin: EdgeInsets.only(right: 20.0),
         child: GestureDetector(
@@ -62,10 +89,10 @@ class Programs extends StatelessWidget {
           },
         ),
       );
-      list.add(element);
+      _list.add(element);
       count++;
     });
-    return list;
+    return _list;
   }
 
   @override
@@ -79,13 +106,17 @@ class Programs extends StatelessWidget {
             child: Column(
               children: <Widget>[
                 Header(
-                  'Programs',
+                  'Fitness',
                   rightSide: UserPhoto(),
                 ),
                 MainCardPrograms(), // MainCard
                 Section(
                   title: 'Fat burning',
-                  horizontalList: this.generateList(context),
+                  horizontalList: this.generateCard(context, exercisesFatBurning),
+                ),
+                Section(
+                  title: 'Yoga',
+                  horizontalList: this.generateCard(context, exercisesYoga),
                 ),
                 Section(
                   title: 'Abs Generating',

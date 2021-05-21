@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'Diet.dart';
-import 'package:health/Programs.dart';
+import 'package:health/Fitness.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -55,7 +55,7 @@ class _HomePage extends State<HomePage> {
         items: const <BottomNavigationBarItem>[
           BottomNavigationBarItem(
             icon: Icon(Icons.fitness_center),
-            label: 'Fit',
+            label: 'Fitness',
             backgroundColor: _colorFit,
           ),
           BottomNavigationBarItem(
