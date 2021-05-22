@@ -1,4 +1,7 @@
+import 'dart:ffi';
+
 import 'package:health/components/daily_tip.dart';
+import 'package:health/components/exercise_list_page.dart';
 import 'package:health/components/header.dart';
 import 'package:health/components/image_card_with_basic_footer.dart';
 import 'package:health/components/section.dart';
@@ -9,7 +12,7 @@ import 'package:health/components/user_tip.dart';
 import 'package:health/models/exercise.dart';
 import 'components/fit_image_card.dart';
 import 'components/detail_exercise_card.dart';
-import 'package:health/components/activity_detail.dart';
+import 'package:health/components/section_title.dart';
 
 import 'package:flutter/material.dart';
 
@@ -62,16 +65,16 @@ class Programs extends StatelessWidget {
     )
   ];
 
-  List<Widget> generateCard(BuildContext context, List<Exercise> list) {
+  List<Widget> generateCard(BuildContext context, List<Exercise> list, double width) {
     List<Widget> _list = [];
     list.forEach((exercise) {
       Widget element = Container(
-        margin: EdgeInsets.only(right: 20.0),
+        margin: EdgeInsets.only(top: 20, left: 20, right: 20),
         child: GestureDetector(
           child: FitImageCard(
             exercise: exercise,
             tag: '${exercise.id}',
-            imageWidth: MediaQuery.of(context).size.width/2,
+            imageWidth: width,
           ),
           onTap: () {
             Navigator.push(
@@ -92,6 +95,8 @@ class Programs extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    double _cardWidth = MediaQuery.of(context).size.width * 2/3;
+    double _listCardWidth = MediaQuery.of(context).size.width;
     return Scaffold(
       backgroundColor: Colors.white,
       body: SingleChildScrollView(
@@ -105,16 +110,30 @@ class Programs extends StatelessWidget {
                   rightSide: UserPhoto(),
                 ),
                 MainCardPrograms(), // MainCard
-                Section(
-                  title: 'Fat burning',
-                  horizontalList: this.generateCard(context, exercisesFatBurning),
+                InkWell(
+                  onTap: () {
+                    Navigator.of(context).push(
+                        MaterialPageRoute(builder: (context) => ExerciseListPage(list: this.generateCard(context, exercisesFatBurning, _listCardWidth), title: 'Fat burning'))
+                    );
+                  },
+                  child: SectionTitle('Fat burning'),
                 ),
                 Section(
-                  title: 'Yoga',
-                  horizontalList: this.generateCard(context, exercisesYoga),
+                  horizontalList: this.generateCard(context, exercisesFatBurning, _cardWidth),
+                ),
+                InkWell(
+                  onTap: () {
+                    Navigator.of(context).push(
+                        MaterialPageRoute(builder: (context) => ExerciseListPage(list: this.generateCard(context, exercisesYoga, _listCardWidth), title: 'Yoga'))
+                    );
+                  },
+                  child: SectionTitle('Yoga'),
                 ),
                 Section(
-                  title: 'Abs Generating',
+                  horizontalList: this.generateCard(context, exercisesYoga, _cardWidth),
+                ),
+                SectionTitle('Ads generating'),
+                Section(
                   horizontalList: <Widget>[
                     ImageCardWithInternal(
                       image: 'assets/images/image004.jpg',
@@ -141,8 +160,8 @@ class Programs extends StatelessWidget {
                   ),
                   child: Column(
                     children: <Widget>[
+                      SectionTitle('Daily tips'),
                       Section(
-                        title: 'Daily Tips',
                         horizontalList: <Widget>[
                           UserTip(
                             image: 'assets/images/image010.jpg',
@@ -167,7 +186,7 @@ class Programs extends StatelessWidget {
                           DailyTip(),
                           DailyTip(),
                           DailyTip(),
-                        ], title: '',
+                        ],
                       ),
                     ],
                   ),

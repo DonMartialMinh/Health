@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'Diet.dart';
+import 'Food.dart';
 import 'package:health/Fitness.dart';
 
 class HomePage extends StatefulWidget {
@@ -15,7 +15,6 @@ class _HomePage extends State<HomePage> {
   static const Color _colorFood = Colors.green;
   static const Color _colorFavorite = Colors.pink;
   static const Color _colorSettings = Colors.orange;
-  static const Color _colorUnknown = Colors.white;
   static const TextStyle optionStyle =
   TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
   static  List<Widget> _widgetOptions = <Widget>[
@@ -42,14 +41,6 @@ class _HomePage extends State<HomePage> {
     return Scaffold(
       body: Center(
         child: _widgetOptions.elementAt(_selectedIndex),
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: (){
-
-        },
-        child: const Icon(Icons.accessibility, color: Colors.black,),
-        backgroundColor: _colorUnknown,
-
       ),
       bottomNavigationBar: BottomNavigationBar(
         items: const <BottomNavigationBarItem>[
@@ -78,7 +69,6 @@ class _HomePage extends State<HomePage> {
         selectedItemColor: Colors.white,
         onTap: _onItemTapped,
       ),
-      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
     );
   }
 }

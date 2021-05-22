@@ -15,8 +15,6 @@ class FitImageCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Size size = MediaQuery.of(context).size;
-    double localWidth = size.width * 0.75;
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[

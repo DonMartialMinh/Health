@@ -20,7 +20,7 @@ class ImageCardWithBasicFooter extends StatelessWidget {
     return  InkWell(
         onTap: () {
       Navigator.of(context).push(
-          MaterialPageRoute(builder: (context) => DetailFoodPage(food: food,))
+          MaterialPageRoute(builder: (context) => DetailFoodPage(food: food, tag: this.tag,))
       );
     },
        child: Column(
@@ -34,10 +34,13 @@ class ImageCardWithBasicFooter extends StatelessWidget {
                    borderRadius: BorderRadius.circular(10),
                    clipBehavior: Clip.hardEdge,
                    child: Center(
-                     child: FadeInImage.assetNetwork(
-                         placeholder: 'assets/images/loading.gif',
-                         image: food.urlImage
-                     ),
+                     child: Hero(
+                       tag: this.tag,
+                       child: FadeInImage.assetNetwork(
+                           placeholder: 'assets/images/loading.gif',
+                           image: food.urlImage
+                       ),
+                     )
                    ),
                  ),
                ),

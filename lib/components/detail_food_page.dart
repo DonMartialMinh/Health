@@ -3,7 +3,8 @@ import 'package:health/models/food.dart';
 
 class DetailFoodPage extends StatelessWidget{
   Food food;
-  DetailFoodPage({required this.food});
+  String tag;
+  DetailFoodPage({required this.food, required this.tag});
 
   @override
   Widget build(BuildContext context) {
@@ -14,9 +15,12 @@ class DetailFoodPage extends StatelessWidget{
         child: Column(
           children: <Widget> [
             Center(
-              child: FadeInImage.assetNetwork(
-                  placeholder: 'assets/images/loading.gif',
-                  image: food.urlImage),
+              child: Hero(
+                tag: this.tag,
+                child: FadeInImage.assetNetwork(
+                    placeholder: 'assets/images/loading.gif',
+                    image: food.urlImage),
+              )
             ),
             Container(
               padding: EdgeInsets.symmetric(vertical: 20),

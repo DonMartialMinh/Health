@@ -11,7 +11,6 @@ class TabViewBase extends StatelessWidget {
   List<Widget> _renderItem(Size size) {
     List<Food> foods = FAKE_FOODS.where((foods) => foods.category == this.tabName).toList();
     return List<Widget>.generate(foods.length, (index) {
-      var tag = foods[index].name + index.toString();
       Food food = Food(
         name: foods[index].name,
         urlImage: foods[index].urlImage,
@@ -25,7 +24,7 @@ class TabViewBase extends StatelessWidget {
         margin: EdgeInsets.only(top: 20.0),
         child: ImageCardWithBasicFooter(
           food: food,
-          tag: tag,
+          tag: '${foods[index].id}',
           imageWidth: size.width,
         ),
       );
