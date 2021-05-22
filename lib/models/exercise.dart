@@ -1,6 +1,7 @@
-import 'package:flutter/foundation.dart';
+import 'dart:math';
 
 class Exercise {
+  late int id;
   final String title, time, difficult, image;
 
   Exercise({
@@ -8,5 +9,8 @@ class Exercise {
     required this.time,
     required this.difficult,
     required this.image,
-  });
+  })
+  {
+  this.id = Random().nextInt(1000);
+  }
 }

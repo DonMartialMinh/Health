@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:health/components/Header.dart';
 
 class Section extends StatelessWidget {
   final List<Widget> horizontalList;
@@ -12,12 +13,12 @@ class Section extends StatelessWidget {
       margin: EdgeInsets.only(top: 35.0),
       child: Column(
         children: <Widget>[
-          SectionTitle((this.title != null ) ? this.title : ''),
+          SectionTitle(this.title),
           SingleChildScrollView(
             padding: EdgeInsets.only(left: 20.0, top: 10.0),
             scrollDirection: Axis.horizontal,
             child: Row(
-                children: (this.horizontalList != null ) ? this.horizontalList : []
+                children: this.horizontalList
             ),
           )
         ],
@@ -34,17 +35,23 @@ class SectionTitle extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.only(left: 20.0),
+      margin: EdgeInsets.only(right: 20.0, left: 20.0),
       child: Align(
         alignment: Alignment.bottomLeft,
-        child: Text(
-          this._text,
-          style: TextStyle(
-            fontSize: 14.0,
-            fontWeight: FontWeight.w700,
-          ),
-        ),
-      ),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: [
+            Padding(padding: EdgeInsets.symmetric(vertical: 20)),
+            Text(this._text, style: TextStyle(fontSize: 20),),
+            Expanded(child: Row(
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: [
+                Icon(Icons.arrow_right_alt, size: 30,)
+              ],
+            ))
+          ],
+        )
+      )
     );
   }
 }

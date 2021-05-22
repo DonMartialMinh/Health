@@ -8,6 +8,7 @@ import 'package:health/components/user_photo.dart';
 import 'package:health/components/user_tip.dart';
 import 'package:health/models/exercise.dart';
 import 'components/fit_image_card.dart';
+import 'components/detail_exercise_card.dart';
 import 'package:health/components/activity_detail.dart';
 
 import 'package:flutter/material.dart';
@@ -63,14 +64,13 @@ class Programs extends StatelessWidget {
 
   List<Widget> generateCard(BuildContext context, List<Exercise> list) {
     List<Widget> _list = [];
-    int count = 0;
     list.forEach((exercise) {
       Widget element = Container(
         margin: EdgeInsets.only(right: 20.0),
         child: GestureDetector(
           child: FitImageCard(
             exercise: exercise,
-            tag: 'imageHeader$count',
+            tag: '${exercise.id}',
             imageWidth: MediaQuery.of(context).size.width/2,
           ),
           onTap: () {
@@ -78,11 +78,7 @@ class Programs extends StatelessWidget {
               context,
               MaterialPageRoute(
                 builder: (_) {
-                  // return ActivityDetail(
-                  //   exercise: exercise,
-                  //   tag: 'imageHeader$count',
-                  // );
-                  return Text('123');
+                  return DetailExerciseCard(exercise: exercise, tag: '${exercise.id}',);
                 },
               ),
             );
@@ -90,7 +86,6 @@ class Programs extends StatelessWidget {
         ),
       );
       _list.add(element);
-      count++;
     });
     return _list;
   }
