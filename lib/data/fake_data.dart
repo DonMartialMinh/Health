@@ -1,5 +1,5 @@
-import 'package:flutter/material.dart';
 import 'package:health/models/food.dart';
+import 'package:health/models/exercise.dart';
 
 var FAKE_FOODS = [
   // Banh my category
@@ -61,4 +61,60 @@ var FAKE_FOODS = [
       ingredients: ['Banh canh tuoi', 'Nuoc mam', 'Rau cu', 'Ot', 'hanh phi', 'Ca loc', 'Sa te', 'Hanh la'],
       category: 'Dinner'
   ),
+];
+
+final List<Exercise> exercisesFatBurning = [
+  Exercise(
+    image: 'assets/images/image001.jpg',
+    title: 'Easy Start',
+    time: '5 min',
+    difficult: 'Low',
+  ),
+  Exercise(
+    image: 'assets/images/image002.jpg',
+    title: 'Medium Start',
+    time: '10 min',
+    difficult: 'Medium',
+  ),
+  Exercise(
+    image: 'assets/images/image003.jpg',
+    title: 'Pro Start',
+    time: '25 min',
+    difficult: 'High',
+  )
+];
+
+final List<Exercise> exercisesYoga = [
+  Exercise(
+    image: 'assets/images/yoga1.jpeg',
+    title: 'Cat pose',
+    time: '5 min',
+    difficult: 'Low',
+    effect: 'This pose provides a gentle massage to the spine and belly organs.',
+    caution: 'With a neck injury, keep the head in line with the torso.',
+    steps: [
+      'Start on your hands and knees in a “tabletop” position. Make sure your knees are set directly below your hips and your wrists, elbows and shoulders are in line and perpendicular to the floor. Center your head in a neutral position, eyes looking at the floor.',
+      'As you exhale, round your spine toward the ceiling, making sure to keep your shoulders and knees in position. Release your head toward the floor, but don’t force your chin to your chest.',
+      'Inhale, coming back to neutral “tabletop” position on your hands and knees.',
+      'This pose is often paired with Cow Pose on the inhale for a gentle, flowing vinyasa.'
+    ]
+  ),
+  Exercise(
+    image: 'assets/images/yoga2.jpeg',
+    title: 'Cobra pose',
+    time: '5 min',
+    difficult: 'Low',
+  ),
+  Exercise(
+    image: 'assets/images/yoga3.jpeg',
+    title: 'Cow pose',
+    time: '5 min',
+    difficult: 'Low',
+  ),
+  Exercise(
+    image: 'assets/images/yoga4.jpeg',
+    title: 'Child pose',
+    time: '5 min',
+    difficult: 'Medium',
+  )
 ];

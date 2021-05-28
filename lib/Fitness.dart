@@ -1,5 +1,4 @@
-import 'dart:ffi';
-
+import 'data/fake_data.dart';
 import 'package:health/components/daily_tip.dart';
 import 'package:health/components/exercise_list_page.dart';
 import 'package:health/components/header.dart';
@@ -17,53 +16,6 @@ import 'package:health/components/section_title.dart';
 import 'package:flutter/material.dart';
 
 class Programs extends StatelessWidget {
-  final List<Exercise> exercisesFatBurning = [
-    Exercise(
-      image: 'assets/images/image001.jpg',
-      title: 'Easy Start',
-      time: '5 min',
-      difficult: 'Low',
-    ),
-    Exercise(
-      image: 'assets/images/image002.jpg',
-      title: 'Medium Start',
-      time: '10 min',
-      difficult: 'Medium',
-    ),
-    Exercise(
-      image: 'assets/images/image003.jpg',
-      title: 'Pro Start',
-      time: '25 min',
-      difficult: 'High',
-    )
-  ];
-
-  final List<Exercise> exercisesYoga = [
-    Exercise(
-      image: 'assets/images/yoga1.jpeg',
-      title: 'Cat pose',
-      time: '5 min',
-      difficult: 'Low',
-    ),
-    Exercise(
-      image: 'assets/images/yoga2.jpeg',
-      title: 'Cobra pose',
-      time: '5 min',
-      difficult: 'Low',
-    ),
-    Exercise(
-      image: 'assets/images/yoga3.jpeg',
-      title: 'Cow pose',
-      time: '5 min',
-      difficult: 'Low',
-    ),
-    Exercise(
-      image: 'assets/images/yoga4.jpeg',
-      title: 'Child pose',
-      time: '5 min',
-      difficult: 'Medium',
-    )
-  ];
 
   List<Widget> generateCard(BuildContext context, List<Exercise> list, double width) {
     List<Widget> _list = [];
