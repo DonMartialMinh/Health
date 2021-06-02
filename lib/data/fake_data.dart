@@ -63,33 +63,51 @@ var FAKE_FOODS = [
   ),
 ];
 
-final List<Exercise> exercisesFatBurning = [
+final List<Exercise> exercisesBodyPart = [
   Exercise(
-    image: 'assets/images/image001.jpg',
-    title: 'Easy Start',
+    image: 'assets/images/Arm1.jpeg',
+    title: 'Weight lifting',
     time: '5 min',
-    difficult: 'Low',
+    difficult: 'Arm',
   ),
   Exercise(
-    image: 'assets/images/image002.jpg',
-    title: 'Medium Start',
+    image: 'assets/images/Arm2.jpeg',
+    title: 'Tricep dips',
     time: '10 min',
-    difficult: 'Medium',
+    difficult: 'Arm',
   ),
   Exercise(
-    image: 'assets/images/image003.jpg',
-    title: 'Pro Start',
+    image: 'assets/images/Arm3.jpeg',
+    title: 'Bicep curls',
     time: '25 min',
-    difficult: 'High',
-  )
+    difficult: 'Arm',
+  ),
+  Exercise(
+    image: 'assets/images/Arm4.jpeg',
+    title: 'Push ups',
+    time: '25 min',
+    difficult: 'Arm',
+  ),
+  Exercise(
+    image: 'assets/images/Arm5.jpeg',
+    title: 'Side plank with dumbbell raises',
+    time: '25 min',
+    difficult: 'Arm',
+  ),
+  Exercise(
+    image: 'assets/images/Arm6.jpeg',
+    title: 'Scissors',
+    time: '25 min',
+    difficult: 'Arm',
+  ),
 ];
 
 final List<Exercise> exercisesYoga = [
   Exercise(
-    image: 'assets/images/yoga1.jpeg',
+    image: 'assets/images/Byoga1.jpeg',
     title: 'Cat pose',
     time: '5 min',
-    difficult: 'Low',
+    difficult: 'Beginners',
     effect: 'This pose provides a gentle massage to the spine and belly organs.',
     caution: 'With a neck injury, keep the head in line with the torso.',
     steps: [
@@ -100,21 +118,69 @@ final List<Exercise> exercisesYoga = [
     ]
   ),
   Exercise(
-    image: 'assets/images/yoga2.jpeg',
+    image: 'assets/images/Byoga2.jpeg',
     title: 'Cobra pose',
     time: '5 min',
-    difficult: 'Low',
+    difficult: 'Beginners',
   ),
   Exercise(
-    image: 'assets/images/yoga3.jpeg',
+    image: 'assets/images/Byoga3.jpeg',
     title: 'Cow pose',
     time: '5 min',
-    difficult: 'Low',
+    difficult: 'Beginners',
   ),
   Exercise(
-    image: 'assets/images/yoga4.jpeg',
+    image: 'assets/images/Byoga4.jpeg',
     title: 'Child pose',
     time: '5 min',
-    difficult: 'Medium',
-  )
+    difficult: 'Beginners',
+  ),
+  Exercise(
+    image: 'assets/images/Iyoga1.jpeg',
+    title: 'Boat pose',
+    time: '5 min',
+    difficult: 'Intermediate',
+  ),
+  Exercise(
+    image: 'assets/images/Iyoga2.jpeg',
+    title: 'Bow pose',
+    time: '5 min',
+    difficult: 'Intermediate',
+  ),
+  Exercise(
+    image: 'assets/images/Iyoga3.jpeg',
+    title: 'Crane(Crow) pose',
+    time: '5 min',
+    difficult: 'Intermediate',
+  ),
+  Exercise(
+    image: 'assets/images/Iyoga4.jpeg',
+    title: 'Dolphin Plank pose',
+    time: '5 min',
+    difficult: 'Intermediate',
+  ),
+  Exercise(
+    image: 'assets/images/Ayoga1.jpeg',
+    title: 'King Pigeon pose',
+    time: '5 min',
+    difficult: 'Advanced',
+  ),
+  Exercise(
+    image: 'assets/images/Ayoga2.jpeg',
+    title: 'Lord Of The Dance pose',
+    time: '5 min',
+    difficult: 'Advanced',
+  ),
+  Exercise(
+    image: 'assets/images/Ayoga3.jpeg',
+    title: 'Lotus pose',
+    time: '5 min',
+    difficult: 'Advanced',
+  ),
+  Exercise(
+    image: 'assets/images/Ayoga4.jpeg',
+    title: 'Peacock pose',
+    time: '5 min',
+    difficult: 'Advanced',
+  ),
 ];

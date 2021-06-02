@@ -8,7 +8,7 @@ class SectionTitle extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-        margin: EdgeInsets.only(right: 20.0, left: 20.0, top: 35.0),
+        margin: EdgeInsets.only(right: 20.0, left: 20.0, top: 20.0, bottom: 5),
         child: Align(
             alignment: Alignment.bottomLeft,
             child: Row(

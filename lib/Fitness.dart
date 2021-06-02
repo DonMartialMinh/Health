@@ -1,5 +1,7 @@
 import 'package:health/components/activity_detail.dart';
+import 'package:health/components/exercise_yoga_category.dart';
 
+import 'components/exercise_body_part_category.dart';
 import 'data/fake_data.dart';
 import 'package:health/components/daily_tip.dart';
 import 'package:health/components/exercise_list_page.dart';
@@ -84,18 +86,18 @@ class Programs extends StatelessWidget {
                 InkWell(
                   onTap: () {
                     Navigator.of(context).push(
-                        MaterialPageRoute(builder: (context) => ExerciseListPage(list: this.generateCard(context, exercisesFatBurning, _listCardWidth), title: 'Fat burning'))
+                        MaterialPageRoute(builder: (context) => ExcerciseBodyPartCategory())
                     );
                   },
-                  child: SectionTitle('Fat burning'),
+                  child: SectionTitle('Exercises for each body part'),
                 ),
                 Section(
-                  horizontalList: this.generateCard(context, exercisesFatBurning, _cardWidth),
+                  horizontalList: this.generateCard(context, exercisesBodyPart, _cardWidth),
                 ),
                 InkWell(
                   onTap: () {
                     Navigator.of(context).push(
-                        MaterialPageRoute(builder: (context) => ExerciseListPage(list: this.generateCard(context, exercisesYoga, _listCardWidth), title: 'Yoga'))
+                        MaterialPageRoute(builder: (context) => ExcerciseYogaCategory())
                     );
                   },
                   child: SectionTitle('Yoga'),

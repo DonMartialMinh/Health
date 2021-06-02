@@ -12,7 +12,7 @@ class ExerciseListPage extends StatelessWidget {
   Widget build(BuildContext context) {
     // TODO: implement build
     return SafeArea(child: Scaffold (
-      appBar: AppBar(title: Text('${this.title}'),backgroundColor: Colors.green,),
+      appBar: AppBar(title: Text('${this.title}'),backgroundColor: Colors.redAccent,),
       body: Container(
           child: SingleChildScrollView(
             scrollDirection: Axis.vertical,
