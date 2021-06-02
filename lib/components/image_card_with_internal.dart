@@ -49,7 +49,7 @@ class ImageCardWithInternal extends StatelessWidget {
       width: size.width * 0.85,
       height: size.width * 0.60,
       padding: EdgeInsets.all(20.0),
-      margin: EdgeInsets.only(right: 15.0),
+      margin: EdgeInsets.only(top: 20, left: 20),
       decoration: BoxDecoration(
         image: DecorationImage(
           image: AssetImage(this.image),

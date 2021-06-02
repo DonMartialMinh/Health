@@ -19,8 +19,8 @@ class DailyTip extends StatelessWidget {
           width: width,
           height: 200.0,
           margin: EdgeInsets.only(
-            right: 15.0,
             bottom: 10.0,
+            left: 20.0,
           ),
           decoration: BoxDecoration(
             image: DecorationImage(
@@ -32,38 +32,22 @@ class DailyTip extends StatelessWidget {
             ),
           ),
         ),
-        Text(
-          this.element['title']!,
-          style: TextStyle(fontSize: 14.0),
+        Container(
+          padding: EdgeInsets.only(left: 20),
+          child: Text(
+            this.element['title']!,
+            style: TextStyle(fontSize: 14.0),
+          ),
         ),
         Container(
           width: width,
-          margin: EdgeInsets.only(top: 10.0),
+          margin: EdgeInsets.only(top: 10.0, left: 20),
           child: Text(
             this.element['subtitle']!,
             style: TextStyle(
               color: Colors.black45,
               fontSize: 14.0,
             ),
-          ),
-        ),
-        Container(
-          margin: EdgeInsets.only(top: 10.0),
-          padding: EdgeInsets.symmetric(
-            vertical: 5.0,
-            horizontal: 15.0,
-          ),
-          child: Text(
-            'More',
-            style: TextStyle(
-              color: Colors.white,
-            ),
-          ),
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.all(
-              Radius.circular(20.0),
-            ),
-            color: Colors.lightBlue,
           ),
         ),
       ],

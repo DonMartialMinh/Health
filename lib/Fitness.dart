@@ -1,3 +1,5 @@
+import 'package:health/components/activity_detail.dart';
+
 import 'data/fake_data.dart';
 import 'package:health/components/daily_tip.dart';
 import 'package:health/components/exercise_list_page.dart';
@@ -59,7 +61,24 @@ class Programs extends StatelessWidget {
               children: <Widget>[
                 Header(
                   'Fitness',
-                  rightSide: UserPhoto(),
+                  rightSide: Container(
+                    height: 35.0,
+                    padding: EdgeInsets.symmetric(horizontal: 16.0),
+                    margin: EdgeInsets.only(right: 20.0),
+                    decoration: BoxDecoration(
+                      color: Colors.redAccent,
+                      borderRadius: BorderRadius.circular(20.0),
+                    ),
+                    child: Center(
+                      child: Text(
+                        'Program',
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontWeight: FontWeight.w900,
+                        ),
+                      ),
+                    ),
+                  ),
                 ),
                 MainCardPrograms(), // MainCard
                 InkWell(
@@ -111,27 +130,12 @@ class Programs extends StatelessWidget {
                     color: Colors.blue[50],
                   ),
                   child: Column(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[
-                      SectionTitle('Daily tips'),
-                      Section(
-                        horizontalList: <Widget>[
-                          UserTip(
-                            image: 'assets/images/image010.jpg',
-                            name: 'User Img',
-                          ),
-                          UserTip(
-                            image: 'assets/images/image010.jpg',
-                            name: 'User Img',
-                          ),
-                          UserTip(
-                            image: 'assets/images/image010.jpg',
-                            name: 'User Img',
-                          ),
-                          UserTip(
-                            image: 'assets/images/image010.jpg',
-                            name: 'User Img',
-                          ),
-                        ],
+                      Container(
+                        padding: EdgeInsets.only(top: 20, bottom: 20, left: 20),
+                        child: Text('Tips', style: TextStyle(fontSize: 20))
                       ),
                       Section(
                         horizontalList: <Widget>[

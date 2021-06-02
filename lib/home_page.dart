@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:health/Settings.dart';
 import 'Food.dart';
 import 'package:health/Fitness.dart';
 
@@ -24,10 +25,7 @@ class _HomePage extends State<HomePage> {
       'Go Favorite',
       style: optionStyle,
     ),
-    Text(
-      'Go Settings',
-      style: optionStyle,
-    ),
+    Settings(),
   ];
 
   void _onItemTapped(int index) {

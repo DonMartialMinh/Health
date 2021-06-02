@@ -4,10 +4,9 @@ class UserPhoto extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: 54.0,
-      height: 54.0,
+      width: 150.0,
+      height: 150.0,
       padding: EdgeInsets.all(10.0),
-      margin: EdgeInsets.only(right: 20.0),
       decoration: BoxDecoration(
         image: DecorationImage(
           image: AssetImage(
