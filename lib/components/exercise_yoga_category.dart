@@ -8,8 +8,12 @@ import 'detail_exercise_card.dart';
 import 'fit_image_card.dart';
 
 class ExcerciseYogaCategory extends StatelessWidget {
-  List<Widget> generateCard(BuildContext context, double width,String sectionName) {
-    List<Exercise> exercises = exercisesYoga.where((exercises) => exercises.difficult == sectionName).toList();
+
+  List<Exercise> getData (String sectionName) {
+    return exercisesYoga.where((exercises) => exercises.difficult == sectionName).toList();
+  }
+
+  List<Widget> generateCard(BuildContext context, double width, List<Exercise> exercises) {
     List<Widget> _list = [];
     exercises.forEach((exercise) {
       Widget element = Container(
@@ -40,7 +44,6 @@ class ExcerciseYogaCategory extends StatelessWidget {
   Widget build(BuildContext context) {
     // TODO: implement build
     double _cardWidth = MediaQuery.of(context).size.width * 2/3;
-    double _listCardWidth = MediaQuery.of(context).size.width;
     return SafeArea(child: Scaffold(
       appBar: AppBar(title: Text('Category'),backgroundColor: Colors.redAccent,),
       body: SingleChildScrollView(
@@ -50,35 +53,35 @@ class ExcerciseYogaCategory extends StatelessWidget {
               InkWell(
                 onTap: () {
                   Navigator.of(context).push(
-                      MaterialPageRoute(builder: (context) => ExerciseListPage(list: this.generateCard(context, _listCardWidth, 'Beginners'), title: 'Beginners yoga poses'))
+                      MaterialPageRoute(builder: (context) => ExerciseListPage(list: getData('Beginners'), title: 'Beginners yoga poses'))
                   );
                 },
                 child: SectionTitle('Beginners yoga poses'),
               ),
               Section(
-                horizontalList: this.generateCard(context, _cardWidth, 'Beginners'),
+                horizontalList: this.generateCard(context, _cardWidth, getData('Beginners')),
               ),
               InkWell(
                 onTap: () {
                   Navigator.of(context).push(
-                      MaterialPageRoute(builder: (context) => ExerciseListPage(list: this.generateCard(context, _listCardWidth, 'Intermediate'), title: 'Intermediate yoga poses'))
+                      MaterialPageRoute(builder: (context) => ExerciseListPage(list: getData('Intermediate'), title: 'Intermediate yoga poses'))
                   );
                 },
                 child: SectionTitle('Intermediate yoga poses'),
               ),
               Section(
-                horizontalList: this.generateCard(context, _cardWidth, 'Intermediate'),
+                horizontalList: this.generateCard(context, _cardWidth, getData('Intermediate')),
               ),
               InkWell(
                 onTap: () {
                   Navigator.of(context).push(
-                      MaterialPageRoute(builder: (context) => ExerciseListPage(list: this.generateCard(context, _listCardWidth, 'Advanced'), title: 'Advanced yoga poses'))
+                      MaterialPageRoute(builder: (context) => ExerciseListPage(list: getData('Advanced'), title: 'Advanced yoga poses'))
                   );
                 },
                 child: SectionTitle('Advanced yoga poses'),
               ),
               Section(
-                horizontalList: this.generateCard(context, _cardWidth, 'Advanced'),
+                horizontalList: this.generateCard(context, _cardWidth, getData('Advanced')),
               ),
             ],
           ),

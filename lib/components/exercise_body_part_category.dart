@@ -8,8 +8,11 @@ import 'detail_exercise_card.dart';
 import 'fit_image_card.dart';
 
 class ExcerciseBodyPartCategory extends StatelessWidget {
-  List<Widget> generateCard(BuildContext context, double width,String sectionName) {
-    List<Exercise> exercises = exercisesBodyPart.where((exercises) => exercises.difficult == sectionName).toList();
+  List<Exercise> getData (String sectionName) {
+    return exercisesBodyPart.where((exercises) => exercises.difficult == sectionName).toList();
+  }
+
+  List<Widget> generateCard(BuildContext context, double width,List<Exercise> exercises) {
     List<Widget> _list = [];
     exercises.forEach((exercise) {
       Widget element = Container(
@@ -50,35 +53,35 @@ class ExcerciseBodyPartCategory extends StatelessWidget {
               InkWell(
                 onTap: () {
                   Navigator.of(context).push(
-                      MaterialPageRoute(builder: (context) => ExerciseListPage(list: this.generateCard(context, _listCardWidth, 'Arm'), title: 'Arm exercises'))
+                      MaterialPageRoute(builder: (context) => ExerciseListPage(list: getData('Arm'), title: 'Arm exercises'))
                   );
                 },
                 child: SectionTitle('Arm'),
               ),
               Section(
-                horizontalList: this.generateCard(context, _cardWidth, 'Arm'),
+                horizontalList: this.generateCard(context, _cardWidth, getData('Arm')),
               ),
               InkWell(
                 onTap: () {
                   Navigator.of(context).push(
-                      MaterialPageRoute(builder: (context) => ExerciseListPage(list: this.generateCard(context, _listCardWidth, 'Leg'), title: 'Leg exercises'))
+                      MaterialPageRoute(builder: (context) => ExerciseListPage(list: getData('Leg'), title: 'Leg exercises'))
                   );
                 },
                 child: SectionTitle('Leg'),
               ),
               Section(
-                horizontalList: this.generateCard(context, _cardWidth, 'Leg'),
+                horizontalList: this.generateCard(context, _cardWidth, getData('Leg')),
               ),
               InkWell(
                 onTap: () {
                   Navigator.of(context).push(
-                      MaterialPageRoute(builder: (context) => ExerciseListPage(list: this.generateCard(context, _listCardWidth, 'Belly'), title: 'Belly exercises'))
+                      MaterialPageRoute(builder: (context) => ExerciseListPage(list:  getData('Belly'), title: 'Belly exercises'))
                   );
                 },
                 child: SectionTitle('Belly'),
               ),
               Section(
-                horizontalList: this.generateCard(context, _cardWidth, 'Belly'),
+                horizontalList: this.generateCard(context, _cardWidth, getData('Belly')),
               ),
             ],
           ),
