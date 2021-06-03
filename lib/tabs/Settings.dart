@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'components/Header.dart';
-import 'components/user_photo.dart';
+import '../components/Header.dart';
+import '../components/user_photo.dart';
 
 class Settings extends StatelessWidget{
   @override

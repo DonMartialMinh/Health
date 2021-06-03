@@ -5,27 +5,24 @@ import 'package:percent_indicator/circular_percent_indicator.dart';
 class ActivityTimer extends StatelessWidget {
   final String image =
       'https://i0.wp.com/fitnessrunning.net/wp-content/uploads/2016/10/woman-doing-plank.jpg';
-  final String tag = 'imageHeader';
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return SafeArea(
+      child: Scaffold(
       body: SingleChildScrollView(
         child: OrientationBuilder(builder: (context, orientation) {
-          return (MediaQuery.of(context).orientation ==
-              prefix0.Orientation.portrait)
-              ? Portrait(image: this.image, tag: this.tag)
-              : Landscape(image: this.image, tag: this.tag);
+          return Portrait(image: this.image);
         }),
       ),
-    );
+    ));
   }
 }
 
 class Portrait extends StatelessWidget {
-  final String image, tag;
+  final String image;
 
-  Portrait({required this.image, required this.tag});
+  Portrait({required this.image});
 
   @override
   Widget build(BuildContext context) {
@@ -34,15 +31,12 @@ class Portrait extends StatelessWidget {
       children: <Widget>[
         Stack(
           children: <Widget>[
-            Hero(
-              tag: this.tag,
-              child: Container(
-                width: MediaQuery.of(context).size.width,
-                height: 270,
-                child: Image.network(
-                  this.image,
-                  fit: BoxFit.fitHeight,
-                ),
+            Container(
+              width: MediaQuery.of(context).size.width,
+              height: 270,
+              child: Image.network(
+                this.image,
+                fit: BoxFit.fitHeight,
               ),
             ),
             Positioned(
@@ -173,9 +167,9 @@ class Portrait extends StatelessWidget {
 }
 
 class Landscape extends StatelessWidget {
-  final String image, tag;
+  final String image;
 
-  Landscape({required this.image, required this.tag});
+  Landscape({required this.image});
 
   @override
   Widget build(BuildContext context) {

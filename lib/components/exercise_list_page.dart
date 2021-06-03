@@ -27,7 +27,7 @@ class _MyAppState extends State<ExerciseListPage> {
   List<Widget> generateCard(BuildContext context, double width, List<Exercise> exercises, String filter) {
     List<Widget> _list = [];
     exercises.forEach((exercise) {
-      if (exercise.title.toLowerCase().contains(filter.trim()))
+      if (exercise.title.toLowerCase().contains(filter.trim().toLowerCase()))
         {
           Widget element = Container(
             margin: EdgeInsets.only(top: 20, left: 20, right: 20),

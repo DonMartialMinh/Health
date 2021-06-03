@@ -1,23 +1,22 @@
 import 'dart:math';
 
-class Exercise {
+import 'package:health/models/exercise.dart';
+
+class Program {
   late int id;
   final String title, time, difficult, image;
-  late String effect, caution;
-  late List<String> steps;
+  late String effect;
+  List<Exercise> exercises;
 
-  Exercise({
+  Program({
     required this.title,
     required this.time,
     required this.difficult,
     required this.image,
+    required this.exercises,
     this.effect = "",
-    this.caution = "",
-    this.steps = Fake
   })
   {
-  this.id = Random().nextInt(10000);
+    this.id = Random().nextInt(1000);
   }
 }
-
-const List<String> Fake = [''];

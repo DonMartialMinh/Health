@@ -4,38 +4,33 @@ import 'package:health/components/activity_timer.dart';
 import 'package:flutter/material.dart';
 
 class ActivityDetail extends StatelessWidget {
-  final String tag;
-  final Exercise exercise;
+  final List<Exercise> exercise;
 
   ActivityDetail({
     required this.exercise,
-    required this.tag,
   });
 
   @override
   Widget build(BuildContext context) {
     var width = MediaQuery.of(context).size.width;
-
-    return Scaffold(
+    Exercise currentExercise = exercise[0];
+    return SafeArea(child: Scaffold(
       body: SingleChildScrollView(
         child: Column(
           children: <Widget>[
             Stack(
               children: <Widget>[
-                Hero(
-                  tag: this.tag,
-                  child: Container(
-                    width: MediaQuery.of(context).size.width,
-                    height: 270,
-                    child: Image.asset(
-                      this.exercise.image,
-                      fit: BoxFit.fitHeight,
-                    ),
+                Container(
+                  width: MediaQuery.of(context).size.width,
+                  height: 270,
+                  child: Image.asset(
+                    currentExercise.image,
+                    fit: BoxFit.fitHeight,
                   ),
                 ),
                 Positioned(
-                  top: 40,
-                  right: 20,
+                  top: 10,
+                  right: 10,
                   child: GestureDetector(
                     child: Container(
                       padding: EdgeInsets.all(4.0),
@@ -65,7 +60,7 @@ class ActivityDetail extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[
                       Text(
-                        this.exercise.title,
+                        currentExercise.title,
                         style: TextStyle(
                           fontSize: 22.0,
                           color: Colors.blueGrey,
@@ -95,7 +90,7 @@ class ActivityDetail extends StatelessWidget {
                                         color: Colors.blueGrey[300]),
                                   ),
                                   Text(
-                                    '${this.exercise.time}',
+                                    '${currentExercise.time}',
                                     style: TextStyle(
                                         fontSize: 18.0,
                                         color: Colors.lightBlue,
@@ -119,7 +114,7 @@ class ActivityDetail extends StatelessWidget {
                                     ),
                                   ),
                                   Text(
-                                    this.exercise.difficult,
+                                    currentExercise.difficult,
                                     style: TextStyle(
                                       fontSize: 18.0,
                                       color: Colors.lightBlue,
@@ -164,7 +159,7 @@ class ActivityDetail extends StatelessWidget {
       ),
       bottomNavigationBar: GestureDetector(
         child: Container(
-          margin: EdgeInsets.only(left: 20.0, right: 20.0, bottom: 20.0),
+          margin: EdgeInsets.only(left: 20.0, right: 20.0, bottom: 30.0),
           padding: EdgeInsets.all(15.0),
           decoration: BoxDecoration(
               color: Color.fromRGBO(100, 140, 255, 1.0),
@@ -195,6 +190,6 @@ class ActivityDetail extends StatelessWidget {
           );
         },
       ),
-    );
+    ));
   }
 }

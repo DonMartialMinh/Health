@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:health/models/program.dart';
 
 class MainCardPrograms extends StatelessWidget {
-  final Map<String, String> cardInfo = {
-    'title': 'For You',
-    'time': '8 min',
-    'image': 'assets/images/image008.jpg',
-  };
+  final Program program;
+
+  MainCardPrograms({required this.program});
 
   @override
   Widget build(BuildContext context) {
@@ -19,7 +18,7 @@ class MainCardPrograms extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: <Widget>[
               Text(
-                this.cardInfo['title']!,
+                this.program.title,
                 style: TextStyle(
                   color: Colors.white,
                   fontSize: 20.0,
@@ -27,7 +26,7 @@ class MainCardPrograms extends StatelessWidget {
                 ),
               ),
               Text(
-                this.cardInfo['time']!,
+                this.program.time,
                 style: TextStyle(
                   color: Colors.white,
                   fontSize: 12.0,
@@ -48,13 +47,13 @@ class MainCardPrograms extends StatelessWidget {
       width: size.width - 40,
       height: (size.width - 40) / 2,
       margin: EdgeInsets.only(
-        top: 40.0,
+        top: 5.0,
         left: 20.0,
         right: 20.0,
       ),
       decoration: BoxDecoration(
         image: DecorationImage(
-          image: AssetImage(this.cardInfo['image']!),
+          image: AssetImage(this.program.image),
           fit: BoxFit.fill,
         ),
         borderRadius: BorderRadius.all(

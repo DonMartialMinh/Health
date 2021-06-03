@@ -2,7 +2,7 @@ import 'package:health/components/Header.dart';
 import 'package:health/components/tab_view_base.dart';
 import 'package:flutter/material.dart';
 
-class Diet extends StatelessWidget {
+class Food extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(

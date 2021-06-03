@@ -1,5 +1,6 @@
 import 'package:health/models/food.dart';
 import 'package:health/models/exercise.dart';
+import 'package:health/models/program.dart';
 
 var FAKE_FOODS = [
   // Banh my category
@@ -61,6 +62,61 @@ var FAKE_FOODS = [
       ingredients: ['Banh canh tuoi', 'Nuoc mam', 'Rau cu', 'Ot', 'hanh phi', 'Ca loc', 'Sa te', 'Hanh la'],
       category: 'Dinner'
   ),
+];
+
+final List<Program> programs = [
+  Program(
+      title: 'Beginner start',
+      time: '5 min',
+      difficult: 'Beginner',
+      image: 'assets/images/image005.jpg',
+      exercises: [
+        Exercise(
+          image: 'assets/images/image005.jpg',
+          title: 'Plank',
+          time: '50 sec',
+          difficult: 'Beginner',
+        ),
+        Exercise(
+          image: 'assets/images/image006.jpg',
+          title: 'Push up',
+          time: '50 sec',
+          difficult: 'Beginner',
+        ),
+        Exercise(
+          image: 'assets/images/image002.jpeg',
+          title: 'Crunches',
+          time: '50 sec',
+          difficult: 'Beginner',
+        ),
+      ]
+  ),
+  Program(
+      title: 'Intermediate start',
+      time: '10 min',
+      difficult: 'Intermediate',
+      image: 'assets/images/image011.jpg',
+      exercises: [
+        Exercise(
+          image: 'assets/images/image005.jpg',
+          title: 'Plank',
+          time: '50 sec',
+          difficult: 'Beginner',
+        ),
+        Exercise(
+          image: 'assets/images/image006.jpg',
+          title: 'Push up',
+          time: '50 sec',
+          difficult: 'Beginner',
+        ),
+        Exercise(
+          image: 'assets/images/image002.jpeg',
+          title: 'Crunches',
+          time: '50 sec',
+          difficult: 'Beginner',
+        ),
+      ]
+  )
 ];
 
 final List<Exercise> exercisesBodyPart = [
