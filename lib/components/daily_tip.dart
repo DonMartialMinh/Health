@@ -1,12 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:health/models/tip.dart';
 
 class DailyTip extends StatelessWidget {
-
-  final Map<String, String> element = {
-    'title': '3 Main workout tips',
-    'subtitle': 'The American Council on Exercises (ACE) recently surveyed 3,000 ACE-certificated personal trainers about the best!',
-    'image': 'assets/images/image011.jpg',
-  };
+  Tip tip;
+  DailyTip({required this.tip});
 
   @override
   Widget build(BuildContext context) {
@@ -24,7 +21,7 @@ class DailyTip extends StatelessWidget {
           ),
           decoration: BoxDecoration(
             image: DecorationImage(
-              image: AssetImage(this.element['image']!),
+              image: AssetImage(tip.image),
               fit: BoxFit.fill,
             ),
             borderRadius: BorderRadius.all(
@@ -35,7 +32,7 @@ class DailyTip extends StatelessWidget {
         Container(
           padding: EdgeInsets.only(left: 20),
           child: Text(
-            this.element['title']!,
+            this.tip.title,
             style: TextStyle(fontSize: 14.0),
           ),
         ),
@@ -43,7 +40,7 @@ class DailyTip extends StatelessWidget {
           width: width,
           margin: EdgeInsets.only(top: 10.0, left: 20),
           child: Text(
-            this.element['subtitle']!,
+            this.tip.content,
             style: TextStyle(
               color: Colors.black45,
               fontSize: 14.0,

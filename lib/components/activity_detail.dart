@@ -132,7 +132,9 @@ class ActivityDetail extends StatelessWidget {
                                     currentExercise.difficult,
                                     style: TextStyle(
                                       fontSize: 18.0,
-                                      color: Colors.lightBlue,
+                                      color: (
+                                          currentExercise.difficult == 'Beginner') ? Colors.lightBlue
+                                          : ((currentExercise.difficult == 'Intermediate') ? Colors.amber : Colors.red),
                                       fontWeight: FontWeight.w900,
                                     ),
                                   ),

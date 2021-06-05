@@ -1,5 +1,7 @@
 import 'package:health/components/activity_detail.dart';
 import 'package:health/components/exercise_yoga_category.dart';
+import 'package:health/models/ads.dart';
+import 'package:health/models/tip.dart';
 import '../components/exercise_body_part_category.dart';
 import '../data/fake_data.dart';
 import 'package:health/components/daily_tip.dart';
@@ -12,7 +14,7 @@ import '../components/fit_image_card.dart';
 import '../components/detail_exercise_card.dart';
 import 'package:health/components/section_title.dart';
 import 'package:health/models/program.dart';
-
+import 'package:url_launcher/url_launcher.dart';
 import 'package:flutter/material.dart';
 
 class Programs extends StatelessWidget {
@@ -45,6 +47,35 @@ class Programs extends StatelessWidget {
     return _list;
   }
 
+  List<Widget> generateAds(BuildContext context, List<Ads> list) {
+    List<Widget> _list = [];
+    list.forEach((ads) {
+      Widget element = Container(
+        margin: EdgeInsets.only(top: 20, left: 20, right: 20),
+        child: GestureDetector(
+          child: ImageCardWithInternal(image: ads.image, title: ads.name, duration: ads.price),
+          onTap: () {
+            _launchURL(ads.url);
+          },
+        ),
+      );
+      _list.add(element);
+    });
+    return _list;
+  }
+
+  List<Widget> generateTips(BuildContext context, List<Tip> list) {
+    List<Widget> _list = [];
+    list.forEach((tip) {
+      Widget element = Container(
+        margin: EdgeInsets.only(top: 20, left: 20, right: 20),
+        child: DailyTip(tip: tip),
+      );
+      _list.add(element);
+    });
+    return _list;
+  }
+
   List<Widget> generateMainCard(BuildContext context, List<Program> list) {
     List<Widget> _list = [];
     list.forEach((program) {
@@ -67,6 +98,14 @@ class Programs extends StatelessWidget {
       _list.add(element);
     });
     return _list;
+  }
+
+  _launchURL(String url) async {
+    if (await canLaunch(url)) {
+      await launch(url);
+    } else {
+      throw 'Could not launch $url';
+    }
   }
 
   @override
@@ -128,29 +167,24 @@ class Programs extends StatelessWidget {
                 Section(
                   horizontalList: this.generateCard(context, exercisesYoga, _cardWidth),
                 ),
-                SectionTitle('Ads generating'),
-                Section(
-                  horizontalList: <Widget>[
-                    ImageCardWithInternal(
-                      image: 'assets/images/image004.jpg',
-                      title: 'Core \nWorkout',
-                      duration: '7 min',
-                    ),
-                    ImageCardWithInternal(
-                      image: 'assets/images/image004.jpg',
-                      title: 'Core \nWorkout',
-                      duration: '7 min',
-                    ),
-                    ImageCardWithInternal(
-                      image: 'assets/images/image004.jpg',
-                      title: 'Core \nWorkout',
-                      duration: '7 min',
-                    ),
-                  ],
+                Padding(padding: EdgeInsets.only(bottom: 20)),
+                Container(
+                  decoration: BoxDecoration(
+                    color: Colors.pink[50],
+                  ),
+                  child: Column(
+                    children: [
+                      SectionTitle('Advertises'),
+                      Section(
+                          horizontalList: this.generateAds(context, ads)
+                      ),
+                      Padding(padding: EdgeInsets.only(bottom: 20))
+                    ],
+                  ),
                 ),
                 Container(
-                  margin: EdgeInsets.only(top: 50.0),
-                  padding: EdgeInsets.only(top: 10.0, bottom: 40.0),
+                  //margin: EdgeInsets.only(top: 50.0),
+                  padding: EdgeInsets.only( bottom: 40.0),
                   decoration: BoxDecoration(
                     color: Colors.blue[50],
                   ),
@@ -158,16 +192,9 @@ class Programs extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.start,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[
-                      Container(
-                        padding: EdgeInsets.only(top: 20, bottom: 20, left: 20),
-                        child: Text('Tips', style: TextStyle(fontSize: 20))
-                      ),
+                      SectionTitle('Tips'),
                       Section(
-                        horizontalList: <Widget>[
-                          DailyTip(),
-                          DailyTip(),
-                          DailyTip(),
-                        ],
+                        horizontalList: this.generateTips(context, tips),
                       ),
                     ],
                   ),

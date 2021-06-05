@@ -1,6 +1,8 @@
+import 'package:health/models/ads.dart';
 import 'package:health/models/food.dart';
 import 'package:health/models/exercise.dart';
 import 'package:health/models/program.dart';
+import 'package:health/models/tip.dart';
 
 var FAKE_FOODS = [
   // Banh my category
@@ -239,4 +241,49 @@ final List<Exercise> exercisesYoga = [
     time: 30,
     difficult: 'Advanced',
   ),
+];
+
+final List<Ads> ads = [
+  Ads(
+    name: 'Whey protein',
+    content: 'Muscle enhance',
+    price: '1,450,000 đ',
+    image: 'https://product.hstatic.net/1000314545/product/suplo-008a-01_master.jpg',
+    url: 'https://wheyshop.vn/san-pham/100-whey-gold-standard-5lbs-2-3kg-13-2'
+  ),
+  Ads(
+      name: 'Best BCAA',
+      content: 'Muscle enhance',
+      price: '750,000 đ',
+      image: 'https://product.hstatic.net/1000185761/product/bpi-sports-best-bcaa-100-serv-blueberry_c0ad5bda7d634b5f9aaa490f9303911d_master.jpg',
+      url: 'https://wheyshop.vn/san-pham/best-bcaa-60-lan-dung'
+  )
+];
+
+final List<Tip> tips = [
+  Tip(
+      title: 'Exercise daily',
+      content: 'Exercise daily for at least an hour. You do not have to kill yourself from running, jogging, etc., but you should have some sort of moderate physical activity in your everyday life.',
+      image: 'assets/images/tip1.jpeg'
+  ),
+  Tip(
+      title: 'Eat the Right Foods and Portion Each Meal',
+      content: 'Fruits and vegetables are the best thing to eat when getting into shape. Try to stay away from sweets.',
+      image: 'assets/images/tip2.png'
+  ),
+  Tip(
+      title: 'Keep Track of Calories and Food Intake Per Day',
+      content: 'Keeping track of how many calories you eat in a day will be helpful in planning out your physical exercising.Losing weight and striving for a skinnier physique will involve more physical exercise than calories you ingest.',
+      image: 'assets/images/tip3.jpeg'
+  ),
+  Tip(
+      title: 'Be Sure to Get Sleep',
+      content: 'It is crucial to get enough sleep to recharge the body\'s batteries. Six to eight hours of sleep will keep the body going throughout the day.',
+      image: 'assets/images/tip4.jpeg'
+  ),
+  Tip(
+      title: 'Stay Motivated',
+      content: 'An important key to being in shape is to set goals and keep a positive mindset. If you stay positive, you will be able to push yourself to get that fit body you\'ve always wanted.',
+      image: 'assets/images/tip5.png'
+  )
 ];

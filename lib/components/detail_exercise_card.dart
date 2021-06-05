@@ -1,6 +1,6 @@
 
 
-
+import 'package:health/components/activity_timer.dart';
 import 'package:flutter/material.dart';
 import 'package:health/models/exercise.dart';
 import 'package:health/components/list_component.dart';
@@ -8,7 +8,11 @@ import 'package:health/components/list_component.dart';
 class DetailExerciseCard extends StatelessWidget{
   Exercise exercise;
   String tag;
-  DetailExerciseCard({required this.exercise, required this.tag});
+  late List <Exercise> list;
+  DetailExerciseCard({required this.exercise, required this.tag}){
+    list = [];
+    list.add(exercise);
+  }
 
   List<Widget> generateComponent(BuildContext context, List<String> list) {
     List<Widget> _list = [];
@@ -69,6 +73,39 @@ class DetailExerciseCard extends StatelessWidget{
             Padding(padding: EdgeInsets.only(bottom: 30))
           ],
         ),
+      ),
+      bottomNavigationBar: GestureDetector(
+        child: Container(
+          margin: EdgeInsets.only(left: 20.0, right: 20.0, bottom: 30.0),
+          padding: EdgeInsets.all(15.0),
+          decoration: BoxDecoration(
+              color: Colors.red[500],
+              borderRadius: BorderRadius.circular(15.0),
+              boxShadow: [
+                BoxShadow(
+                  color: Color.fromRGBO(100, 140, 255, 0.5),
+                  blurRadius: 10.0,
+                  offset: Offset(0.0, 5.0),
+                ),
+              ]),
+          child: Text(
+            'Start',
+            textAlign: TextAlign.center,
+            style: TextStyle(
+              fontSize: 25.0,
+              fontWeight: FontWeight.w900,
+              color: Colors.white,
+            ),
+          ),
+        ),
+        onTap: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (_) {
+              return ActivityTimer(exercises: this.list);
+            }),
+          );
+        },
       ),
     ));
   }

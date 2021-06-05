@@ -31,9 +31,8 @@ class _ActivityTimerState extends State<ActivityTimer> {
       widget._timer = new Timer.periodic(
         sec,
             (Timer timer) {
-          if (widget._start == 0) {
+          if (widget._start == 1) {
             timer.cancel();
-            Next();
           }
           if (!widget.isStarting) {
             setState(() {
@@ -228,10 +227,11 @@ class _ActivityTimerState extends State<ActivityTimer> {
           ),
           onTap: () {
             if (widget.currentExerciseIndex < widget.exercises.length - 1)
-              Next();
+              {
+                Next();
+              }
             else
               {
-                //dispose();
                 Navigator.pop(context);
               }
           },

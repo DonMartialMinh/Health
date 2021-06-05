@@ -23,6 +23,7 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  url_launcher: ^6.0.6
 
 
   # The following adds the Cupertino Icons font to your application.
@@ -84,6 +85,12 @@ flutter:
      - assets/images/iprogram1.jpeg
      - assets/images/iprogram2.jpeg
      - assets/images/iprogram3.jpeg
+     - assets/images/tip1.jpeg
+     - assets/images/tip2.png
+     - assets/images/tip3.jpeg
+     - assets/images/tip4.jpeg
+     - assets/images/tip5.png
+
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.

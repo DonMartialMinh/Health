@@ -14,50 +14,41 @@ class ImageCardWithInternal extends StatelessWidget {
     Size size = MediaQuery.of(context).size;
     return Container(
       child: Column(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
           Container(
-            child: Text(
-              this.duration,
-              style: TextStyle(
-                color: Colors.white,
-                fontSize: 12.0,
+            width: size.width* 0.9 ,
+            height: size.width * 0.6,
+            child: ClipRRect(
+              borderRadius: BorderRadius.circular(10),
+              clipBehavior: Clip.hardEdge,
+              child: Center(
+                child: FadeInImage.assetNetwork(
+                    placeholder: 'assets/images/loading.gif',
+                    image: this.image
+                ),
               ),
-            ),
-            padding: EdgeInsets.symmetric(
-              vertical: 4.0,
-              horizontal: 10.0,
-            ),
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.all(
-                Radius.circular(20.0),
-              ),
-              color: Colors.black.withAlpha(900),
             ),
           ),
-          Text(
-            this.title,
-            style: TextStyle(
-              color: Colors.white,
-              fontSize: 28,
-              fontWeight: FontWeight.w900,
+          Container(
+            margin: EdgeInsets.only(top: 10.0),
+            child: Text(
+              this.title,
+              textAlign: TextAlign.left,
+              style: TextStyle(fontSize: 15.0),
+            ),
+          ),
+          Container(
+            margin: EdgeInsets.only(top: 5.0),
+            child: Text(
+              '${this.duration}',
+              style: TextStyle(
+                fontSize: 15.0,
+                color: Colors.green,
+              ),
             ),
           ),
         ],
-      ),
-      width: size.width * 0.85,
-      height: size.width * 0.60,
-      padding: EdgeInsets.all(20.0),
-      margin: EdgeInsets.only(top: 20, left: 20),
-      decoration: BoxDecoration(
-        image: DecorationImage(
-          image: AssetImage(this.image),
-          fit: BoxFit.cover,
-        ),
-        borderRadius: BorderRadius.all(
-          Radius.circular(15.0),
-        ),
       ),
     );
   }

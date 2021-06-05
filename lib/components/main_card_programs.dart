@@ -29,7 +29,7 @@ class MainCardPrograms extends StatelessWidget {
                 this.program.time,
                 style: TextStyle(
                   color: Colors.white,
-                  fontSize: 12.0,
+                  fontSize: 20.0,
                 ),
               )
             ],
