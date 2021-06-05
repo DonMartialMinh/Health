@@ -65,7 +65,8 @@ class DetailExerciseCard extends StatelessWidget{
             ),
             Column(
               children: this.generateComponent(context, exercise.steps),
-            )
+            ),
+            Padding(padding: EdgeInsets.only(bottom: 30))
           ],
         ),
       ),

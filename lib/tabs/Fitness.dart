@@ -57,7 +57,7 @@ class Programs extends StatelessWidget {
               context,
               MaterialPageRoute(
                 builder: (_) {
-                  return ActivityDetail(exercise: program.exercises,);
+                  return ActivityDetail(program: program);
                 },
               ),
             );
@@ -112,7 +112,7 @@ class Programs extends StatelessWidget {
                         MaterialPageRoute(builder: (context) => ExcerciseBodyPartCategory())
                     );
                   },
-                  child: SectionTitle('Exercises for each body part'),
+                  child: SectionTitle('Body focus'),
                 ),
                 Section(
                   horizontalList: this.generateCard(context, exercisesBodyPart, _cardWidth),

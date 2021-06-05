@@ -34,9 +34,9 @@ class MainCardPrograms extends StatelessWidget {
               )
             ],
           ),
-          padding: EdgeInsets.all(20.0),
+          padding: EdgeInsets.symmetric(horizontal: 20.0),
           decoration: BoxDecoration(
-            color: Colors.grey[400]!.withOpacity(0.95),
+            color: Colors.redAccent.withOpacity(0.85),
             borderRadius: BorderRadius.only(
               bottomLeft: Radius.circular(20.0),
               bottomRight: Radius.circular(20.0),

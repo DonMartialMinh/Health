@@ -1,8 +1,8 @@
 import 'dart:math';
 
 class Exercise {
-  late int id;
-  final String title, time, difficult, image;
+  late int id, time ;
+  final String title, difficult, image;
   late String effect, caution;
   late List<String> steps;
 

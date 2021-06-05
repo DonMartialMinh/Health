@@ -2,18 +2,33 @@ import 'package:health/components/next_step.dart';
 import 'package:health/models/exercise.dart';
 import 'package:health/components/activity_timer.dart';
 import 'package:flutter/material.dart';
+import 'package:health/models/program.dart';
 
 class ActivityDetail extends StatelessWidget {
-  final List<Exercise> exercise;
+  final Program program;
 
   ActivityDetail({
-    required this.exercise,
+    required this.program,
   });
+
+  List<Widget> generateList(List<Exercise> list) {
+    List<Widget> _list = [];
+    list.forEach((exercise) {
+      Widget element = Container(
+        //margin: EdgeInsets.only(top: 20, left: 20, right: 20),
+        child: GestureDetector(
+          child: NextStep(title: exercise.title,image: exercise.image, seconds: exercise.time),
+        ),
+      );
+      _list.add(element);
+    });
+    return _list;
+  }
 
   @override
   Widget build(BuildContext context) {
     var width = MediaQuery.of(context).size.width;
-    Exercise currentExercise = exercise[0];
+    Exercise currentExercise = program.exercises[0];
     return SafeArea(child: Scaffold(
       body: SingleChildScrollView(
         child: Column(
@@ -24,7 +39,7 @@ class ActivityDetail extends StatelessWidget {
                   width: MediaQuery.of(context).size.width,
                   height: 270,
                   child: Image.asset(
-                    currentExercise.image,
+                    program.image,
                     fit: BoxFit.fitHeight,
                   ),
                 ),
@@ -60,7 +75,7 @@ class ActivityDetail extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[
                       Text(
-                        currentExercise.title,
+                        program.title,
                         style: TextStyle(
                           fontSize: 22.0,
                           color: Colors.blueGrey,
@@ -90,7 +105,7 @@ class ActivityDetail extends StatelessWidget {
                                         color: Colors.blueGrey[300]),
                                   ),
                                   Text(
-                                    '${currentExercise.time}',
+                                    '${program.time}',
                                     style: TextStyle(
                                         fontSize: 18.0,
                                         color: Colors.lightBlue,
@@ -130,23 +145,7 @@ class ActivityDetail extends StatelessWidget {
                       Container(
                         margin: EdgeInsets.only(top: 15.0),
                         child: Column(
-                          children: <Widget>[
-                            NextStep(
-                              image: 'assets/images/image005.jpg',
-                              title: 'Plank',
-                              seconds: 50,
-                            ),
-                            NextStep(
-                              image: 'assets/images/image006.jpg',
-                              title: 'Push-ups',
-                              seconds: 50,
-                            ),
-                            NextStep(
-                              image: 'assets/images/image007.jpg',
-                              title: 'Lateral Raise',
-                              seconds: 50,
-                            ),
-                          ],
+                          children: generateList(program.exercises),
                         ),
                       ),
                     ],
@@ -162,7 +161,7 @@ class ActivityDetail extends StatelessWidget {
           margin: EdgeInsets.only(left: 20.0, right: 20.0, bottom: 30.0),
           padding: EdgeInsets.all(15.0),
           decoration: BoxDecoration(
-              color: Color.fromRGBO(100, 140, 255, 1.0),
+              color: Colors.red[500],
               borderRadius: BorderRadius.circular(15.0),
               boxShadow: [
                 BoxShadow(
@@ -175,7 +174,7 @@ class ActivityDetail extends StatelessWidget {
             'Start',
             textAlign: TextAlign.center,
             style: TextStyle(
-              fontSize: 22.0,
+              fontSize: 25.0,
               fontWeight: FontWeight.w900,
               color: Colors.white,
             ),
@@ -185,7 +184,7 @@ class ActivityDetail extends StatelessWidget {
           Navigator.push(
             context,
             MaterialPageRoute(builder: (_) {
-              return ActivityTimer();
+              return ActivityTimer(exercises: this.program.exercises);
             }),
           );
         },

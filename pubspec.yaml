@@ -81,6 +81,9 @@ flutter:
      - assets/images/Arm4.jpeg
      - assets/images/Arm5.jpeg
      - assets/images/Arm6.jpeg
+     - assets/images/iprogram1.jpeg
+     - assets/images/iprogram2.jpeg
+     - assets/images/iprogram3.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.

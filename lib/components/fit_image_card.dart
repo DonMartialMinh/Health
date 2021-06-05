@@ -47,7 +47,7 @@ class FitImageCard extends StatelessWidget {
           width: this.imageWidth,
           margin: EdgeInsets.only(top: 5.0),
           child: Text(
-            '${this.exercise.time}    |    ${this.exercise.difficult}',
+            '${this.exercise.time} sec    |    ${this.exercise.difficult}',
             style: TextStyle(
               fontSize: 12.0,
               color: Colors.grey,
