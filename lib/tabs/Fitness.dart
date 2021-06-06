@@ -18,7 +18,6 @@ import 'package:url_launcher/url_launcher.dart';
 import 'package:flutter/material.dart';
 
 class Programs extends StatelessWidget {
-
   List<Widget> generateCard(BuildContext context, List<Exercise> list, double width) {
     List<Widget> _list = [];
     list.forEach((exercise) {

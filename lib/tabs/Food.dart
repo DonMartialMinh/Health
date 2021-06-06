@@ -9,7 +9,7 @@ class Food extends StatelessWidget {
       padding: EdgeInsets.only(top: 20.0),
       child: SafeArea(
         child: DefaultTabController(
-          length: 4,
+          length: 2,
           child: Scaffold(
             appBar: AppBar(
               elevation: 0,
@@ -40,25 +40,13 @@ class Food extends StatelessWidget {
                   Container(
                     height: 30.0,
                     child: Tab(
-                      text: 'Breakfast',
+                      text: 'Non-Vegetarian',
                     ),
                   ),
                   Container(
                     height: 30.0,
                     child: Tab(
-                      text: 'Lunch',
-                    ),
-                  ),
-                  Container(
-                    height: 30.0,
-                    child: Tab(
-                      text: 'Dinner',
-                    ),
-                  ),
-                  Container(
-                    height: 30.0,
-                    child: Tab(
-                      text: 'Snacks',
+                      text: 'Vegetarian',
                     ),
                   ),
                 ],
@@ -72,16 +60,10 @@ class Food extends StatelessWidget {
             body: TabBarView(
               children: <Widget>[
                 TabViewBase(
-                  tabName: 'Breakfast',
+                  tabName: 'NonVegetarian',
                 ),
                 TabViewBase(
-                  tabName: 'Lunch',
-                ),
-                TabViewBase(
-                  tabName: 'Dinner',
-                ),
-                TabViewBase(
-                  tabName: 'Snacks',
+                  tabName: 'Vegetarian',
                 ),
               ],
             ),

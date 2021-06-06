@@ -1,68 +1,67 @@
 import 'package:health/models/ads.dart';
+import 'package:health/models/category.dart';
 import 'package:health/models/food.dart';
 import 'package:health/models/exercise.dart';
 import 'package:health/models/program.dart';
 import 'package:health/models/tip.dart';
 
 var FAKE_FOODS = [
-  // Banh my category
-  Food(name: 'Banh my thit',
-      urlImage: 'https://blog.beemart.vn/wp-content/uploads/2019/09/cach-lam-banh-mi-thit-de-ban-1-e1569653919220.jpg',
-      duration: Duration(minutes: 5),
-      calorie: 500,
+  Food(name: 'Butternut Squash Risotto',
+      urlImage: 'https://cdn-chbmh.nitrocdn.com/uCHJULoYOybHKDUKzLnqTxCnARqvoiSH/assets/static/optimized/rev-c265b59/wp-content/uploads/2018/06/IMG_7786-2-2000x1333.jpg',
+      duration: Duration(minutes: 50),
+      calorie: 323,
+      youtubeLink: 'https://www.youtube.com/watch?v=-9UU52ubphc',
       complexity: Complexity.Simple,
-      ingredients: ['Banh my', 'Thit heo', 'Rau cu', 'Nuoc sot', 'Cha lua', 'Pate'],
-      category: 'Breakfast'
+      ingredients: [
+        '500 g butternut squash, cubed',
+        '1 tbsp olive oil',
+        '1 tbsp balsamic vinegar',
+        '10 g butter',
+        '1 onion, finely chopped',
+        '2 garlic cloves, finely chopped',
+        '200 g risotto rice, uncooked weight',
+        '30 ml strong booze (rum, whisky, brandy etc)',
+        '500 ml vegetable stock',
+        '1 bay leaf',
+        '1 tsp mixed herbs'
+      ],
+      category: FoodCategory.Vegetarian,
+      steps: [
+        'Preheat your oven to 180° Celsius.',
+        'Tip the chopped butternut squash onto a baking tray, drizzle the olive oil and balsamic vinegar over the top then get your hands in and mix everything through. Place the baking tray into the oven for 40 minutes.',
+        'Meanwhile, heat a large, oven proof pan on a medium heat, add the butter and gently fry the garlic and onions for 5 minutes.',
+        'Add the rice and stir through.',
+        'Add the shot of booze and simmer for a 1 minute.',
+        'Add the stock, mixed herbs and bayleaf, mix through, cover and place into the oven when there is 20 minutes remaining on the clock.',
+        'The rice and butternut squash should be ready at the same time. Remove both from the oven, add the squash to the rice pan, mix through and serve immediately.'
+      ]
   ),
-  Food(name: 'Banh my trung',
-      urlImage: 'https://media-cdn.tripadvisor.com/media/photo-s/0a/8b/d4/11/banh-mi-pate-tr-ng.jpg',
-      duration: Duration(minutes: 5),
-      calorie: 600,
+
+  Food(name: 'Mexican Fajita Steak and Rice',
+      urlImage: 'https://cdn-chbmh.nitrocdn.com/uCHJULoYOybHKDUKzLnqTxCnARqvoiSH/assets/static/optimized/rev-c265b59/wp-content/uploads/2017/08/IMG_3988-2048x1536.jpg',
+      duration: Duration(minutes: 17),
+      calorie: 409,
       complexity: Complexity.Simple,
-      ingredients: ['Banh my', 'Trung ga', 'Rau cu', 'Nuoc sot', 'Cha lua', 'Pate'],
-      category: 'Breakfast'
-  ),
-  Food(name: 'Banh my xa xiu',
-      urlImage: 'https://static.wixstatic.com/media/c34839_12fb60bc0382498fbf777e084cf9228f~mv2.png/v1/fill/w_561,h_373,al_c,lg_1,q_85/c34839_12fb60bc0382498fbf777e084cf9228f~mv2.webp',
-      duration: Duration(minutes: 5),
-      calorie: 369,
-      complexity: Complexity.Simple,
-      ingredients: ['Banh my', 'Thit xa xiu', 'Rau cu', 'Nuoc sot', 'Cha lua', 'Pate'],
-      category: 'Breakfast'
-  ),
-  // Bun thit nuong
-  Food(name: 'Bun thit nuong truyen thong',
-      urlImage: 'https://www.hoidaubepaau.com/wp-content/uploads/2018/06/bun-thit-nuong.jpg',
-      duration: Duration(minutes: 8),
-      calorie: 215,
-      complexity: Complexity.Medium,
-      ingredients: ['Bun tuoi', 'Nuoc mam', 'Rau cu', 'Ot', 'hanh phi', 'Hanh tim', 'Top mo', 'Dua leo'],
-      category: 'Lunch'
-  ),
-  Food(name: 'Bun thit nuong cha ram',
-      urlImage: 'https://www.cet.edu.vn/wp-content/uploads/2018/03/bun-thit-nuong-kieu-mien-nam.jpg',
-      duration: Duration(minutes: 8),
-      calorie: 576,
-      complexity: Complexity.Medium,
-      ingredients: ['Bun tuoi', 'Nuoc mam', 'Rau cu', 'Ot', 'hanh phi', 'Hanh tim', 'top mo', 'Dua leo', 'Cha ram'],
-      category: 'Lunch'
-  ),
-  // Banh Canh
-  Food(name: 'Banh canh gio heo',
-      urlImage: 'https://bekhoe.net/wp-content/uploads/2018/07/cach-nau-banh-canh-gio-heo.jpg',
-      duration: Duration(minutes: 15),
-      calorie: 411,
-      complexity: Complexity.Hard,
-      ingredients: ['Banh canh tuoi', 'Nuoc mam', 'Rau cu', 'Ot', 'hanh phi', 'Gio Heo', 'top mo', 'Hanh la', 'Nam rom'],
-      category: 'Dinner'
-  ),
-  Food(name: 'Banh canh ca loc',
-      urlImage: 'https://monngonchuabenh.com/wp-content/uploads/2019/03/cach-lam-banh-canh-ca-loc-hue.jpg',
-      duration: Duration(minutes: 15),
-      calorie: 451,
-      complexity: Complexity.Hard,
-      ingredients: ['Banh canh tuoi', 'Nuoc mam', 'Rau cu', 'Ot', 'hanh phi', 'Ca loc', 'Sa te', 'Hanh la'],
-      category: 'Dinner'
+      youtubeLink: 'https://www.youtube.com/watch?v=5oF2pwVv16k',
+      ingredients: [
+        '1 tbsp olive oil',
+        '1 green pepper, sliced',
+        '1 red pepper, sliced',
+        '2 red onions, sliced',
+        '400 g frying steak or chicken breast, sliced into long strips',
+        '2 tbsp Mexican/Cajun/Fajita spice mix',
+        '150 g white rice, uncooked weight',
+        '1 tbsp tomato puree'
+      ],
+      category: FoodCategory.NonVegetarian,
+      steps: [
+        'To start, bring rice (dry weight) to the boil cook according to the directions on the packet.',
+        'Heat the olive oil in a large pan or work over a medium heat and add the chopped peppers and onions and fry until brown.',
+        'Remove the veg from the pan and add the steak and fry for a couple of minutes or until it is cooked.',
+        'Just like you would do with fajitas, add the vegetables back to the pan and mix through with the steak.',
+        'Add the spice mix and mix through and cook for a further minute.',
+        'Once the rice has cooked, drain it then add it to pan with the meat and vegetables along with the tomato puree and cook, stirring constantly for about a minute. Serve.',
+      ]
   ),
 ];
 

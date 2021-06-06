@@ -45,7 +45,7 @@ class ImageCardWithBasicFooter extends StatelessWidget {
                  ),
                ),
                Positioned(
-                 top: 10,left: 10,
+                 bottom: 10,left: 10,
                  child: Container(
                    padding: EdgeInsets.all(5),
                    decoration: BoxDecoration(
@@ -86,10 +86,15 @@ class ImageCardWithBasicFooter extends StatelessWidget {
                    decoration: BoxDecoration(
                      color: Colors.black45,
                      borderRadius: BorderRadius.circular(10),
-
+                       border: Border.all(color: Colors.white, width: 2)
                    ),
-                   child: Text('${food.name}',
-                     style: TextStyle(fontSize: 30, color: Colors.white),),
+                   child:Row(
+                     children: [
+                       Icon(Icons.fitness_center, color: Colors.white, size: 25,),
+                       Text('${food.calorie} kcal',
+                         style: TextStyle(fontSize: 22, color: Colors.white),),
+                     ],
+                   )
                  ),
                ),
              ],
@@ -100,18 +105,9 @@ class ImageCardWithBasicFooter extends StatelessWidget {
              child: Text(
                this.food.name,
                textAlign: TextAlign.left,
-               style: TextStyle(fontSize: 15.0),
+               style: TextStyle(fontSize: 20.0),
              ),
            ),
-           Container(
-             width: this.imageWidth,
-             margin: EdgeInsets.only(top: 5.0),
-             child: Text('${food.duration.inMinutes} minutes    |    ${this.food.calorie} Kcal',
-             style: TextStyle(
-               fontSize: 12.0,
-               color: Colors.grey,
-             ),),
-           )
          ]
        )
     );

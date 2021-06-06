@@ -15,6 +15,11 @@ class ActivityTimer extends StatefulWidget {
     currentExerciseIndex = 0;
     _start = exercises[currentExerciseIndex].time;
     isStarting = false;
+    _timer = new Timer.periodic(
+      const Duration(seconds: 0),
+          (Timer timer) {
+      },
+    );
   }
 
 
