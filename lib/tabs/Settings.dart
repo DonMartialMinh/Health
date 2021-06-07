@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:health/components/google_sign_up.dart';
 import '../components/Header.dart';
 import '../components/user_photo.dart';
 
@@ -41,7 +42,7 @@ class Settings extends StatelessWidget{
                     child: UserPhoto(),
                   ),
                 ),
-                Text('Minh Đôn', style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold))
+                Text('Minh Đôn', style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold)),
               ],
             ),
           ),

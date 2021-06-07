@@ -37,11 +37,8 @@ class DetailExerciseCard extends StatelessWidget{
           //crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget> [
             Center(
-                child: Hero(
-                  tag: this.tag,
-                  child: Image(
-                      image: AssetImage(exercise.image)),
-                )
+              child: Image(
+                  image: AssetImage(exercise.image)),
             ),
             Container(
               padding: EdgeInsets.all(20),

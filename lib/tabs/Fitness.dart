@@ -110,7 +110,6 @@ class Programs extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     double _cardWidth = MediaQuery.of(context).size.width * 2/3;
-    double _listCardWidth = MediaQuery.of(context).size.width;
     return Scaffold(
       backgroundColor: Colors.white,
       body: SingleChildScrollView(

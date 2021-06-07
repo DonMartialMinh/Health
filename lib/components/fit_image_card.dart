@@ -18,9 +18,7 @@ class FitImageCard extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
-        Hero(
-          tag: this.tag,
-          child: Container(
+        Container(
             width: this.imageWidth,
             height: 160.0,
             decoration: BoxDecoration(
@@ -33,7 +31,6 @@ class FitImageCard extends StatelessWidget {
               ),
             ),
           ),
-        ),
         Container(
           width: this.imageWidth,
           margin: EdgeInsets.only(top: 10.0),

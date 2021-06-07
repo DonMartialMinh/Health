@@ -1,5 +1,4 @@
 import 'package:health/models/ads.dart';
-import 'package:health/models/category.dart';
 import 'package:health/models/food.dart';
 import 'package:health/models/exercise.dart';
 import 'package:health/models/program.dart';
@@ -38,7 +37,7 @@ var FAKE_FOODS = [
   ),
 
   Food(name: 'Mexican Fajita Steak and Rice',
-      urlImage: 'https://cdn-chbmh.nitrocdn.com/uCHJULoYOybHKDUKzLnqTxCnARqvoiSH/assets/static/optimized/rev-c265b59/wp-content/uploads/2017/08/IMG_3988-2048x1536.jpg',
+      urlImage: 'https://www.isabeleats.com/wp-content/uploads/2018/04/easy-steak-fajitas-small-1-650x650.jpg',
       duration: Duration(minutes: 17),
       calorie: 409,
       complexity: Complexity.Simple,

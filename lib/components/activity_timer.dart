@@ -5,6 +5,7 @@ import 'package:percent_indicator/circular_percent_indicator.dart';
 import 'dart:async';
 
 class ActivityTimer extends StatefulWidget {
+
   final List<Exercise> exercises;
   late int currentExerciseIndex;
   late int _start;

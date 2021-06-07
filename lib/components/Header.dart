@@ -26,7 +26,7 @@ class Header extends StatelessWidget {
           margin: EdgeInsets.only(left: 20.0),
           height: 54.0,
         ),
-        (this.rightSide != null) ? this.rightSide : Container()
+        this.rightSide
       ],
     );
   }

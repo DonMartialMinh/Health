@@ -43,7 +43,6 @@ class ExcerciseBodyPartCategory extends StatelessWidget {
   Widget build(BuildContext context) {
     // TODO: implement build
     double _cardWidth = MediaQuery.of(context).size.width * 2/3;
-    double _listCardWidth = MediaQuery.of(context).size.width;
     return SafeArea(child: Scaffold(
       appBar: AppBar(title: Text('Category'),backgroundColor: Colors.redAccent,),
       body: SingleChildScrollView(
