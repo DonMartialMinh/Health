@@ -18,7 +18,7 @@ class GoogleSignUp extends StatelessWidget{
             provider.login();
           },
           icon: FaIcon(FontAwesomeIcons.google, color: Colors.red,),
-          label: Text('Sign In with Google', style: TextStyle(fontSize: 20, color: Colors.black),),
+          label: Text('Connect to Google account', style: TextStyle(fontSize: 20, color: Colors.black),),
     )
     );
   }

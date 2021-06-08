@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:health/components/google_sign_up.dart';
+import 'package:health/provider/sign_in_provider.dart';
+import 'package:provider/provider.dart';
 import '../components/Header.dart';
-import '../components/user_photo.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 class Settings extends StatelessWidget{
   @override
   Widget build(BuildContext context) {
+    final user = FirebaseAuth.instance.currentUser;
     // TODO: implement build
     return SafeArea(
       child: Scaffold(
@@ -39,10 +41,19 @@ class Settings extends StatelessWidget{
                 Container(
                   padding: EdgeInsets.symmetric(vertical: 20),
                   child: Center(
-                    child: UserPhoto(),
+                    child: CircleAvatar(
+                      maxRadius: 50,
+                      backgroundImage: NetworkImage(user!.photoURL!),
+                    ),
                   ),
                 ),
-                Text('Minh Đôn', style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold)),
+                Text('${user.displayName}', style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold)),
+                ElevatedButton(
+                  onPressed: (){
+                    final provider = Provider.of<GoogleSignInProvider>(context,listen: false);
+                    provider.logout();
+                  }
+                  , child: Text('Log Out'))
               ],
             ),
           ),

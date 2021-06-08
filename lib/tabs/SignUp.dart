@@ -22,7 +22,7 @@ class SignUpWidget extends StatelessWidget {
           child: Text(
             'Welcome Back To MyApp',
             style: TextStyle(
-              color: Colors.white,
+              color: Colors.black,
               fontSize: 30,
               fontWeight: FontWeight.bold,
             ),

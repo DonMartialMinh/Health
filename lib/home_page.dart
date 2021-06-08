@@ -6,6 +6,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:provider/provider.dart';
 import 'tabs/SignUp.dart';
 import 'provider/sign_in_provider.dart';
+import 'tabs/Settings.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -15,6 +16,7 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePage extends State<HomePage> {
+  dynamic data;
   int _selectedIndex = 0;
   static const Color _colorFit = Colors.red;
   static const Color _colorFood = Colors.green;
@@ -33,6 +35,12 @@ class _HomePage extends State<HomePage> {
     setState(() {
       _selectedIndex = index;
     });
+  }
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
   }
 
   @override
