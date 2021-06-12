@@ -51,9 +51,9 @@ class ExcerciseBodyPartCategory extends StatelessWidget {
             children: [
               InkWell(
                 onTap: () {
-                  Navigator.of(context).push(
-                      MaterialPageRoute(builder: (context) => ExerciseListPage(list: getData('Arm'), title: 'Arm exercises'))
-                  );
+                  // Navigator.of(context).push(
+                  //     MaterialPageRoute(builder: (context) => ExerciseListPage(list: getData('Arm'), title: 'Arm exercises'))
+                  // );
                 },
                 child: SectionTitle('Arm'),
               ),
@@ -62,9 +62,9 @@ class ExcerciseBodyPartCategory extends StatelessWidget {
               ),
               InkWell(
                 onTap: () {
-                  Navigator.of(context).push(
-                      MaterialPageRoute(builder: (context) => ExerciseListPage(list: getData('Leg'), title: 'Leg exercises'))
-                  );
+                  // Navigator.of(context).push(
+                  //     MaterialPageRoute(builder: (context) => ExerciseListPage(list: getData('Leg'), title: 'Leg exercises'))
+                  // );
                 },
                 child: SectionTitle('Leg'),
               ),
@@ -73,9 +73,9 @@ class ExcerciseBodyPartCategory extends StatelessWidget {
               ),
               InkWell(
                 onTap: () {
-                  Navigator.of(context).push(
-                      MaterialPageRoute(builder: (context) => ExerciseListPage(list:  getData('Belly'), title: 'Belly exercises'))
-                  );
+                  // Navigator.of(context).push(
+                  //     MaterialPageRoute(builder: (context) => ExerciseListPage(list:  getData('Belly'), title: 'Belly exercises'))
+                  // );
                 },
                 child: SectionTitle('Belly'),
               ),

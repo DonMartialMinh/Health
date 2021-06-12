@@ -1,4 +1,5 @@
 
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:health/components/detail_exercise_card.dart';
@@ -7,13 +8,13 @@ import 'package:health/models/exercise.dart';
 import 'fit_image_card.dart';
 
 class ExerciseListPage extends StatefulWidget {
-  List<Exercise> list;
+  String category;
   String title;
   TextEditingController _searchQueryController = TextEditingController();
   bool _isSearching = false;
   String searchQuery = "";
 
-  ExerciseListPage({required this.list, required this.title});
+  ExerciseListPage({required this.category, required this.title});
 
   @override
   State <StatefulWidget> createState() {
@@ -66,16 +67,60 @@ class _MyAppState extends State<ExerciseListPage> {
           actions: _buildActions(),
         ),
         body: Container(
-          child: SingleChildScrollView(
-            scrollDirection: Axis.vertical,
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: this.generateCard(context, _cardWidth, widget.list, widget.searchQuery
-            ),
+          //height: 230,
+          child: StreamBuilder(
+            stream: FirebaseFirestore.instance
+                .collection('Exercise')
+                .where('difficult', isEqualTo: widget.category)
+                .snapshots(),
+            builder: (context, AsyncSnapshot<QuerySnapshot> streamSnapshot) {
+              if (!streamSnapshot.hasData) {
+                return Container();
+              }
+              return ListView.builder(
+                scrollDirection: Axis.vertical,
+                itemCount:  streamSnapshot.data!.docs.length,
+                itemBuilder: (ctx, index) =>
+                (streamSnapshot.data!.docs[index]['title'].toLowerCase().contains(widget.searchQuery.trim().toLowerCase())) ? Container(
+                  margin: EdgeInsets.only(top: 20, left: 20, right: 20),
+                  child: GestureDetector(
+                    child: FitImageCard(
+                      exercise: new Exercise(
+                        title: streamSnapshot.data!.docs[index]['title'],
+                        time: streamSnapshot.data!.docs[index]['time'],
+                        difficult: streamSnapshot.data!.docs[index]['difficult'],
+                        image: streamSnapshot.data!.docs[index]['image'],
+                        effect: streamSnapshot.data!.docs[index]['effect'],
+                        caution: streamSnapshot.data!.docs[index]['caution'],
+                        steps: streamSnapshot.data!.docs[index]['steps'].cast<String>(),
+                      ),
+                      tag: streamSnapshot.data!.docs[index].id,
+                      imageWidth: _cardWidth,
+                    ),
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (_) {
+                            return DetailExerciseCard(exercise: new Exercise(
+                              title: streamSnapshot.data!.docs[index]['title'],
+                              time: streamSnapshot.data!.docs[index]['time'],
+                              difficult: streamSnapshot.data!.docs[index]['difficult'],
+                              image: streamSnapshot.data!.docs[index]['image'],
+                              effect: streamSnapshot.data!.docs[index]['effect'],
+                              caution: streamSnapshot.data!.docs[index]['caution'],
+                              steps: streamSnapshot.data!.docs[index]['steps'].cast<String>(),
+                            ), tag: streamSnapshot.data!.docs[index].id);
+                          },
+                        ),
+                      );
+                    },
+                  ),
+                ) : Container()
+              );
+            },
           ),
-          padding: EdgeInsets.only(bottom: 20),
         )
-      )
     ));
   }
   Widget _buildSearchField() {

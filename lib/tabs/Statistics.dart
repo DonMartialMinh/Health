@@ -9,17 +9,20 @@ import 'package:health/models/exercise.dart';
 
 class Statistics extends StatelessWidget {
   Exercise temp = new Exercise(
-      image: 'assets/images/Byoga2.jpeg',
-      title: 'Cobra pose',
+      image: 'assets/images/Ayoga4.jpeg',
+      title: 'Firefly Pose',
       time: 30,
-      difficult: 'Beginners',
-      effect: 'This pose provides a gentle massage to the spine and belly organs.',
-      caution: 'With a neck injury, keep the head in line with the torso.',
+      difficult: 'Advanced',
+      effect: 'Want to fly? Fire up your core. Firefly pose is an arm balance pose that requires more core strength than arm strength.',
+      caution: 'Shoulder, elbow, wrist and low back injuries.',
       steps: [
-        'Start on your hands and knees in a “tabletop” position. Make sure your knees are set directly below your hips and your wrists, elbows and shoulders are in line and perpendicular to the floor. Center your head in a neutral position, eyes looking at the floor.',
-        'As you exhale, round your spine toward the ceiling, making sure to keep your shoulders and knees in position. Release your head toward the floor, but don’t force your chin to your chest.',
-        'Inhale, coming back to neutral “tabletop” position on your hands and knees.',
-        'This pose is often paired with Cow Pose on the inhale for a gentle, flowing vinyasa.'
+        'Squat with your feet a little less than shoulder distance apart. Tilt your pelvis forward and bring your trunk between your legs. Keeping your trunk low, straighten your legs enough to lift your pelvis to about knee height.',
+        'Bring your left upper arm and shoulder as far as possible underneath the back of your left thigh just above the knee and place your left hand on the floor at the outside edge of your foot, fingers pointing forward. Repeat these actions on the other side.',
+        'Lift yourself off the floor by carefully shifting your center of gravity. Press your hands into the floor and slowly begin to rock your weight back, off your feet and onto your hands. Keep your inner thighs as high on your arms as possible.',
+        'With an inhalation, stretch your legs out to the sides as straight as you can, keeping your pelvis high to make your legs parallel to the floor.',
+        'Press through the bases of your big toes but pull your toes back toward your torso and spread them apart. The inner edges of your feet should be angled slightly forward, the outer edges slightly back.',
+        'Straighten your arms as much as possible. Hollow your chest as you widen your shoulder blades as much as possible; this will round your upper back, which will lift your torso higher.',
+        'Without tensing your neck, lift your head and gaze forward. Breathe slowly and hold the pose for 15 seconds or longer, then release your feet to the floor with an exhale.'
       ]
   );
 
