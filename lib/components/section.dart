@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:health/components/Header.dart';
 
 class Section extends StatelessWidget {
   final List<Widget> horizontalList;

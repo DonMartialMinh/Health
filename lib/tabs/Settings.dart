@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:health/provider/sign_in_provider.dart';
 import 'package:provider/provider.dart';
 import '../components/Header.dart';
@@ -7,6 +8,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 class Settings extends StatelessWidget{
   @override
   Widget build(BuildContext context) {
+    final provider = Provider.of<GoogleSignInProvider>(context,listen: false);
     final user = FirebaseAuth.instance.currentUser;
     // TODO: implement build
     return SafeArea(
@@ -48,12 +50,30 @@ class Settings extends StatelessWidget{
                   ),
                 ),
                 Text('${user.displayName}', style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold)),
-                ElevatedButton(
-                  onPressed: (){
-                    final provider = Provider.of<GoogleSignInProvider>(context,listen: false);
-                    provider.logout();
-                  }
-                  , child: Text('Log Out'))
+                OutlinedButton.icon(
+                    onPressed: () => showDialog<String>(
+                      context: context,
+                      builder: (BuildContext context) => AlertDialog(
+                        title: const Text('Logging Out'),
+                        content: const Text('Are you sure want to log out ?'),
+                        actions: <Widget>[
+                          TextButton(
+                            onPressed: () => Navigator.pop(context, 'Cancel'),
+                            child: const Text('Cancel'),
+                          ),
+                          TextButton(
+                            onPressed: () => {
+                              provider.logout(),
+                              Navigator.pop(context),
+                            },
+                            child: const Text('OK'),
+                          ),
+                        ],
+                      ),
+                    ),
+                  icon: FaIcon(FontAwesomeIcons.powerOff, color: Colors.red,),
+                  label: Text('Log Out', style: TextStyle(fontSize: 20, color: Colors.black),),
+                )
               ],
             ),
           ),

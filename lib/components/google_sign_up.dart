@@ -13,12 +13,13 @@ class GoogleSignUp extends StatelessWidget{
     return Container(
       padding: EdgeInsets.all(20),
       child: OutlinedButton.icon(
-          onPressed: (){
-            final provider = Provider.of<GoogleSignInProvider> (context, listen: false);
-            provider.login();
-          },
-          icon: FaIcon(FontAwesomeIcons.google, color: Colors.red,),
-          label: Text('Connect to Google account', style: TextStyle(fontSize: 20, color: Colors.black),),
+        style: ButtonStyle(backgroundColor: MaterialStateProperty.all<Color>(Colors.white)),
+        onPressed: (){
+          final provider = Provider.of<GoogleSignInProvider> (context, listen: false);
+          provider.login();
+        },
+        icon: FaIcon(FontAwesomeIcons.google, color: Colors.red,),
+        label: Text('Connect to Google account', style: TextStyle(fontSize: 20, color: Colors.black),),
     )
     );
   }

@@ -6,7 +6,7 @@ import 'package:health/models/tip.dart';
 
 var FAKE_FOODS = [
   Food(name: 'Butternut Squash Risotto',
-      urlImage: 'https://cdn-chbmh.nitrocdn.com/uCHJULoYOybHKDUKzLnqTxCnARqvoiSH/assets/static/optimized/rev-c265b59/wp-content/uploads/2018/06/IMG_7786-2-2000x1333.jpg',
+      urlImage: 'https://www.chewoutloud.com/wp-content/uploads/2015/11/butternut-risotto.jpg',
       duration: Duration(minutes: 50),
       calorie: 323,
       youtubeLink: 'https://www.youtube.com/watch?v=-9UU52ubphc',
@@ -157,6 +157,7 @@ final List<Exercise> exercisesBodyPart = [
     difficult: 'Arm',
   ),
 ];
+
 
 final List<Exercise> exercisesYoga = [
   Exercise(

@@ -1,4 +1,4 @@
-
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:health/components/activity_detail.dart';
 import 'package:health/components/exercise_yoga_category.dart';
 import 'package:health/models/ads.dart';
@@ -17,8 +17,9 @@ import 'package:health/components/section_title.dart';
 import 'package:health/models/program.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:flutter/material.dart';
+import 'package:health/data/GetExercise.dart';
 
-class Programs extends StatelessWidget {
+class Fitness extends StatelessWidget {
   List<Widget> generateCard(BuildContext context, List<Exercise> list, double width) {
     List<Widget> _list = [];
     list.forEach((exercise) {
@@ -35,7 +36,7 @@ class Programs extends StatelessWidget {
               context,
               MaterialPageRoute(
                 builder: (_) {
-                  return DetailExerciseCard(exercise: exercise, tag: '${exercise.id}',);
+                  return DetailExerciseCard(exercise: exercise, tag: '${exercise.id}');
                 },
               ),
             );
@@ -100,6 +101,7 @@ class Programs extends StatelessWidget {
     return _list;
   }
 
+
   _launchURL(String url) async {
     if (await canLaunch(url)) {
       await launch(url);
@@ -152,9 +154,6 @@ class Programs extends StatelessWidget {
                   },
                   child: SectionTitle('Body focus'),
                 ),
-                Section(
-                  horizontalList: this.generateCard(context, exercisesBodyPart, _cardWidth),
-                ),
                 InkWell(
                   onTap: () {
                     Navigator.of(context).push(
@@ -163,8 +162,59 @@ class Programs extends StatelessWidget {
                   },
                   child: SectionTitle('Yoga'),
                 ),
-                Section(
-                  horizontalList: this.generateCard(context, exercisesYoga, _cardWidth),
+                Container(
+                  height: 230,
+                  child: StreamBuilder(
+                    stream: FirebaseFirestore.instance
+                        .collection('Exercise')
+                        .snapshots(),
+                    builder: (context, AsyncSnapshot<QuerySnapshot> streamSnapshot) {
+                      if (!streamSnapshot.hasData) {
+                        return Container();
+                      }
+                      return ListView.builder(
+                        scrollDirection: Axis.horizontal,
+                        itemCount:  streamSnapshot.data!.docs.length,
+                        itemBuilder: (ctx, index) =>
+                            Container(
+                              margin: EdgeInsets.only(top: 20, left: 20, right: 20),
+                              child: GestureDetector(
+                                child: FitImageCard(
+                                  exercise: new Exercise(
+                                      title: streamSnapshot.data!.docs[index]['title'],
+                                      time: streamSnapshot.data!.docs[index]['time'],
+                                      difficult: streamSnapshot.data!.docs[index]['difficult'],
+                                      image: streamSnapshot.data!.docs[index]['image'],
+                                      effect: streamSnapshot.data!.docs[index]['effect'],
+                                      caution: streamSnapshot.data!.docs[index]['caution'],
+                                      steps: streamSnapshot.data!.docs[index]['steps'].cast<String>(),
+                                  ),
+                                  tag: streamSnapshot.data!.docs[index].id,
+                                  imageWidth: _cardWidth,
+                                ),
+                                onTap: () {
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (_) {
+                                        return DetailExerciseCard(exercise: new Exercise(
+                                          title: streamSnapshot.data!.docs[index]['title'],
+                                          time: streamSnapshot.data!.docs[index]['time'],
+                                          difficult: streamSnapshot.data!.docs[index]['difficult'],
+                                          image: streamSnapshot.data!.docs[index]['image'],
+                                          effect: streamSnapshot.data!.docs[index]['effect'],
+                                          caution: streamSnapshot.data!.docs[index]['caution'],
+                                          steps: streamSnapshot.data!.docs[index]['steps'].cast<String>(),
+                                        ), tag: streamSnapshot.data!.docs[index].id);
+                                      },
+                                    ),
+                                  );
+                                },
+                              ),
+                            ),
+                      );
+                    },
+                  ),
                 ),
                 Padding(padding: EdgeInsets.only(bottom: 20)),
                 Container(
@@ -206,3 +256,4 @@ class Programs extends StatelessWidget {
     );
   }
 }
+

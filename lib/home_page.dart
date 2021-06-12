@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:health/tabs/Settings.dart';
+import 'package:health/tabs/Statistics.dart';
 import 'tabs/Food.dart';
 import 'package:health/tabs/Fitness.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -23,11 +24,9 @@ class _HomePage extends State<HomePage> {
   static const Color _colorFavorite = Colors.pink;
   static const Color _colorSettings = Colors.orange;
   static  List<Widget> _widgetOptions = <Widget>[
-    Programs(),
+    Fitness(),
     Food(),
-    Text(
-      'Go Favorite',
-    ),
+    Statistics(),
     Settings(),
   ];
 
