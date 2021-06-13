@@ -37,11 +37,17 @@ class DetailExerciseCard extends StatelessWidget{
           //crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget> [
             Center(
-              child: Image(
-                  image: AssetImage(exercise.image)),
+              child: FadeInImage.assetNetwork(
+                  placeholder: 'assets/images/loading.gif',
+                  image: this.exercise.image
+              ),
             ),
             Container(
-              padding: EdgeInsets.all(20),
+              padding: EdgeInsets.symmetric(vertical: 20),
+              child: Text('Guideline', style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold, fontFamily: 'PatrickHand'),),
+            ),
+            Container(
+              padding: EdgeInsets.symmetric(horizontal: 20),
               child: RichText(
                 text: TextSpan(
                     style:  new TextStyle(
@@ -63,6 +69,10 @@ class DetailExerciseCard extends StatelessWidget{
                   ]
                 ),
               ),
+            ),
+            Container(
+              padding: EdgeInsets.symmetric(vertical: 20),
+              child: Text('Steps', style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold, fontFamily: 'PatrickHand'),),
             ),
             Column(
               children: this.generateComponent(context, exercise.steps),

@@ -5,12 +5,12 @@ class Food{
   String name;
   String urlImage;
   String youtubeLink;
-  Duration duration;
+  int duration;
   int calorie;
-  Complexity complexity;
+  String complexity;
   List<String> ingredients;
   List<String> steps;
-  FoodCategory category;
+  String category;
 
   Food({
     required this.name,
@@ -25,15 +25,17 @@ class Food{
 }){
     this.id = Random().nextInt(1000);
   }
-}
-
-enum Complexity{
-  Simple,
-  Medium,
-  Hard
-}
-
-enum FoodCategory{
-  NonVegetarian,
-  Vegetarian
+  Map<String, dynamic> toMap(){
+    return {
+      'name' : name,
+      'urlImage' : urlImage,
+      'duration' : duration,
+      'youtubeLink' : youtubeLink,
+      'calorie' : calorie,
+      'complexity' : complexity,
+      'ingredients' : ingredients,
+      'steps' : steps,
+      'category' : category
+    };
+  }
 }

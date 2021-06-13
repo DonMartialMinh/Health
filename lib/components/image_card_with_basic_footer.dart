@@ -16,7 +16,6 @@ class ImageCardWithBasicFooter extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    String _complexity = food.complexity.toString().split('.').last;
     return  InkWell(
         onTap: () {
       Navigator.of(context).push(
@@ -56,7 +55,7 @@ class ImageCardWithBasicFooter extends StatelessWidget {
                    child: Row(
                      children: <Widget>[
                        Icon(Icons.timer, color: Colors.white, size: 25,),
-                       Text('${food.duration.inMinutes} minutes',
+                       Text('${food.duration} minutes',
                          style: TextStyle(fontSize: 22, color: Colors.white),),
                      ],
                    ),
@@ -67,7 +66,7 @@ class ImageCardWithBasicFooter extends StatelessWidget {
                  child: Container(
                    padding: EdgeInsets.all(5),
                    decoration: BoxDecoration(
-                     color: _complexity == 'Simple' ? Colors.greenAccent : (_complexity == 'Medium' ? Colors.yellowAccent : Colors.pinkAccent),
+                     color: food.complexity == 'Simple' ? Colors.greenAccent : (food.complexity == 'Medium' ? Colors.yellowAccent : Colors.pinkAccent),
                      borderRadius: BorderRadius.circular(10),
 
                    ),

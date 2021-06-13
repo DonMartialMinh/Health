@@ -5,12 +5,13 @@ import 'package:health/models/program.dart';
 import 'package:health/models/tip.dart';
 
 var FAKE_FOODS = [
-  Food(name: 'Butternut Squash Risotto',
+  Food(
+      name: 'Butternut Squash Risotto',
       urlImage: 'https://www.chewoutloud.com/wp-content/uploads/2015/11/butternut-risotto.jpg',
-      duration: Duration(minutes: 50),
+      duration: 50,
       calorie: 323,
       youtubeLink: 'https://www.youtube.com/watch?v=-9UU52ubphc',
-      complexity: Complexity.Simple,
+      complexity: 'Simple',
       ingredients: [
         '500 g butternut squash, cubed',
         '1 tbsp olive oil',
@@ -24,7 +25,7 @@ var FAKE_FOODS = [
         '1 bay leaf',
         '1 tsp mixed herbs'
       ],
-      category: FoodCategory.Vegetarian,
+      category: 'Vegetarian',
       steps: [
         'Preheat your oven to 180° Celsius.',
         'Tip the chopped butternut squash onto a baking tray, drizzle the olive oil and balsamic vinegar over the top then get your hands in and mix everything through. Place the baking tray into the oven for 40 minutes.',
@@ -36,11 +37,12 @@ var FAKE_FOODS = [
       ]
   ),
 
-  Food(name: 'Mexican Fajita Steak and Rice',
+  Food(
+      name: 'Mexican Fajita Steak and Rice',
       urlImage: 'https://www.isabeleats.com/wp-content/uploads/2018/04/easy-steak-fajitas-small-1-650x650.jpg',
-      duration: Duration(minutes: 17),
+      duration:  17,
       calorie: 409,
-      complexity: Complexity.Simple,
+      complexity: 'Simple',
       youtubeLink: 'https://www.youtube.com/watch?v=5oF2pwVv16k',
       ingredients: [
         '1 tbsp olive oil',
@@ -52,7 +54,7 @@ var FAKE_FOODS = [
         '150 g white rice, uncooked weight',
         '1 tbsp tomato puree'
       ],
-      category: FoodCategory.NonVegetarian,
+      category: 'NonVegetarian',
       steps: [
         'To start, bring rice (dry weight) to the boil cook according to the directions on the packet.',
         'Heat the olive oil in a large pan or work over a medium heat and add the chopped peppers and onions and fry until brown.',
@@ -156,133 +158,4 @@ final List<Exercise> exercisesBodyPart = [
     time: 150,
     difficult: 'Arm',
   ),
-];
-
-
-final List<Exercise> exercisesYoga = [
-  Exercise(
-    image: 'assets/images/Byoga1.jpeg',
-    title: 'Cat pose',
-    time: 30,
-    difficult: 'Beginners',
-    effect: 'This pose provides a gentle massage to the spine and belly organs.',
-    caution: 'With a neck injury, keep the head in line with the torso.',
-    steps: [
-      'Start on your hands and knees in a “tabletop” position. Make sure your knees are set directly below your hips and your wrists, elbows and shoulders are in line and perpendicular to the floor. Center your head in a neutral position, eyes looking at the floor.',
-      'As you exhale, round your spine toward the ceiling, making sure to keep your shoulders and knees in position. Release your head toward the floor, but don’t force your chin to your chest.',
-      'Inhale, coming back to neutral “tabletop” position on your hands and knees.',
-      'This pose is often paired with Cow Pose on the inhale for a gentle, flowing vinyasa.'
-    ]
-  ),
-  Exercise(
-    image: 'assets/images/Byoga2.jpeg',
-    title: 'Cobra pose',
-    time: 30,
-    difficult: 'Beginners',
-  ),
-  Exercise(
-    image: 'assets/images/Byoga3.jpeg',
-    title: 'Cow pose',
-    time: 30,
-    difficult: 'Beginners',
-  ),
-  Exercise(
-    image: 'assets/images/Byoga4.jpeg',
-    title: 'Child pose',
-    time: 30,
-    difficult: 'Beginners',
-  ),
-  Exercise(
-    image: 'assets/images/Iyoga1.jpeg',
-    title: 'Boat pose',
-    time: 30,
-    difficult: 'Intermediate',
-  ),
-  Exercise(
-    image: 'assets/images/Iyoga2.jpeg',
-    title: 'Bow pose',
-    time: 30,
-    difficult: 'Intermediate',
-  ),
-  Exercise(
-    image: 'assets/images/Iyoga3.jpeg',
-    title: 'Crane(Crow) pose',
-    time: 30,
-    difficult: 'Intermediate',
-  ),
-  Exercise(
-    image: 'assets/images/Iyoga4.jpeg',
-    title: 'Dolphin Plank pose',
-    time: 30,
-    difficult: 'Intermediate',
-  ),
-  Exercise(
-    image: 'assets/images/Ayoga1.jpeg',
-    title: 'King Pigeon pose',
-    time: 30,
-    difficult: 'Advanced',
-  ),
-  Exercise(
-    image: 'assets/images/Ayoga2.jpeg',
-    title: 'Lord Of The Dance pose',
-    time: 30,
-    difficult: 'Advanced',
-  ),
-  Exercise(
-    image: 'assets/images/Ayoga3.jpeg',
-    title: 'Lotus pose',
-    time: 30,
-    difficult: 'Advanced',
-  ),
-  Exercise(
-    image: 'assets/images/Ayoga4.jpeg',
-    title: 'Peacock pose',
-    time: 30,
-    difficult: 'Advanced',
-  ),
-];
-
-final List<Ads> ads = [
-  Ads(
-    name: 'Whey protein',
-    content: 'Muscle enhance',
-    price: '1,450,000 đ',
-    image: 'https://product.hstatic.net/1000314545/product/suplo-008a-01_master.jpg',
-    url: 'https://wheyshop.vn/san-pham/100-whey-gold-standard-5lbs-2-3kg-13-2'
-  ),
-  Ads(
-      name: 'Best BCAA',
-      content: 'Muscle enhance',
-      price: '750,000 đ',
-      image: 'https://product.hstatic.net/1000185761/product/bpi-sports-best-bcaa-100-serv-blueberry_c0ad5bda7d634b5f9aaa490f9303911d_master.jpg',
-      url: 'https://wheyshop.vn/san-pham/best-bcaa-60-lan-dung'
-  )
-];
-
-final List<Tip> tips = [
-  Tip(
-      title: 'Exercise daily',
-      content: 'Exercise daily for at least an hour. You do not have to kill yourself from running, jogging, etc., but you should have some sort of moderate physical activity in your everyday life.',
-      image: 'assets/images/tip1.jpeg'
-  ),
-  Tip(
-      title: 'Eat the Right Foods and Portion Each Meal',
-      content: 'Fruits and vegetables are the best thing to eat when getting into shape. Try to stay away from sweets.',
-      image: 'assets/images/tip2.png'
-  ),
-  Tip(
-      title: 'Keep Track of Calories and Food Intake Per Day',
-      content: 'Keeping track of how many calories you eat in a day will be helpful in planning out your physical exercising.Losing weight and striving for a skinnier physique will involve more physical exercise than calories you ingest.',
-      image: 'assets/images/tip3.jpeg'
-  ),
-  Tip(
-      title: 'Be Sure to Get Sleep',
-      content: 'It is crucial to get enough sleep to recharge the body\'s batteries. Six to eight hours of sleep will keep the body going throughout the day.',
-      image: 'assets/images/tip4.jpeg'
-  ),
-  Tip(
-      title: 'Stay Motivated',
-      content: 'An important key to being in shape is to set goals and keep a positive mindset. If you stay positive, you will be able to push yourself to get that fit body you\'ve always wanted.',
-      image: 'assets/images/tip5.png'
-  )
 ];

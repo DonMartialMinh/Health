@@ -20,62 +20,6 @@ import 'package:flutter/material.dart';
 import 'package:health/data/GetExercise.dart';
 
 class Fitness extends StatelessWidget {
-  List<Widget> generateCard(BuildContext context, List<Exercise> list, double width) {
-    List<Widget> _list = [];
-    list.forEach((exercise) {
-      Widget element = Container(
-        margin: EdgeInsets.only(top: 20, left: 20, right: 20),
-        child: GestureDetector(
-          child: FitImageCard(
-            exercise: exercise,
-            tag: '${exercise.id}',
-            imageWidth: width,
-          ),
-          onTap: () {
-            Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (_) {
-                  return DetailExerciseCard(exercise: exercise, tag: '${exercise.id}');
-                },
-              ),
-            );
-          },
-        ),
-      );
-      _list.add(element);
-    });
-    return _list;
-  }
-
-  List<Widget> generateAds(BuildContext context, List<Ads> list) {
-    List<Widget> _list = [];
-    list.forEach((ads) {
-      Widget element = Container(
-        margin: EdgeInsets.only(top: 20, left: 20, right: 20),
-        child: GestureDetector(
-          child: ImageCardWithInternal(image: ads.image, title: ads.name, duration: ads.price),
-          onTap: () {
-            _launchURL(ads.url);
-          },
-        ),
-      );
-      _list.add(element);
-    });
-    return _list;
-  }
-
-  List<Widget> generateTips(BuildContext context, List<Tip> list) {
-    List<Widget> _list = [];
-    list.forEach((tip) {
-      Widget element = Container(
-        margin: EdgeInsets.only(top: 20, left: 20, right: 20),
-        child: DailyTip(tip: tip),
-      );
-      _list.add(element);
-    });
-    return _list;
-  }
 
   List<Widget> generateMainCard(BuildContext context, List<Program> list) {
     List<Widget> _list = [];
@@ -100,7 +44,6 @@ class Fitness extends StatelessWidget {
     });
     return _list;
   }
-
 
   _launchURL(String url) async {
     if (await canLaunch(url)) {
@@ -224,8 +167,32 @@ class Fitness extends StatelessWidget {
                   child: Column(
                     children: [
                       SectionTitle('Advertises'),
-                      Section(
-                          horizontalList: this.generateAds(context, ads)
+                      Container(
+                        height: 332,
+                        child: StreamBuilder(
+                          stream: FirebaseFirestore.instance
+                              .collection('Ads')
+                              .snapshots(),
+                          builder: (context, AsyncSnapshot<QuerySnapshot> streamSnapshot) {
+                            if (!streamSnapshot.hasData) {
+                              return Container();
+                            }
+                            return ListView.builder(
+                              scrollDirection: Axis.horizontal,
+                              itemCount:  streamSnapshot.data!.docs.length,
+                              itemBuilder: (ctx, index) =>
+                              Container(
+                                margin: EdgeInsets.only(top: 20, left: 20, right: 20),
+                                child: GestureDetector(
+                                  child: ImageCardWithInternal(image: streamSnapshot.data!.docs[index]['image'], title: streamSnapshot.data!.docs[index]['name'], duration: streamSnapshot.data!.docs[index]['price']),
+                                  onTap: () {
+                                    _launchURL(streamSnapshot.data!.docs[index]['url']);
+                                  },
+                                ),
+                              ),
+                            );
+                          },
+                        ),
                       ),
                       Padding(padding: EdgeInsets.only(bottom: 20))
                     ],
@@ -242,8 +209,31 @@ class Fitness extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[
                       SectionTitle('Tips'),
-                      Section(
-                        horizontalList: this.generateTips(context, tips),
+                      Container(
+                        height: 335,
+                        child: StreamBuilder(
+                          stream: FirebaseFirestore.instance
+                              .collection('Tip')
+                              .snapshots(),
+                          builder: (context, AsyncSnapshot<QuerySnapshot> streamSnapshot) {
+                            if (!streamSnapshot.hasData) {
+                              return Container();
+                            }
+                            return ListView.builder(
+                              scrollDirection: Axis.horizontal,
+                              itemCount:  streamSnapshot.data!.docs.length,
+                              itemBuilder: (ctx, index) =>
+                                Container(
+                                  margin: EdgeInsets.only(top: 20, left: 20, right: 20),
+                                  child: DailyTip(tip: new Tip(
+                                      title: streamSnapshot.data!.docs[index]['title'],
+                                      content: streamSnapshot.data!.docs[index]['content'],
+                                      image: streamSnapshot.data!.docs[index]['image'])
+                                  ),
+                                ),
+                            );
+                          },
+                        ),
                       ),
                     ],
                   ),

@@ -24,8 +24,9 @@ class ImageCardWithInternal extends StatelessWidget {
               clipBehavior: Clip.hardEdge,
               child: Center(
                 child: FadeInImage.assetNetwork(
-                    placeholder: 'assets/images/loading.gif',
-                    image: this.image
+                  placeholder: 'assets/images/loading.gif',
+                  image: this.image,
+                  fit: BoxFit.fill,
                 ),
               ),
             ),
