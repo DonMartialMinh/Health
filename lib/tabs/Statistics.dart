@@ -12,38 +12,25 @@ import 'package:health/models/food.dart';
 import 'Foods.dart';
 
 class Statistics extends StatelessWidget {
-  Food temp = new Food(
-      name: 'Mexican Fajita Steak and Rice',
-      urlImage: 'https://www.isabeleats.com/wp-content/uploads/2018/04/easy-steak-fajitas-small-1-650x650.jpg',
-      duration:  17,
-      calorie: 409,
-      complexity: 'Simple',
-      youtubeLink: 'https://www.youtube.com/watch?v=5oF2pwVv16k',
-      ingredients: [
-        '1 tbsp olive oil',
-        '1 green pepper, sliced',
-        '1 red pepper, sliced',
-        '2 red onions, sliced',
-        '400 g frying steak or chicken breast, sliced into long strips',
-        '2 tbsp Mexican/Cajun/Fajita spice mix',
-        '150 g white rice, uncooked weight',
-        '1 tbsp tomato puree'
-      ],
-      category: 'NonVegetarian',
-      steps: [
-        'To start, bring rice (dry weight) to the boil cook according to the directions on the packet.',
-        'Heat the olive oil in a large pan or work over a medium heat and add the chopped peppers and onions and fry until brown.',
-        'Remove the veg from the pan and add the steak and fry for a couple of minutes or until it is cooked.',
-        'Just like you would do with fajitas, add the vegetables back to the pan and mix through with the steak.',
-        'Add the spice mix and mix through and cook for a further minute.',
-        'Once the rice has cooked, drain it then add it to pan with the meat and vegetables along with the tomato puree and cook, stirring constantly for about a minute. Serve.',
-      ]
+  Exercise temp = new Exercise(
+    title: 'Glute bridge',
+    time: 10,
+    difficult: 'Leg',
+    image: 'https://cdn2.coachmag.co.uk/sites/coachmag/files/styles/insert_main_wide_image/public/2018/01/glute-bridge.jpg?itok=BRlJnlx2',
+    effect: 'The glutes are often overlooked but they’re a key muscle group.',
+    caution: '',
+    steps: [
+      'The bridge is a great way to work on your glutes. Lying on your back with knees bent and feet flat on the floor.',
+      'Squeeze your glutes and push your heels into the floor to lift your hips into a bridge.',
+      'You should finish with your hips straight and abdominals tight.'
+    ]
   );
+
 
   @override
   Widget build(BuildContext context) {
     // Create a CollectionReference called users that references the firestore collection
-    CollectionReference exercise = FirebaseFirestore.instance.collection('Food');
+    CollectionReference exercise = FirebaseFirestore.instance.collection('BodyFocus');
 
     Future<void> addUser() async {
       // Call the user's CollectionReference to add a new user

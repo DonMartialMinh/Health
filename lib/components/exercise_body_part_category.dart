@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:health/components/section.dart';
 import 'package:health/components/section_title.dart';
@@ -51,36 +52,192 @@ class ExcerciseBodyPartCategory extends StatelessWidget {
             children: [
               InkWell(
                 onTap: () {
-                  // Navigator.of(context).push(
-                  //     MaterialPageRoute(builder: (context) => ExerciseListPage(list: getData('Arm'), title: 'Arm exercises'))
-                  // );
+                  Navigator.of(context).push(
+                      MaterialPageRoute(builder: (context) => ExerciseListPage(kind: 'BodyFocus' ,category: 'Arm', title: 'Arm focus exercises'))
+                  );
                 },
                 child: SectionTitle('Arm'),
               ),
-              Section(
-                horizontalList: this.generateCard(context, _cardWidth, getData('Arm')),
+              Container(
+                height: 230,
+                child: StreamBuilder(
+                  stream: FirebaseFirestore.instance
+                      .collection('BodyFocus')
+                      .where('difficult', isEqualTo: 'Arm')
+                      .snapshots(),
+                  builder: (context, AsyncSnapshot<QuerySnapshot> streamSnapshot) {
+                    if (!streamSnapshot.hasData) {
+                      return Container();
+                    }
+                    return ListView.builder(
+                      scrollDirection: Axis.horizontal,
+                      itemCount:  streamSnapshot.data!.docs.length,
+                      itemBuilder: (ctx, index) =>
+                          Container(
+                            margin: EdgeInsets.only(top: 20, left: 20, right: 20),
+                            child: GestureDetector(
+                              child: FitImageCard(
+                                exercise: new Exercise(
+                                  title: streamSnapshot.data!.docs[index]['title'],
+                                  time: streamSnapshot.data!.docs[index]['time'],
+                                  difficult: streamSnapshot.data!.docs[index]['difficult'],
+                                  image: streamSnapshot.data!.docs[index]['image'],
+                                  effect: streamSnapshot.data!.docs[index]['effect'],
+                                  caution: streamSnapshot.data!.docs[index]['caution'],
+                                  steps: streamSnapshot.data!.docs[index]['steps'].cast<String>(),
+                                ),
+                                tag: streamSnapshot.data!.docs[index].id,
+                                imageWidth: _cardWidth,
+                              ),
+                              onTap: () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (_) {
+                                      return DetailExerciseCard(exercise: new Exercise(
+                                        title: streamSnapshot.data!.docs[index]['title'],
+                                        time: streamSnapshot.data!.docs[index]['time'],
+                                        difficult: streamSnapshot.data!.docs[index]['difficult'],
+                                        image: streamSnapshot.data!.docs[index]['image'],
+                                        effect: streamSnapshot.data!.docs[index]['effect'],
+                                        caution: streamSnapshot.data!.docs[index]['caution'],
+                                        steps: streamSnapshot.data!.docs[index]['steps'].cast<String>(),
+                                      ), tag: streamSnapshot.data!.docs[index].id);
+                                    },
+                                  ),
+                                );
+                              },
+                            ),
+                          ),
+                    );
+                  },
+                ),
               ),
               InkWell(
                 onTap: () {
-                  // Navigator.of(context).push(
-                  //     MaterialPageRoute(builder: (context) => ExerciseListPage(list: getData('Leg'), title: 'Leg exercises'))
-                  // );
+                  Navigator.of(context).push(
+                      MaterialPageRoute(builder: (context) => ExerciseListPage(kind: 'BodyFocus' ,category: 'Leg', title: 'Leg focus exercises'))
+                  );
                 },
                 child: SectionTitle('Leg'),
               ),
-              Section(
-                horizontalList: this.generateCard(context, _cardWidth, getData('Leg')),
+              Container(
+                height: 230,
+                child: StreamBuilder(
+                  stream: FirebaseFirestore.instance
+                      .collection('BodyFocus')
+                      .where('difficult', isEqualTo: 'Leg')
+                      .snapshots(),
+                  builder: (context, AsyncSnapshot<QuerySnapshot> streamSnapshot) {
+                    if (!streamSnapshot.hasData) {
+                      return Container();
+                    }
+                    return ListView.builder(
+                      scrollDirection: Axis.horizontal,
+                      itemCount:  streamSnapshot.data!.docs.length,
+                      itemBuilder: (ctx, index) =>
+                          Container(
+                            margin: EdgeInsets.only(top: 20, left: 20, right: 20),
+                            child: GestureDetector(
+                              child: FitImageCard(
+                                exercise: new Exercise(
+                                  title: streamSnapshot.data!.docs[index]['title'],
+                                  time: streamSnapshot.data!.docs[index]['time'],
+                                  difficult: streamSnapshot.data!.docs[index]['difficult'],
+                                  image: streamSnapshot.data!.docs[index]['image'],
+                                  effect: streamSnapshot.data!.docs[index]['effect'],
+                                  caution: streamSnapshot.data!.docs[index]['caution'],
+                                  steps: streamSnapshot.data!.docs[index]['steps'].cast<String>(),
+                                ),
+                                tag: streamSnapshot.data!.docs[index].id,
+                                imageWidth: _cardWidth,
+                              ),
+                              onTap: () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (_) {
+                                      return DetailExerciseCard(exercise: new Exercise(
+                                        title: streamSnapshot.data!.docs[index]['title'],
+                                        time: streamSnapshot.data!.docs[index]['time'],
+                                        difficult: streamSnapshot.data!.docs[index]['difficult'],
+                                        image: streamSnapshot.data!.docs[index]['image'],
+                                        effect: streamSnapshot.data!.docs[index]['effect'],
+                                        caution: streamSnapshot.data!.docs[index]['caution'],
+                                        steps: streamSnapshot.data!.docs[index]['steps'].cast<String>(),
+                                      ), tag: streamSnapshot.data!.docs[index].id);
+                                    },
+                                  ),
+                                );
+                              },
+                            ),
+                          ),
+                    );
+                  },
+                ),
               ),
               InkWell(
                 onTap: () {
-                  // Navigator.of(context).push(
-                  //     MaterialPageRoute(builder: (context) => ExerciseListPage(list:  getData('Belly'), title: 'Belly exercises'))
-                  // );
+                  Navigator.of(context).push(
+                      MaterialPageRoute(builder: (context) => ExerciseListPage(kind: 'BodyFocus' ,category: 'Belly', title: 'Belly focus exercises'))
+                  );
                 },
                 child: SectionTitle('Belly'),
               ),
-              Section(
-                horizontalList: this.generateCard(context, _cardWidth, getData('Belly')),
+              Container(
+                height: 230,
+                child: StreamBuilder(
+                  stream: FirebaseFirestore.instance
+                      .collection('BodyFocus')
+                      .where('difficult', isEqualTo: 'Belly')
+                      .snapshots(),
+                  builder: (context, AsyncSnapshot<QuerySnapshot> streamSnapshot) {
+                    if (!streamSnapshot.hasData) {
+                      return Container();
+                    }
+                    return ListView.builder(
+                      scrollDirection: Axis.horizontal,
+                      itemCount:  streamSnapshot.data!.docs.length,
+                      itemBuilder: (ctx, index) =>
+                          Container(
+                            margin: EdgeInsets.only(top: 20, left: 20, right: 20),
+                            child: GestureDetector(
+                              child: FitImageCard(
+                                exercise: new Exercise(
+                                  title: streamSnapshot.data!.docs[index]['title'],
+                                  time: streamSnapshot.data!.docs[index]['time'],
+                                  difficult: streamSnapshot.data!.docs[index]['difficult'],
+                                  image: streamSnapshot.data!.docs[index]['image'],
+                                  effect: streamSnapshot.data!.docs[index]['effect'],
+                                  caution: streamSnapshot.data!.docs[index]['caution'],
+                                  steps: streamSnapshot.data!.docs[index]['steps'].cast<String>(),
+                                ),
+                                tag: streamSnapshot.data!.docs[index].id,
+                                imageWidth: _cardWidth,
+                              ),
+                              onTap: () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (_) {
+                                      return DetailExerciseCard(exercise: new Exercise(
+                                        title: streamSnapshot.data!.docs[index]['title'],
+                                        time: streamSnapshot.data!.docs[index]['time'],
+                                        difficult: streamSnapshot.data!.docs[index]['difficult'],
+                                        image: streamSnapshot.data!.docs[index]['image'],
+                                        effect: streamSnapshot.data!.docs[index]['effect'],
+                                        caution: streamSnapshot.data!.docs[index]['caution'],
+                                        steps: streamSnapshot.data!.docs[index]['steps'].cast<String>(),
+                                      ), tag: streamSnapshot.data!.docs[index].id);
+                                    },
+                                  ),
+                                );
+                              },
+                            ),
+                          ),
+                    );
+                  },
+                ),
               ),
             ],
           ),

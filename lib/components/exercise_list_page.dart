@@ -8,13 +8,14 @@ import 'package:health/models/exercise.dart';
 import 'fit_image_card.dart';
 
 class ExerciseListPage extends StatefulWidget {
+  String kind;
   String category;
   String title;
   TextEditingController _searchQueryController = TextEditingController();
   bool _isSearching = false;
   String searchQuery = "";
 
-  ExerciseListPage({required this.category, required this.title});
+  ExerciseListPage({required this.kind,required this.category, required this.title});
 
   @override
   State <StatefulWidget> createState() {
@@ -25,36 +26,6 @@ class ExerciseListPage extends StatefulWidget {
 }
 @override
 class _MyAppState extends State<ExerciseListPage> {
-  List<Widget> generateCard(BuildContext context, double width, List<Exercise> exercises, String filter) {
-    List<Widget> _list = [];
-    exercises.forEach((exercise) {
-      if (exercise.title.toLowerCase().contains(filter.trim().toLowerCase()))
-        {
-          Widget element = Container(
-            margin: EdgeInsets.only(top: 20, left: 20, right: 20),
-            child: GestureDetector(
-              child: FitImageCard(
-                exercise: exercise,
-                tag: '${exercise.id}',
-                imageWidth: width,
-              ),
-              onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (_) {
-                      return DetailExerciseCard(exercise: exercise, tag: '${exercise.id}',);
-                    },
-                  ),
-                );
-              },
-            ),
-          );
-          _list.add(element);
-        }
-    });
-    return _list;
-  }
 
   Widget build(BuildContext context) {
     double _cardWidth = MediaQuery.of(context).size.width ;
@@ -70,7 +41,7 @@ class _MyAppState extends State<ExerciseListPage> {
           //height: 230,
           child: StreamBuilder(
             stream: FirebaseFirestore.instance
-                .collection('Exercise')
+                .collection(widget.kind)
                 .where('difficult', isEqualTo: widget.category)
                 .snapshots(),
             builder: (context, AsyncSnapshot<QuerySnapshot> streamSnapshot) {
@@ -78,6 +49,7 @@ class _MyAppState extends State<ExerciseListPage> {
                 return Container();
               }
               return ListView.builder(
+                padding: EdgeInsets.only(bottom: 30),
                 scrollDirection: Axis.vertical,
                 itemCount:  streamSnapshot.data!.docs.length,
                 itemBuilder: (ctx, index) =>
@@ -116,7 +88,7 @@ class _MyAppState extends State<ExerciseListPage> {
                       );
                     },
                   ),
-                ) : Container()
+                ) : Container(),
               );
             },
           ),

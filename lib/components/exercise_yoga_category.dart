@@ -23,7 +23,7 @@ class ExcerciseYogaCategory extends StatelessWidget {
               InkWell(
                 onTap: () {
                   Navigator.of(context).push(
-                      MaterialPageRoute(builder: (context) => ExerciseListPage(category: 'Beginners', title: 'Beginners yoga poses'))
+                      MaterialPageRoute(builder: (context) => ExerciseListPage(kind: 'Exercise' ,category: 'Beginners', title: 'Beginners yoga poses'))
                   );
                 },
                 child: SectionTitle('Beginners yoga poses'),
@@ -86,7 +86,7 @@ class ExcerciseYogaCategory extends StatelessWidget {
               InkWell(
                 onTap: () {
                   Navigator.of(context).push(
-                      MaterialPageRoute(builder: (context) => ExerciseListPage(category: 'Intermediate', title: 'Intermediate yoga poses'))
+                      MaterialPageRoute(builder: (context) => ExerciseListPage(kind: 'Exercise' ,category: 'Intermediate', title: 'Intermediate yoga poses'))
                   );
                 },
                 child: SectionTitle('Intermediate yoga poses'),
@@ -149,7 +149,7 @@ class ExcerciseYogaCategory extends StatelessWidget {
               InkWell(
                 onTap: () {
                   Navigator.of(context).push(
-                      MaterialPageRoute(builder: (context) => ExerciseListPage(category: 'Advanced', title: 'Advanced yoga poses'))
+                      MaterialPageRoute(builder: (context) => ExerciseListPage(kind: 'Exercise' ,category: 'Advanced', title: 'Advanced yoga poses'))
                   );
                 },
                 child: SectionTitle('Advanced yoga poses'),

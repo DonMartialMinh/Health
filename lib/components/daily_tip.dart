@@ -19,13 +19,14 @@ class DailyTip extends StatelessWidget {
             bottom: 10.0,
             left: 20.0,
           ),
-          decoration: BoxDecoration(
-            image: DecorationImage(
-              image: AssetImage(tip.image),
-              fit: BoxFit.fill,
-            ),
-            borderRadius: BorderRadius.all(
-              Radius.circular(15.0),
+          child: ClipRRect(
+            borderRadius: BorderRadius.circular(20),
+            clipBehavior: Clip.hardEdge,
+            child: Center(
+              child: FadeInImage.assetNetwork(
+                    placeholder: 'assets/images/loading.gif',
+                    image: tip.image
+                ),
             ),
           ),
         ),

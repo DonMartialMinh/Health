@@ -70,9 +70,9 @@ class _ActivityTimerState extends State<ActivityTimer> {
                     Container(
                       width: MediaQuery.of(context).size.width,
                       height: 270,
-                      child: Image.asset(
-                        widget.exercises[widget.currentExerciseIndex].image,
-                        fit: BoxFit.fitHeight,
+                      child: FadeInImage.assetNetwork(
+                          placeholder: 'assets/images/loading.gif',
+                          image: widget.exercises[widget.currentExerciseIndex].image
                       ),
                     ),
                     Positioned(
