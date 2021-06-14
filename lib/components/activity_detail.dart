@@ -38,10 +38,10 @@ class ActivityDetail extends StatelessWidget {
                 Container(
                   width: MediaQuery.of(context).size.width,
                   height: 270,
-                  child: Image.asset(
-                    program.image,
-                    fit: BoxFit.fitHeight,
-                  ),
+                  child: FadeInImage.assetNetwork(
+                    fit: BoxFit.cover,
+                      placeholder: 'assets/images/loading.gif',
+                      image: program.image),
                 ),
                 Positioned(
                   top: 10,

@@ -19,4 +19,15 @@ class Program {
   {
     this.id = Random().nextInt(1000);
   }
+
+  Map<String, dynamic> toMap(){
+    return {
+      'title' : title,
+      'time' : time,
+      'difficult' : difficult,
+      'image' : image,
+      'effect' : effect,
+      'exercises' : exercises.map((i) => i.toMap()).toList(),
+    };
+  }
 }

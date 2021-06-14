@@ -21,14 +21,11 @@ class NextStep extends StatelessWidget {
             right: 20.0,
             bottom: 20.0,
           ),
-          decoration: BoxDecoration(
-            image: DecorationImage(
-              image: AssetImage(
-                this.image,
-              ),
-              fit: BoxFit.cover,
-            ),
-            borderRadius: BorderRadius.circular(15.0),
+          child: ClipRRect(
+            borderRadius: BorderRadius.circular(10),
+            child: FadeInImage.assetNetwork(
+                placeholder: 'assets/images/loading.gif', 
+                image: image),
           ),
         ),
         Container(

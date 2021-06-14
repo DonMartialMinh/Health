@@ -27,7 +27,7 @@ class Fitness extends StatelessWidget {
       Widget element = Container(
         //margin: EdgeInsets.only(top: 20, left: 20, right: 20),
         child: GestureDetector(
-          child: MainCardPrograms(program: program,),
+          child: MainCardPrograms(program: program),
           onTap: () {
             Navigator.push(
               context,
@@ -86,8 +86,52 @@ class Fitness extends StatelessWidget {
                   ),
                 ),
                 SectionTitle('Fitness program'), // MainCard
-                Section(
-                  horizontalList: this.generateMainCard(context, programs),
+                Container(
+                  height: 230,
+                  child: StreamBuilder(
+                    stream: FirebaseFirestore.instance
+                        .collection('Program')
+                        .snapshots(),
+                    builder: (context, AsyncSnapshot<QuerySnapshot> streamSnapshot) {
+                      if (!streamSnapshot.hasData) {
+                        return Container();
+                      }
+                      return ListView.builder(
+                        scrollDirection: Axis.horizontal,
+                        itemCount:  streamSnapshot.data!.docs.length,
+                        itemBuilder: (ctx, index) =>
+                          Container(
+                            //margin: EdgeInsets.only(top: 20, left: 20, right: 20),
+                            child: GestureDetector(
+                              child: MainCardPrograms(program: new Program(
+                                  title: streamSnapshot.data!.docs[index]['title'],
+                                  time: streamSnapshot.data!.docs[index]['time'],
+                                  difficult: streamSnapshot.data!.docs[index]['difficult'],
+                                  image: streamSnapshot.data!.docs[index]['image'],
+                                  exercises: List<Exercise>.from(streamSnapshot.data!.docs[index]['exercises'].map((i) => Exercise.fromJson(i)))
+                              )
+                              ),
+                              onTap: () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (_) {
+                                      return ActivityDetail(program: Program(
+                                          title: streamSnapshot.data!.docs[index]['title'],
+                                          time: streamSnapshot.data!.docs[index]['time'],
+                                          difficult: streamSnapshot.data!.docs[index]['difficult'],
+                                          image: streamSnapshot.data!.docs[index]['image'],
+                                          exercises: List<Exercise>.from(streamSnapshot.data!.docs[index]['exercises'].map((i) => Exercise.fromJson(i)))
+                                      ));
+                                    },
+                                  ),
+                                );
+                              },
+                            ),
+                          )
+                      );
+                    },
+                  ),
                 ),
                 InkWell(
                   onTap: () {

@@ -10,39 +10,54 @@ class MainCardPrograms extends StatelessWidget {
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     return Container(
-      child: Align(
-        alignment: Alignment.bottomCenter,
-        child: Container(
-          height: 60.0,
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: <Widget>[
-              Text(
-                this.program.title,
-                style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 20.0,
-                  fontWeight: FontWeight.w700,
-                ),
+      child: Stack(
+        children: [
+          Container(
+            child: ClipRRect(
+              borderRadius: BorderRadius.circular(25.0),
+              child: FadeInImage.assetNetwork(
+                width: size.width,
+                placeholder: 'assets/images/loading.gif',
+                image: program.image,
+                fit: BoxFit.cover,
               ),
-              Text(
-                this.program.time,
-                style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 20.0,
-                ),
-              )
-            ],
-          ),
-          padding: EdgeInsets.symmetric(horizontal: 20.0),
-          decoration: BoxDecoration(
-            color: Colors.redAccent.withOpacity(0.85),
-            borderRadius: BorderRadius.only(
-              bottomLeft: Radius.circular(20.0),
-              bottomRight: Radius.circular(20.0),
             ),
           ),
-        ),
+          Align(
+            alignment: Alignment.bottomCenter,
+            child: Container(
+              height: 60.0,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: <Widget>[
+                  Text(
+                    this.program.title,
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 20.0,
+                      fontWeight: FontWeight.w700,
+                    ),
+                  ),
+                  Text(
+                    this.program.time,
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 20.0,
+                    ),
+                  )
+                ],
+              ),
+              padding: EdgeInsets.symmetric(horizontal: 20.0),
+              decoration: BoxDecoration(
+                color: Colors.redAccent.withOpacity(0.85),
+                borderRadius: BorderRadius.only(
+                  bottomLeft: Radius.circular(20.0),
+                  bottomRight: Radius.circular(20.0),
+                ),
+              ),
+            ),
+          ),
+        ],
       ),
       width: size.width - 40,
       height: (size.width - 40) / 2,
@@ -50,23 +65,6 @@ class MainCardPrograms extends StatelessWidget {
         top: 5.0,
         left: 20.0,
         right: 20.0,
-      ),
-      decoration: BoxDecoration(
-        image: DecorationImage(
-          image: AssetImage(this.program.image),
-          fit: BoxFit.fill,
-        ),
-        borderRadius: BorderRadius.all(
-          Radius.circular(20.0),
-        ),
-        color: Colors.white70,
-        boxShadow: [
-          BoxShadow(
-            color: Colors.black38,
-            blurRadius: 25.0,
-            offset: Offset(8.0, 8.0),
-          ),
-        ],
       ),
     );
   }

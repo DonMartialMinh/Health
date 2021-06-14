@@ -19,6 +19,7 @@ class Exercise {
   this.id = Random().nextInt(10000);
   }
 
+
   Map<String, dynamic> toMap(){
     return {
       'title' : title,
@@ -30,6 +31,16 @@ class Exercise {
       'steps' : steps,
     };
   }
+  factory Exercise.fromJson(Map<String, dynamic> json) => fromJson(json);
+}
+
+fromJson(Map<String, dynamic> json) {
+  return Exercise(
+      title: json['title'] as String,
+      time: json['time'] as int,
+      difficult: json['difficult'] as String,
+      image: json['image'] as String
+  );
 }
 
 const List<String> temp = [];

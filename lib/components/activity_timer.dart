@@ -71,8 +71,9 @@ class _ActivityTimerState extends State<ActivityTimer> {
                       width: MediaQuery.of(context).size.width,
                       height: 270,
                       child: FadeInImage.assetNetwork(
-                          placeholder: 'assets/images/loading.gif',
-                          image: widget.exercises[widget.currentExerciseIndex].image
+                        placeholder: 'assets/images/loading.gif',
+                        image: widget.exercises[widget.currentExerciseIndex].image,
+                        fit: BoxFit.cover,
                       ),
                     ),
                     Positioned(
