@@ -10,11 +10,23 @@ class ActivityTimer extends StatefulWidget {
   late int currentExerciseIndex;
   late int _start;
   late bool isStarting;
+  int time;
+  late int totaltime;
   late Timer _timer;
 
-  ActivityTimer({required this.exercises}){
+  ActivityTimer({required this.exercises, this.time = 0}){
     currentExerciseIndex = 0;
-    _start = exercises[currentExerciseIndex].time;
+     if (this.time == 0)
+       {
+         totaltime = exercises[currentExerciseIndex].time;
+         _start = exercises[currentExerciseIndex].time;
+       }
+     else
+       {
+         _start = time;
+         totaltime = time;
+       }
+
     isStarting = false;
     _timer = new Timer.periodic(
       const Duration(seconds: 0),
@@ -147,7 +159,7 @@ class _ActivityTimerState extends State<ActivityTimer> {
                               animation: false,
                               //animationDuration: 1200,
                               lineWidth: 16.0,
-                              percent: widget._start / widget.exercises[widget.currentExerciseIndex].time,
+                              percent: widget._start / widget.totaltime,
                               center: (widget.isStarting) ? InkWell(child: Container(
                                 child: Text(
                                   '${widget._start} sec',
@@ -172,7 +184,7 @@ class _ActivityTimerState extends State<ActivityTimer> {
                                     style: TextStyle(
                                       fontSize: 30.0,
                                       fontWeight: FontWeight.w900,
-                                      color: Colors.grey[700],
+                                      color: Colors.redAccent,
                                     ),
                                   ),
                                   InkWell(
@@ -252,6 +264,7 @@ class _ActivityTimerState extends State<ActivityTimer> {
       widget.isStarting = false;
       widget.currentExerciseIndex++;
       widget._start = widget.exercises[widget.currentExerciseIndex].time;
+      widget.totaltime = widget.exercises[widget.currentExerciseIndex].time;
     });
   }
 }
