@@ -21,10 +21,13 @@ class FitImageCard extends StatelessWidget {
         Container(
             width: this.imageWidth,
             height: 160.0,
-            child: FadeInImage.assetNetwork(
-              placeholder: 'assets/images/loading.gif',
-              image: this.exercise.image,
-              fit: BoxFit.fill,
+            child: ClipRRect(
+              borderRadius: BorderRadius.circular(20),
+              child: FadeInImage.assetNetwork(
+                placeholder: 'assets/images/loading.gif',
+                image: this.exercise.image,
+                fit: BoxFit.fill,
+              ),
             ),
           ),
         Container(

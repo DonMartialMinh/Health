@@ -1,13 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:health/components/detail_exercise_card.dart';
-import 'package:health/components/fit_image_card.dart';
-import 'package:health/data/GetExercise.dart';
-import 'package:health/data/fake_data.dart';
-import 'package:health/models/ads.dart';
 import 'package:health/models/exercise.dart';
-import 'package:health/models/food.dart';
 import 'package:health/models/program.dart';
 
 import 'Foods.dart';

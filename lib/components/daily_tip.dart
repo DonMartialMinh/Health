@@ -20,8 +20,7 @@ class DailyTip extends StatelessWidget {
             left: 20.0,
           ),
           child: ClipRRect(
-            borderRadius: BorderRadius.circular(20),
-            clipBehavior: Clip.hardEdge,
+            borderRadius: BorderRadius.circular(40),
             child: Center(
               child: FadeInImage.assetNetwork(
                     placeholder: 'assets/images/loading.gif',

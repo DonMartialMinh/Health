@@ -1,10 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:health/components/section.dart';
 import 'package:health/components/section_title.dart';
 import 'package:health/components/exercise_list_page.dart';
 import 'package:health/models/exercise.dart';
-import 'package:health/data/fake_data.dart';
 import 'detail_exercise_card.dart';
 import 'fit_image_card.dart';
 

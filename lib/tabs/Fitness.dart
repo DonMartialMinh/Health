@@ -1,13 +1,10 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:health/components/activity_detail.dart';
 import 'package:health/components/exercise_yoga_category.dart';
-import 'package:health/models/ads.dart';
 import 'package:health/models/tip.dart';
 import '../components/exercise_body_part_category.dart';
-import '../data/fake_data.dart';
 import 'package:health/components/daily_tip.dart';
 import 'package:health/components/header.dart';
-import 'package:health/components/section.dart';
 import 'package:health/components/image_card_with_internal.dart';
 import 'package:health/components/main_card_programs.dart';
 import 'package:health/models/exercise.dart';
@@ -17,33 +14,8 @@ import 'package:health/components/section_title.dart';
 import 'package:health/models/program.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:flutter/material.dart';
-import 'package:health/data/GetExercise.dart';
 
 class Fitness extends StatelessWidget {
-
-  List<Widget> generateMainCard(BuildContext context, List<Program> list) {
-    List<Widget> _list = [];
-    list.forEach((program) {
-      Widget element = Container(
-        //margin: EdgeInsets.only(top: 20, left: 20, right: 20),
-        child: GestureDetector(
-          child: MainCardPrograms(program: program),
-          onTap: () {
-            Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (_) {
-                  return ActivityDetail(program: program);
-                },
-              ),
-            );
-          },
-        ),
-      );
-      _list.add(element);
-    });
-    return _list;
-  }
 
   _launchURL(String url) async {
     if (await canLaunch(url)) {
@@ -282,7 +254,12 @@ class Fitness extends StatelessWidget {
                               Container(
                                 margin: EdgeInsets.only(top: 20, left: 20, right: 20),
                                 child: GestureDetector(
-                                  child: ImageCardWithInternal(image: streamSnapshot.data!.docs[index]['image'], title: streamSnapshot.data!.docs[index]['name'], duration: streamSnapshot.data!.docs[index]['price']),
+                                  child: ImageCardWithInternal(
+                                    image: streamSnapshot.data!.docs[index]['image'],
+                                    title: streamSnapshot.data!.docs[index]['name'],
+                                    price: streamSnapshot.data!.docs[index]['price'],
+                                    effect: streamSnapshot.data!.docs[index]['content']
+                                  ),
                                   onTap: () {
                                     _launchURL(streamSnapshot.data!.docs[index]['url']);
                                   },
