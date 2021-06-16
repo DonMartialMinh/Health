@@ -14,26 +14,31 @@ class SignUpWidget extends StatelessWidget {
   Widget buildSignUp() => Container(
     color: Color.fromRGBO(255, 189, 89, 1),
     child: Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      crossAxisAlignment: CrossAxisAlignment.center,
       children: [
         Spacer(),
+        Image(
+          image: AssetImage('assets/images/appicon.png'), width: 180, height: 180,
+        ),
         Align(
           alignment: Alignment.centerLeft,
           child: Container(
             margin: EdgeInsets.symmetric(horizontal: 20),
-            width: 175,
+            width: 200,
             child: Text(
-              'Welcome Back To MyApp',
+              'Welcome Back To Health',
               style: TextStyle(
                 color: Colors.black,
-                fontSize: 30,
-                fontWeight: FontWeight.bold,
+                fontSize: 35,
+                fontWeight: FontWeight.normal,
               ),
             ),
           ),
         ),
         Spacer(),
         GoogleSignUp(),
-        SizedBox(height: 12),
+        SizedBox(height: 10),
         Text(
           'Login to continue',
           style: TextStyle(fontSize: 16),

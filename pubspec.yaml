@@ -69,47 +69,8 @@ flutter:
   # To add assets to your application, add an assets section, like this:
   assets:
      - assets/images/loading.gif
-     - assets/images/image001.jpg
-     - assets/images/image002.jpg
-     - assets/images/image003.jpg
-     - assets/images/image004.jpg
-     - assets/images/image005.jpg
-     - assets/images/image006.jpg
-     - assets/images/image007.jpg
-     - assets/images/image008.jpg
+     - assets/images/appicon.png
      - assets/images/image009.jpg
-     - assets/images/image010.jpg
-     - assets/images/image011.jpg
-     - assets/images/image012.jpg
-     - assets/images/image013.jpg
-     - assets/images/image014.jpeg
-     - assets/images/image015.jpg
-     - assets/images/Byoga1.jpeg
-     - assets/images/Byoga2.jpeg
-     - assets/images/Byoga3.jpeg
-     - assets/images/Byoga4.jpeg
-     - assets/images/Iyoga1.jpeg
-     - assets/images/Iyoga2.jpeg
-     - assets/images/Iyoga3.jpeg
-     - assets/images/Iyoga4.jpeg
-     - assets/images/Ayoga1.jpeg
-     - assets/images/Ayoga2.jpeg
-     - assets/images/Ayoga3.jpeg
-     - assets/images/Ayoga4.jpeg
-     - assets/images/Arm1.jpeg
-     - assets/images/Arm2.jpeg
-     - assets/images/Arm3.jpeg
-     - assets/images/Arm4.jpeg
-     - assets/images/Arm5.jpeg
-     - assets/images/Arm6.jpeg
-     - assets/images/iprogram1.jpeg
-     - assets/images/iprogram2.jpeg
-     - assets/images/iprogram3.jpeg
-     - assets/images/tip1.jpeg
-     - assets/images/tip2.png
-     - assets/images/tip3.jpeg
-     - assets/images/tip4.jpeg
-     - assets/images/tip5.png
 
 
   # An image asset can refer to one or more resolution-specific "variants", see

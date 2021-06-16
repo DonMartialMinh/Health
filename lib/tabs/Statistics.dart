@@ -8,28 +8,34 @@ import 'Foods.dart';
 
 class Statistics extends StatelessWidget {
   Program temp = new Program(
-      title: 'Intermediate start',
-      time: '10 min',
-      difficult: 'Intermediate',
-      image: 'https://www.runtastic.com/blog/wp-content/uploads/2018/06/how-to-squat-properly-without-mistake.jpg',
+      title: 'Advanced start',
+      time: '20 min',
+      difficult: 'Advanced',
+      image: 'https://cdn.shopify.com/s/files/1/1103/4864/articles/people-2604149_960_720_960x.jpg?v=1520663623',
       exercises: [
         Exercise(
-          image: 'https://www.runtastic.com/blog/wp-content/uploads/2018/06/how-to-squat-properly-without-mistake.jpg',
-          title: 'Swat',
-          time: 120,
-          difficult: 'Intermediate',
+          image: 'https://www.verywellfit.com/thmb/piE3wytFQNS_S3WGuS8jix7L2FQ=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc():format(webp)/GettyImages-564120931-57b615773df78c69097528e2.jpg',
+          title: 'Power clean and press',
+          time: 300,
+          difficult: 'Advanced',
         ),
         Exercise(
-          image: 'https://www.wheystore.vn/upload/news_optimize/wst_1607682528_jumping_jack_la_gi__huong_dan_tap_jumping_jack_giam_can_hieu_qua_image_1607682528_1.jpg',
-          title: 'Jumping jacks',
-          time: 100,
-          difficult: 'Intermediate',
+          image: 'https://www.verywellfit.com/thmb/CypSw-kj6UbJW6mkNgmbEofx63c=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc():format(webp)/Verywell-34-3498604-BicepCurl01-1576-599462e7b501e800128ff42d.gif',
+          title: 'Biceps Curls',
+          time: 250,
+          difficult: 'Advanced',
         ),
         Exercise(
-          image: 'https://post.healthline.com/wp-content/uploads/2020/03/Female_Running_Inplace_1200x628-facebook-1200x628.jpg',
-          title: 'Run in place',
-          time: 90,
-          difficult: 'Intermediate',
+          image: 'https://www.chicagotribune.com/resizer/zgdusStLwKyPYh2La9itWDH9-4U=/1200x0/top/cloudfront-us-east-1.images.arcpublishing.com/tronc/UXUVNNAFPBCRPA36DBMFM3SCAM.jpg',
+          title: 'Treadmill run',
+          time: 360,
+          difficult: 'Advanced',
+        ),
+        Exercise(
+          image: 'https://www.verywellfit.com/thmb/Vk9yvjF9wHZjMmOiJBh_1f8w-dk=/768x0/filters:no_upscale():max_bytes(150000):strip_icc():format(webp)/About-194-1231474-Chest-Press-Bench02-1560-fe31b6ad47f042c896163a5e1a89e169.jpg',
+          title: 'Chest press',
+          time: 300,
+          difficult: 'Advanced',
         ),
       ]
   );

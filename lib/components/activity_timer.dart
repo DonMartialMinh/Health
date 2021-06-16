@@ -41,6 +41,7 @@ class ActivityTimer extends StatefulWidget {
     // TODO: implement createState
     return _ActivityTimerState();
   }
+
 }
 
 class _ActivityTimerState extends State<ActivityTimer> {

@@ -1,8 +1,6 @@
-import 'package:health/models/ads.dart';
 import 'package:health/models/food.dart';
 import 'package:health/models/exercise.dart';
 import 'package:health/models/program.dart';
-import 'package:health/models/tip.dart';
 
 var FAKE_FOODS = [
   Food(
