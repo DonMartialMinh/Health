@@ -26,7 +26,7 @@ class Foods extends StatelessWidget {
                   ),
                   child: Center(
                     child: Text(
-                      'Tracker',
+                      'Supporter',
                       style: TextStyle(
                         color: Colors.white,
                         fontWeight: FontWeight.w900,

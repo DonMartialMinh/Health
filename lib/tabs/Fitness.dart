@@ -236,7 +236,7 @@ class Fitness extends StatelessWidget {
                   ),
                   child: Column(
                     children: [
-                      SectionTitle('Advertises'),
+                      SectionTitle('Our products'),
                       Container(
                         height: 332,
                         child: StreamBuilder(

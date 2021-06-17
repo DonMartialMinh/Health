@@ -46,7 +46,7 @@ class FitImageCard extends StatelessWidget {
             '${this.exercise.time} sec    |    ${this.exercise.difficult}',
             style: TextStyle(
               fontSize: 12.0,
-              color: Colors.grey,
+              color: Colors.black,
             ),
           ),
         ),

@@ -1,7 +1,14 @@
-class User{
+class currentUser{
   //int id;
   String name;
-  late double calories, height;
+  String image;
 
-  User({required this.name});
+  currentUser({required this.name, required this.image});
+
+  Map<String, dynamic> toMap() {
+    return {
+      'name' : this.name,
+      'image' : this.image,
+    };
+  }
 }
