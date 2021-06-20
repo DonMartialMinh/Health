@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:health/tabs/Settings.dart';
-import 'package:health/tabs/Statistics.dart';
+import 'package:health/tabs/WeightTracker.dart';
 import 'tabs/Foods.dart';
 import 'package:health/tabs/Fitness.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -19,14 +19,14 @@ class HomePage extends StatefulWidget {
 class _HomePage extends State<HomePage> {
   dynamic data;
   int _selectedIndex = 0;
-  static const Color _colorFit = Colors.red;
+  static const Color _colorFit = Colors.redAccent;
   static const Color _colorFood = Colors.green;
-  static const Color _colorFavorite = Colors.pink;
+  static const Color _colorFavorite = Colors.pinkAccent;
   static const Color _colorSettings = Colors.orange;
   static  List<Widget> _widgetOptions = <Widget>[
     Fitness(),
     Foods(),
-    Statistics(),
+    WeightTracker(),
     Settings(),
   ];
 
@@ -71,7 +71,7 @@ class _HomePage extends State<HomePage> {
                   ),
                   BottomNavigationBarItem(
                     icon: Icon(Icons.favorite),
-                    label: 'Favorite',
+                    label: 'Weight',
                     backgroundColor: _colorFavorite,
                   ),
                   BottomNavigationBarItem(

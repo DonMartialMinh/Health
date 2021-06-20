@@ -26,7 +26,7 @@ class Settings extends StatelessWidget{
                     padding: EdgeInsets.symmetric(horizontal: 16.0),
                     margin: EdgeInsets.only(right: 20.0),
                     decoration: BoxDecoration(
-                      color: Colors.orangeAccent,
+                      color: Colors.orange,
                       borderRadius: BorderRadius.circular(20.0),
                     ),
                     child: Center(
