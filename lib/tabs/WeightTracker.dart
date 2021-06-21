@@ -25,15 +25,9 @@ class WeightTracker extends StatefulWidget {
 class _WeightTracker extends State<WeightTracker> {
   late TextEditingController _controller;
   DateTime _currentDate =  DateTime.now();
+  late String _selectedDate;
+
   List<Weight> _list = [
-    Weight(dateTime: '10/10/2000', weight: 65),
-    Weight(dateTime: '11/10/2000', weight: 68),
-    Weight(dateTime: '11/10/2000', weight: 68),
-    Weight(dateTime: '11/10/2000', weight: 68),
-    Weight(dateTime: '11/10/2000', weight: 68),
-    Weight(dateTime: '11/10/2000', weight: 68),
-    Weight(dateTime: '11/10/2000', weight: 68),
-    Weight(dateTime: '11/10/2000', weight: 68),
   ];
 
   double roundDouble(double value, int places){
@@ -43,7 +37,14 @@ class _WeightTracker extends State<WeightTracker> {
 
   void _addToList(String weight, DateTime date) {
     setState(() {
-      _list.insert(0, new Weight(weight: double.parse(weight), dateTime: DateFormat.yMMMd().format(date).toString()));
+      _list.insert(0, new Weight(weight: double.parse(weight), dateTime: date));
+    });
+  }
+
+  void _updateWeight(int index, String weight, DateTime date) {
+    setState(() {
+      _list.removeAt(index);
+      _list.insert(index, new Weight(weight: double.parse(weight), dateTime: date));
     });
   }
 
@@ -59,6 +60,17 @@ class _WeightTracker extends State<WeightTracker> {
     final DateTime temp = (await showDatePicker(
         context: context,
         initialDate: DateTime.now(),
+        firstDate: new DateTime(DateTime.now().year - 1),
+        lastDate: new DateTime(DateTime.now().year + 1)))!;
+    setState(() {
+      _currentDate = temp;
+    });
+  }
+
+  Future<void> _openDatePickerWithDate(BuildContext context, setState, DateTime datetime) async {
+    final DateTime temp = (await showDatePicker(
+        context: context,
+        initialDate: datetime,
         firstDate: new DateTime(DateTime.now().year - 1),
         lastDate: new DateTime(DateTime.now().year + 1)))!;
     setState(() {
@@ -178,8 +190,80 @@ class _WeightTracker extends State<WeightTracker> {
                                   itemCount: _list.length,
                                   itemBuilder: (context, index) {
                                     return ListTile(
-                                      //onLongPress: ,
-                                      leading: Text('${_list[index].dateTime}', style: TextStyle(fontSize: 15)),
+                                      onLongPress: () => {
+                                        _currentDate = _list[index].dateTime,
+                                        _controller..text = _list[index].weight.toString(),
+                                        showDialog(
+                                            context: context,
+                                            builder: (BuildContext context) => StatefulBuilder(
+                                                builder: (context, setState) {
+                                                  return AlertDialog(
+                                                    title: const Text('Update your weight:'),
+                                                    content: Container(
+                                                      height: 150,
+                                                      child: Column(
+                                                        mainAxisAlignment: MainAxisAlignment.center,
+                                                        children: [
+                                                          Row (
+                                                            //mainAxisAlignment: MainAxisAlignment.center,
+                                                            children: [
+                                                              Text('Your weight:    '),
+                                                              Container(
+                                                                width: 100,
+                                                                child: TextField(
+                                                                  keyboardType: TextInputType.numberWithOptions(
+                                                                    decimal: true,
+                                                                    signed: false,
+                                                                  ),
+                                                                  inputFormatters: <TextInputFormatter> [
+                                                                    FilteringTextInputFormatter.allow(RegExp(r"[0-9.]")),
+                                                                  ],
+                                                                  controller: _controller,
+                                                                  decoration: InputDecoration(
+                                                                    border: OutlineInputBorder(),
+                                                                  ),
+                                                                ),
+                                                              )
+                                                            ],
+                                                          ),
+                                                          Padding(padding: EdgeInsets.only(top:10)),
+                                                          Row (
+                                                            mainAxisAlignment: MainAxisAlignment.center,
+                                                            children: [
+                                                              Text(DateFormat.yMMMd().format(_currentDate), style: TextStyle(fontSize: 20),),
+                                                              IconButton(
+                                                                  icon: Icon(Icons.calendar_today),
+                                                                  onPressed: () {
+                                                                    _openDatePickerWithDate(context, setState, _list[index].dateTime);
+                                                                  }
+                                                              )
+                                                            ],
+                                                          )
+                                                        ],
+                                                      ),
+                                                    ),
+                                                    actions: <Widget>[
+                                                      TextButton(
+                                                        onPressed: () => _clearData(context),
+                                                        child: const Text('Cancel', style: TextStyle(fontSize: 20 ,color: Colors.pinkAccent),),
+                                                      ),
+                                                      TextButton(
+                                                        onPressed: () {
+                                                          if (_controller.text.isEmpty == false)
+                                                            {
+                                                              _updateWeight(index, _controller.text, _currentDate);
+                                                              _clearData(context);
+                                                            }
+                                                        },
+                                                        child: const Text('OK', style: TextStyle(fontSize: 20, color: Colors.pinkAccent),),
+                                                      ),
+                                                    ],
+                                                  );
+                                                }
+                                            )
+                                        ),
+                                      },
+                                      leading: Text('${DateFormat.yMMMd().format(_list[index].dateTime)}', style: TextStyle(fontSize: 15)),
                                       title: Center(child: Text('${_list[index].weight}kg', style: TextStyle(fontSize: 25))),
                                       trailing: IconButton(
                                         icon: Icon(Icons.delete),
@@ -308,8 +392,11 @@ class _WeightTracker extends State<WeightTracker> {
                         ),
                         TextButton(
                           onPressed: () {
-                            _addToList(_controller.text, _currentDate);
-                            _clearData(context);
+                            if (_controller.text.isEmpty == false)
+                              {
+                                _addToList(_controller.text, _currentDate);
+                                _clearData(context);
+                              }
                           },
                           child: const Text('OK', style: TextStyle(fontSize: 20, color: Colors.pinkAccent),),
                         ),
@@ -322,15 +409,4 @@ class _WeightTracker extends State<WeightTracker> {
         )
     );
   }
-}
-
-Widget WeightCard(String date, String weight, String changes) {
-  return Row(
-    mainAxisAlignment: MainAxisAlignment.spaceAround,
-    children: [
-      Text('10/03/2000',style: TextStyle(fontSize: 20),),
-      Text('67.8 kg', style: TextStyle(fontSize: 30),),
-      Text ('+3 kg', style: TextStyle(fontSize: 30),),
-    ],
-  );
 }
