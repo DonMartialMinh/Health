@@ -44,7 +44,7 @@ class GoogleSignInProvider extends ChangeNotifier {
         }
         else {
           //currentUser _currentUser = new currentUser(name: firebaseUser.displayName!, image: firebaseUser.photoURL!);
-          documentReference.set(currentUser(name: firebaseUser.displayName!, image: firebaseUser.photoURL!).toMap())
+          documentReference.set(currentUser(name: firebaseUser.displayName!, image: firebaseUser.photoURL!, desireWeight: 0.0).toMap(),)
           .then((value) => print("user Added"))
           .catchError((error) => print("Failed to add user: $error"))
         }

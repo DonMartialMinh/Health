@@ -39,7 +39,7 @@ class _WeightTracker extends State<WeightTracker> {
   Future<void> _addToList(Weight weight) async {
     await FirebaseFirestore.instance.collection('User').doc(firebaseUser!.uid)
         .collection('WeightHistory').doc('${weight.id}').set(weight.toMap());
-    _getData();
+    _getCurrentWeight();
   }
 
   Future<void> _updateWeight(String id , double weight, DateTime dateTime) async {
@@ -48,13 +48,21 @@ class _WeightTracker extends State<WeightTracker> {
       'weight' : weight,
       'dateTime' : dateTime
     });
-    _getData();
+    _getCurrentWeight();
+  }
+
+  Future<void> _updateDesireWeight(double weight) async {
+    await FirebaseFirestore.instance.collection('User')
+        .doc(firebaseUser!.uid).update({
+      'desireWeight' : weight,
+    });
+    _getDesireWeight();
   }
 
   Future<void> _removeFromList(String id) async {
     await FirebaseFirestore.instance.collection('User').doc(firebaseUser!.uid)
         .collection('WeightHistory').doc('$id').delete();
-    _getData();
+    _getCurrentWeight();
   }
 
   void _clearData(BuildContext context) {
@@ -87,7 +95,7 @@ class _WeightTracker extends State<WeightTracker> {
     });
   }
 
-  Future<dynamic> _getData() async {
+  Future<dynamic> _getCurrentWeight() async {
     final query = FirebaseFirestore.instance
         .collection("User")
         .doc(firebaseUser!.uid)
@@ -109,16 +117,28 @@ class _WeightTracker extends State<WeightTracker> {
     });
   }
 
+  Future<void> _getDesireWeight() async {
+    final collection = FirebaseFirestore.instance
+        .collection("User")
+        .doc(firebaseUser!.uid);
+
+    await collection.get().then((snapshot) => {
+      setState((){
+        this._desireWeight = snapshot.get('desireWeight').toDouble();
+      })
+    });
+  }
+
   @override
   void initState() {
     super.initState();
     _controller = TextEditingController();
-    _getData();
+    _getCurrentWeight();
+    _getDesireWeight();
   }
 
   @override
   Widget build(BuildContext context) {
-    //_getData();
     return SafeArea(
         child: Scaffold(
           backgroundColor: Colors.white,
@@ -184,13 +204,74 @@ class _WeightTracker extends State<WeightTracker> {
                           ),
                           borderRadius: BorderRadius.circular(12),
                         ),
-                        child: Column(
-                          children: [
-                            Text('DESIRE WEIGHT', style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),),
-                            Text('${this._desireWeight} kg', style: TextStyle(fontSize: 30, color: Colors.pinkAccent),),
-                            Text('${(roundDouble((this._desireWeight - this._currentWeight),2)).abs()} kg difference remain', style: TextStyle(fontSize: 18),),
-                          ],
-                        ),
+                        child: GestureDetector(
+                          child: Column(
+                            children: [
+                              Text('DESIRE WEIGHT', style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),),
+                              Text('${this._desireWeight} kg', style: TextStyle(fontSize: 30, color: Colors.pinkAccent),),
+                              Text('${(roundDouble((this._desireWeight - this._currentWeight),2)).abs()} kg difference remain', style: TextStyle(fontSize: 18),),
+                            ],
+                          ),
+                          onTap: () => {
+                            _controller..text = this._desireWeight.toString(),
+                            showDialog(
+                                context: context,
+                                builder: (BuildContext context) => StatefulBuilder(
+                                    builder: (context, setState) {
+                                      return AlertDialog(
+                                        title: const Text('Desire weight:'),
+                                        content: Container(
+                                          height: 100,
+                                          child: Column(
+                                            mainAxisAlignment: MainAxisAlignment.center,
+                                            children: [
+                                              Row (
+                                                //mainAxisAlignment: MainAxisAlignment.center,
+                                                children: [
+                                                  Text('Your desire weight:    '),
+                                                  Container(
+                                                    width: 100,
+                                                    child: TextField(
+                                                      keyboardType: TextInputType.numberWithOptions(
+                                                        decimal: true,
+                                                        signed: false,
+                                                      ),
+                                                      inputFormatters: <TextInputFormatter> [
+                                                        FilteringTextInputFormatter.allow(RegExp(r"[0-9.]")),
+                                                      ],
+                                                      controller: _controller,
+                                                      decoration: InputDecoration(
+                                                        border: OutlineInputBorder(),
+                                                      ),
+                                                    ),
+                                                  )
+                                                ],
+                                              ),
+                                            ],
+                                          ),
+                                        ),
+                                        actions: <Widget>[
+                                          TextButton(
+                                            onPressed: () => _clearData(context),
+                                            child: const Text('Cancel', style: TextStyle(fontSize: 20 ,color: Colors.pinkAccent),),
+                                          ),
+                                          TextButton(
+                                            onPressed: () {
+                                              if (_controller.text.isEmpty == false)
+                                              {
+                                                _updateDesireWeight(double.parse(_controller.text));
+                                                _clearData(context);
+                                              }
+                                            },
+                                            child: const Text('Update', style: TextStyle(fontSize: 20, color: Colors.pinkAccent),),
+                                          ),
+                                        ],
+                                      );
+                                    }
+                                )
+                            ),
+                          },
+                        )
                       )),
                       Container(
                         width: 20,
