@@ -1,4 +1,6 @@
 import 'dart:math';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -9,23 +11,22 @@ import 'package:intl/intl.dart';
 
 
 class WeightTracker extends StatefulWidget {
-  double _currentWeight = 60.1;
-  double _desireWeight = 67.5;
-
 
   @override
   State<StatefulWidget> createState() {
     // TODO: implement createState
     return _WeightTracker();
   }
-
-
 }
 
 class _WeightTracker extends State<WeightTracker> {
+  double _currentWeight = 0.0;
+  DateTime _currentWeightTime = DateTime.now();
+  double _desireWeight = 67.5;
   late TextEditingController _controller;
+
   DateTime _currentDate =  DateTime.now();
-  late String _selectedDate;
+  final firebaseUser = FirebaseAuth.instance.currentUser;
 
   List<Weight> _list = [
   ];
@@ -35,17 +36,25 @@ class _WeightTracker extends State<WeightTracker> {
     return ((value * mod).round().toDouble() / mod);
   }
 
-  void _addToList(String weight, DateTime date) {
-    setState(() {
-      _list.insert(0, new Weight(weight: double.parse(weight), dateTime: date));
-    });
+  Future<void> _addToList(Weight weight) async {
+    await FirebaseFirestore.instance.collection('User').doc(firebaseUser!.uid)
+        .collection('WeightHistory').doc('${weight.id}').set(weight.toMap());
+    _getData();
   }
 
-  void _updateWeight(int index, String weight, DateTime date) {
-    setState(() {
-      _list.removeAt(index);
-      _list.insert(index, new Weight(weight: double.parse(weight), dateTime: date));
+  Future<void> _updateWeight(String id , double weight, DateTime dateTime) async {
+    await FirebaseFirestore.instance.collection('User').doc(firebaseUser!.uid)
+        .collection('WeightHistory').doc('$id').update({
+      'weight' : weight,
+      'dateTime' : dateTime
     });
+    _getData();
+  }
+
+  Future<void> _removeFromList(String id) async {
+    await FirebaseFirestore.instance.collection('User').doc(firebaseUser!.uid)
+        .collection('WeightHistory').doc('$id').delete();
+    _getData();
   }
 
   void _clearData(BuildContext context) {
@@ -78,15 +87,38 @@ class _WeightTracker extends State<WeightTracker> {
     });
   }
 
+  Future<dynamic> _getData() async {
+    final query = FirebaseFirestore.instance
+        .collection("User")
+        .doc(firebaseUser!.uid)
+        .collection('WeightHistory')
+        .orderBy('dateTime', descending: true).limit(1);
+
+    await query.get().then((QuerySnapshot snapshot) async {
+      setState(() {
+        if (snapshot.docs.isEmpty == false)
+          {
+            this._currentWeight = snapshot.docs[0]['weight'];
+            this._currentWeightTime = snapshot.docs[0]['dateTime'].toDate();
+          }
+        else {
+          this._currentWeight = 0.0;
+          this._currentWeightTime = DateTime.now();
+        }
+      });
+    });
+  }
+
   @override
   void initState() {
     super.initState();
     _controller = TextEditingController();
+    _getData();
   }
 
   @override
   Widget build(BuildContext context) {
-
+    //_getData();
     return SafeArea(
         child: Scaffold(
           backgroundColor: Colors.white,
@@ -135,8 +167,8 @@ class _WeightTracker extends State<WeightTracker> {
                         child: Column(
                           children: [
                             Text('CURRENT WEIGHT', style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),),
-                            Text('${widget._currentWeight} kg', style: TextStyle(fontSize: 30),),
-                            Text('Date: 10/10/2000', style: TextStyle(fontSize: 18),)
+                            Text('${this._currentWeight} kg', style: TextStyle(fontSize: 30),),
+                            Text('${DateFormat.yMMMd().format(this._currentWeightTime)}', style: TextStyle(fontSize: 18),)
                           ],
                         ),
                       )),
@@ -155,8 +187,8 @@ class _WeightTracker extends State<WeightTracker> {
                         child: Column(
                           children: [
                             Text('DESIRE WEIGHT', style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),),
-                            Text('${widget._desireWeight} kg', style: TextStyle(fontSize: 30, color: Colors.pinkAccent),),
-                            Text('${roundDouble((widget._desireWeight - widget._currentWeight),2)} kg to archive your goal', style: TextStyle(fontSize: 18),),
+                            Text('${this._desireWeight} kg', style: TextStyle(fontSize: 30, color: Colors.pinkAccent),),
+                            Text('${(roundDouble((this._desireWeight - this._currentWeight),2)).abs()} kg difference remain', style: TextStyle(fontSize: 18),),
                           ],
                         ),
                       )),
@@ -185,114 +217,122 @@ class _WeightTracker extends State<WeightTracker> {
                             Text('HISTORY WEIGHT DEVELOPMENT', style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),),
                             Container(
                               height: 200,
-                              child: ListView.builder(
-                                  shrinkWrap: true,
-                                  itemCount: _list.length,
-                                  itemBuilder: (context, index) {
-                                    return ListTile(
-                                      onLongPress: () => {
-                                        _currentDate = _list[index].dateTime,
-                                        _controller..text = _list[index].weight.toString(),
-                                        showDialog(
-                                            context: context,
-                                            builder: (BuildContext context) => StatefulBuilder(
-                                                builder: (context, setState) {
-                                                  return AlertDialog(
-                                                    title: const Text('Update your weight:'),
-                                                    content: Container(
-                                                      height: 150,
-                                                      child: Column(
-                                                        mainAxisAlignment: MainAxisAlignment.center,
-                                                        children: [
-                                                          Row (
-                                                            //mainAxisAlignment: MainAxisAlignment.center,
+                              child: StreamBuilder(
+                                stream: FirebaseFirestore.instance.collection('User')
+                                    .doc(firebaseUser!.uid).collection('WeightHistory')
+                                    .orderBy('dateTime', descending: true).snapshots(),
+                                builder: (context, AsyncSnapshot<QuerySnapshot> streamSnapshot) {
+                                  if (!streamSnapshot.hasData){
+                                    return Container();
+                                  }
+                                  return ListView.builder(
+                                      shrinkWrap: true,
+                                      itemCount: streamSnapshot.data!.docs.length,
+                                      itemBuilder: (context, index) {
+                                        return ListTile(
+                                          onLongPress: () => {
+                                            _currentDate = streamSnapshot.data!.docs[index]['dateTime'].toDate(),
+                                            _controller..text = streamSnapshot.data!.docs[index]['weight'].toString(),
+                                            showDialog(
+                                                context: context,
+                                                builder: (BuildContext context) => StatefulBuilder(
+                                                    builder: (context, setState) {
+                                                      return AlertDialog(
+                                                        title: const Text('Update your weight:'),
+                                                        content: Container(
+                                                          height: 150,
+                                                          child: Column(
+                                                            mainAxisAlignment: MainAxisAlignment.center,
                                                             children: [
-                                                              Text('Your weight:    '),
-                                                              Container(
-                                                                width: 100,
-                                                                child: TextField(
-                                                                  keyboardType: TextInputType.numberWithOptions(
-                                                                    decimal: true,
-                                                                    signed: false,
-                                                                  ),
-                                                                  inputFormatters: <TextInputFormatter> [
-                                                                    FilteringTextInputFormatter.allow(RegExp(r"[0-9.]")),
-                                                                  ],
-                                                                  controller: _controller,
-                                                                  decoration: InputDecoration(
-                                                                    border: OutlineInputBorder(),
-                                                                  ),
-                                                                ),
+                                                              Row (
+                                                                //mainAxisAlignment: MainAxisAlignment.center,
+                                                                children: [
+                                                                  Text('Your weight:    '),
+                                                                  Container(
+                                                                    width: 100,
+                                                                    child: TextField(
+                                                                      keyboardType: TextInputType.numberWithOptions(
+                                                                        decimal: true,
+                                                                        signed: false,
+                                                                      ),
+                                                                      inputFormatters: <TextInputFormatter> [
+                                                                        FilteringTextInputFormatter.allow(RegExp(r"[0-9.]")),
+                                                                      ],
+                                                                      controller: _controller,
+                                                                      decoration: InputDecoration(
+                                                                        border: OutlineInputBorder(),
+                                                                      ),
+                                                                    ),
+                                                                  )
+                                                                ],
+                                                              ),
+                                                              Padding(padding: EdgeInsets.only(top:10)),
+                                                              Row (
+                                                                mainAxisAlignment: MainAxisAlignment.center,
+                                                                children: [
+                                                                  Text(DateFormat.yMMMd().format(_currentDate), style: TextStyle(fontSize: 20),),
+                                                                  IconButton(
+                                                                      icon: Icon(Icons.calendar_today),
+                                                                      onPressed: () {
+                                                                        _openDatePickerWithDate(context, setState, streamSnapshot.data!.docs[index]['dateTime'].toDate());
+                                                                      }
+                                                                  )
+                                                                ],
                                                               )
                                                             ],
                                                           ),
-                                                          Padding(padding: EdgeInsets.only(top:10)),
-                                                          Row (
-                                                            mainAxisAlignment: MainAxisAlignment.center,
-                                                            children: [
-                                                              Text(DateFormat.yMMMd().format(_currentDate), style: TextStyle(fontSize: 20),),
-                                                              IconButton(
-                                                                  icon: Icon(Icons.calendar_today),
-                                                                  onPressed: () {
-                                                                    _openDatePickerWithDate(context, setState, _list[index].dateTime);
-                                                                  }
-                                                              )
-                                                            ],
-                                                          )
+                                                        ),
+                                                        actions: <Widget>[
+                                                          TextButton(
+                                                            onPressed: () => _clearData(context),
+                                                            child: const Text('Cancel', style: TextStyle(fontSize: 20 ,color: Colors.pinkAccent),),
+                                                          ),
+                                                          TextButton(
+                                                            onPressed: () {
+                                                              if (_controller.text.isEmpty == false)
+                                                              {
+                                                                _updateWeight(streamSnapshot.data!.docs[index].id, double.parse(_controller.text), _currentDate);
+                                                                _clearData(context);
+                                                              }
+                                                            },
+                                                            child: const Text('OK', style: TextStyle(fontSize: 20, color: Colors.pinkAccent),),
+                                                          ),
                                                         ],
-                                                      ),
+                                                      );
+                                                    }
+                                                )
+                                            ),
+                                          },
+                                          leading: Text('${DateFormat.yMMMd().format(streamSnapshot.data!.docs[index]['dateTime'].toDate())}', style: TextStyle(fontSize: 15)),
+                                          title: Center(child: Text('${streamSnapshot.data!.docs[index]['weight']} kg', style: TextStyle(fontSize: 25))),
+                                          trailing: IconButton(
+                                            icon: Icon(Icons.delete),
+                                            onPressed: () => showDialog(
+                                                context: context,
+                                                builder: (BuildContext context) => AlertDialog(
+                                                  title: const Text('Delete'),
+                                                  content: const Text('Are you sure want to delete?'),
+                                                  actions: <Widget>[
+                                                    TextButton(
+                                                      onPressed: () => Navigator.pop(context, 'Cancel'),
+                                                      child: const Text('Cancel', style: TextStyle(color: Colors.pinkAccent),),
                                                     ),
-                                                    actions: <Widget>[
-                                                      TextButton(
-                                                        onPressed: () => _clearData(context),
-                                                        child: const Text('Cancel', style: TextStyle(fontSize: 20 ,color: Colors.pinkAccent),),
-                                                      ),
-                                                      TextButton(
-                                                        onPressed: () {
-                                                          if (_controller.text.isEmpty == false)
-                                                            {
-                                                              _updateWeight(index, _controller.text, _currentDate);
-                                                              _clearData(context);
-                                                            }
-                                                        },
-                                                        child: const Text('OK', style: TextStyle(fontSize: 20, color: Colors.pinkAccent),),
-                                                      ),
-                                                    ],
-                                                  );
-                                                }
-                                            )
-                                        ),
-                                      },
-                                      leading: Text('${DateFormat.yMMMd().format(_list[index].dateTime)}', style: TextStyle(fontSize: 15)),
-                                      title: Center(child: Text('${_list[index].weight}kg', style: TextStyle(fontSize: 25))),
-                                      trailing: IconButton(
-                                        icon: Icon(Icons.delete),
-                                        onPressed: () => showDialog(
-                                          context: context,
-                                          builder: (BuildContext context) => AlertDialog(
-                                            title: const Text('Delete'),
-                                            content: const Text('Are you sure want to delete?'),
-                                            actions: <Widget>[
-                                              TextButton(
-                                                onPressed: () => Navigator.pop(context, 'Cancel'),
-                                                child: const Text('Cancel', style: TextStyle(color: Colors.pinkAccent),),
-                                              ),
-                                              TextButton(
-                                                onPressed: () => {
-                                                  setState((){
-                                                    _list.removeAt(index);
-                                                  }),
-                                                  Navigator.pop(context),
-                                                },
-                                                child: const Text('OK', style: TextStyle(color: Colors.pinkAccent),),
-                                              ),
-                                            ],
-                                          )
-                                        ),
-                                      ),
-                                    );
-                                  }
-                              ),
+                                                    TextButton(
+                                                      onPressed: () => {
+                                                        _removeFromList(streamSnapshot.data!.docs[index].id),
+                                                        Navigator.pop(context),
+                                                      },
+                                                      child: const Text('OK', style: TextStyle(color: Colors.pinkAccent),),
+                                                    ),
+                                                  ],
+                                                )
+                                            ),
+                                          ),
+                                        );
+                                      }
+                                  );
+                                },
+                              )
                             )
                           ],
                         ),
@@ -394,7 +434,7 @@ class _WeightTracker extends State<WeightTracker> {
                           onPressed: () {
                             if (_controller.text.isEmpty == false)
                               {
-                                _addToList(_controller.text, _currentDate);
+                                _addToList(new Weight(dateTime: _currentDate, weight: double.parse(_controller.text)));
                                 _clearData(context);
                               }
                           },
