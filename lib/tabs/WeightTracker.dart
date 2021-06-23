@@ -5,13 +5,12 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:health/components/Header.dart';
-import 'package:fl_chart/fl_chart.dart';
 import 'package:health/models/weight.dart';
 import 'package:intl/intl.dart';
+import 'package:syncfusion_flutter_charts/charts.dart';
 
 
 class WeightTracker extends StatefulWidget {
-
   @override
   State<StatefulWidget> createState() {
     // TODO: implement createState
@@ -22,14 +21,12 @@ class WeightTracker extends StatefulWidget {
 class _WeightTracker extends State<WeightTracker> {
   double _currentWeight = 0.0;
   DateTime _currentWeightTime = DateTime.now();
-  double _desireWeight = 67.5;
+  double _desireWeight = 0.0;
   late TextEditingController _controller;
-
   DateTime _currentDate =  DateTime.now();
   final firebaseUser = FirebaseAuth.instance.currentUser;
-
-  List<Weight> _list = [
-  ];
+  List<Weight> _list = [];
+  late TooltipBehavior _tooltipBehavior;
 
   double roundDouble(double value, int places){
     num mod = pow(10.0, places);
@@ -96,11 +93,12 @@ class _WeightTracker extends State<WeightTracker> {
   }
 
   Future<dynamic> _getCurrentWeight() async {
+    _list.clear();
     final query = FirebaseFirestore.instance
         .collection("User")
         .doc(firebaseUser!.uid)
         .collection('WeightHistory')
-        .orderBy('dateTime', descending: true).limit(1);
+        .orderBy('dateTime', descending: true);
 
     await query.get().then((QuerySnapshot snapshot) async {
       setState(() {
@@ -108,6 +106,9 @@ class _WeightTracker extends State<WeightTracker> {
           {
             this._currentWeight = snapshot.docs[0]['weight'];
             this._currentWeightTime = snapshot.docs[0]['dateTime'].toDate();
+            snapshot.docs.forEach((element) {
+              _list.add(new Weight(weight: element['weight'], dateTime: element['dateTime'].toDate()));
+            });
           }
         else {
           this._currentWeight = 0.0;
@@ -118,14 +119,14 @@ class _WeightTracker extends State<WeightTracker> {
   }
 
   Future<void> _getDesireWeight() async {
-    final collection = FirebaseFirestore.instance
+    final document = FirebaseFirestore.instance
         .collection("User")
         .doc(firebaseUser!.uid);
 
-    await collection.get().then((snapshot) => {
+    await document.get().then((snapshot) async {
       setState((){
         this._desireWeight = snapshot.get('desireWeight').toDouble();
-      })
+      });
     });
   }
 
@@ -133,8 +134,9 @@ class _WeightTracker extends State<WeightTracker> {
   void initState() {
     super.initState();
     _controller = TextEditingController();
-    _getCurrentWeight();
+    _tooltipBehavior = TooltipBehavior(enable: true);
     _getDesireWeight();
+    _getCurrentWeight();
   }
 
   @override
@@ -186,7 +188,7 @@ class _WeightTracker extends State<WeightTracker> {
                         ),
                         child: Column(
                           children: [
-                            Text('CURRENT WEIGHT', style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),),
+                            Text('CURRENT WEIGHT', style: TextStyle(fontSize: 23),),
                             Text('${this._currentWeight} kg', style: TextStyle(fontSize: 30),),
                             Text('${DateFormat.yMMMd().format(this._currentWeightTime)}', style: TextStyle(fontSize: 18),)
                           ],
@@ -207,7 +209,7 @@ class _WeightTracker extends State<WeightTracker> {
                         child: GestureDetector(
                           child: Column(
                             children: [
-                              Text('DESIRE WEIGHT', style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),),
+                              Text('DESIRE WEIGHT', style: TextStyle(fontSize: 23),),
                               Text('${this._desireWeight} kg', style: TextStyle(fontSize: 30, color: Colors.pinkAccent),),
                               Text('${(roundDouble((this._desireWeight - this._currentWeight),2)).abs()} kg difference remain', style: TextStyle(fontSize: 18),),
                             ],
@@ -221,32 +223,26 @@ class _WeightTracker extends State<WeightTracker> {
                                       return AlertDialog(
                                         title: const Text('Desire weight:'),
                                         content: Container(
-                                          height: 100,
-                                          child: Column(
-                                            mainAxisAlignment: MainAxisAlignment.center,
+                                          child: Row (
+                                            //mainAxisAlignment: MainAxisAlignment.center,
                                             children: [
-                                              Row (
-                                                //mainAxisAlignment: MainAxisAlignment.center,
-                                                children: [
-                                                  Text('Your desire weight:    '),
-                                                  Container(
-                                                    width: 100,
-                                                    child: TextField(
-                                                      keyboardType: TextInputType.numberWithOptions(
-                                                        decimal: true,
-                                                        signed: false,
-                                                      ),
-                                                      inputFormatters: <TextInputFormatter> [
-                                                        FilteringTextInputFormatter.allow(RegExp(r"[0-9.]")),
-                                                      ],
-                                                      controller: _controller,
-                                                      decoration: InputDecoration(
-                                                        border: OutlineInputBorder(),
-                                                      ),
-                                                    ),
-                                                  )
-                                                ],
-                                              ),
+                                              Text('Your desire weight:    '),
+                                              Container(
+                                                width: 100,
+                                                child: TextField(
+                                                  keyboardType: TextInputType.numberWithOptions(
+                                                    decimal: true,
+                                                    signed: false,
+                                                  ),
+                                                  inputFormatters: <TextInputFormatter> [
+                                                    FilteringTextInputFormatter.allow(RegExp(r"[0-9.]")),
+                                                  ],
+                                                  controller: _controller,
+                                                  decoration: InputDecoration(
+                                                    border: OutlineInputBorder(),
+                                                  ),
+                                                ),
+                                              )
                                             ],
                                           ),
                                         ),
@@ -295,9 +291,9 @@ class _WeightTracker extends State<WeightTracker> {
                         ),
                         child: Column(
                           children: [
-                            Text('HISTORY WEIGHT DEVELOPMENT', style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),),
+                            Text('HISTORY WEIGHT DEVELOPMENT', style: TextStyle(fontSize: 23),),
                             Container(
-                              height: 200,
+                              height: 170,
                               child: StreamBuilder(
                                 stream: FirebaseFirestore.instance.collection('User')
                                     .doc(firebaseUser!.uid).collection('WeightHistory')
@@ -424,32 +420,31 @@ class _WeightTracker extends State<WeightTracker> {
                     ],
                   ),
                   Padding(padding: EdgeInsets.only(top: 15)),
-                  Center(
-                    child: Text('WEIGHT DEVELOPMENT CHART', style: TextStyle(fontSize: 20), textAlign: TextAlign.center,),
-                  ),
                   Container(
-                    padding: EdgeInsets.all(10),
-                    width: MediaQuery.of(context).size.width*0.9,
-                    height: 300,
-                    child: LineChart(
-                      LineChartData(
-                        borderData: FlBorderData(show: false),
-                        lineBarsData: [
-                          LineChartBarData(
-                              spots: [
-                                FlSpot(2, 65.2),
-                                FlSpot(3, 63.5),
-                                FlSpot(4, 67.8),
-                                FlSpot(5, 72.1),
-                                FlSpot(6, 75.4),
-                                FlSpot(7, 78.4),
-                                FlSpot(8, 70.2),
-                              ]
-                          )
-                        ]
+                    padding: EdgeInsets.symmetric(horizontal: 20),
+                    width: MediaQuery.of(context).size.width,
+                    height: 400,
+                    child: SfCartesianChart(
+                      tooltipBehavior: _tooltipBehavior,
+                      title: ChartTitle(text:'WEIGHT DEVELOPMENT CHART',textStyle: TextStyle(fontFamily: 'PatrickHand', fontSize: 20)),
+                      borderColor: Colors.pink, borderWidth: 1,
+                      backgroundColor: Colors.pink[50],
+                      primaryXAxis: DateTimeAxis(
+                          majorGridLines: MajorGridLines(width: 0),
+                          edgeLabelPlacement: EdgeLabelPlacement.shift,
+                          intervalType: DateTimeIntervalType.days),
+                      series: <ChartSeries< Weight, DateTime>>[
+                        LineSeries<Weight, DateTime>(
+                          name: 'weight',
+                          dataSource: _list,
+                          dataLabelSettings: DataLabelSettings(isVisible: true), enableTooltip: true,
+                          xValueMapper: (Weight weight, _) => weight.dateTime,
+                          yValueMapper: (Weight weight, _) => weight.weight,
+                        )
+                      ],
+                      ),
                     ),
-                    ),
-                  ),
+                  Padding(padding: EdgeInsets.only(bottom: 100)),
                 ],
               ),
             ),
@@ -531,3 +526,4 @@ class _WeightTracker extends State<WeightTracker> {
     );
   }
 }
+

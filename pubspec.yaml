@@ -39,7 +39,7 @@ dependencies:
   flutter_launcher_icons: ^0.9.0
   flutter_native_splash: ^1.1.8+4
   numberpicker: ^2.1.1
-  fl_chart: ^0.36.1
+  syncfusion_flutter_charts: ^19.1.69+1
 
 flutter_native_splash:
   color: "#ffbd59"
