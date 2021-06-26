@@ -1,10 +1,10 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:health/components/section_title.dart';
-import 'package:health/components/exercise_list_page.dart';
+import 'package:health/controllers/section_title.dart';
+import 'package:health/controllers/exercise_list_page.dart';
 import 'package:health/models/exercise.dart';
 import 'detail_exercise_card.dart';
-import 'fit_image_card.dart';
+import 'exercise_card.dart';
 
 class ExcerciseYogaCategory extends StatelessWidget {
 
@@ -44,7 +44,7 @@ class ExcerciseYogaCategory extends StatelessWidget {
                           Container(
                             margin: EdgeInsets.only(top: 20, left: 20, right: 20),
                             child: GestureDetector(
-                              child: FitImageCard(
+                              child: ExerciseCard(
                                 exercise: new Exercise(
                                   title: streamSnapshot.data!.docs[index]['title'],
                                   time: streamSnapshot.data!.docs[index]['time'],
@@ -107,7 +107,7 @@ class ExcerciseYogaCategory extends StatelessWidget {
                       Container(
                         margin: EdgeInsets.only(top: 20, left: 20, right: 20),
                         child: GestureDetector(
-                          child: FitImageCard(
+                          child: ExerciseCard(
                             exercise: new Exercise(
                               title: streamSnapshot.data!.docs[index]['title'],
                               time: streamSnapshot.data!.docs[index]['time'],
@@ -170,7 +170,7 @@ class ExcerciseYogaCategory extends StatelessWidget {
                           Container(
                             margin: EdgeInsets.only(top: 20, left: 20, right: 20),
                             child: GestureDetector(
-                              child: FitImageCard(
+                              child: ExerciseCard(
                                 exercise: new Exercise(
                                   title: streamSnapshot.data!.docs[index]['title'],
                                   time: streamSnapshot.data!.docs[index]['time'],

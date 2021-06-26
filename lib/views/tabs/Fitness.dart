@@ -1,16 +1,16 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:health/components/activity_detail.dart';
-import 'package:health/components/exercise_yoga_category.dart';
+import 'package:health/controllers//activity_detail.dart';
+import 'package:health/controllers/Header.dart';
+import 'package:health/controllers/exercise_yoga_category.dart';
 import 'package:health/models/tip.dart';
-import '../components/exercise_body_part_category.dart';
-import 'package:health/components/daily_tip.dart';
-import 'package:health/components/header.dart';
-import 'package:health/components/image_card_with_internal.dart';
-import 'package:health/components/main_card_programs.dart';
+import 'package:health/controllers/exercise_body_part_category.dart';
+import 'package:health/controllers/tip_card.dart';
+import 'package:health/controllers/ads_card.dart';
+import 'package:health/controllers/main_card_programs.dart';
 import 'package:health/models/exercise.dart';
-import '../components/fit_image_card.dart';
-import '../components/detail_exercise_card.dart';
-import 'package:health/components/section_title.dart';
+import 'package:health/controllers/exercise_card.dart';
+import 'package:health/controllers/detail_exercise_card.dart';
+import 'package:health/controllers/section_title.dart';
 import 'package:health/models/program.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:flutter/material.dart';
@@ -130,7 +130,7 @@ class Fitness extends StatelessWidget {
                             Container(
                               margin: EdgeInsets.only(top: 20, left: 20, right: 20),
                               child: GestureDetector(
-                                child: FitImageCard(
+                                child: ExerciseCard(
                                   exercise: new Exercise(
                                     title: streamSnapshot.data!.docs[index]['title'],
                                     time: streamSnapshot.data!.docs[index]['time'],
@@ -192,7 +192,7 @@ class Fitness extends StatelessWidget {
                             Container(
                               margin: EdgeInsets.only(top: 20, left: 20, right: 20),
                               child: GestureDetector(
-                                child: FitImageCard(
+                                child: ExerciseCard(
                                   exercise: new Exercise(
                                       title: streamSnapshot.data!.docs[index]['title'],
                                       time: streamSnapshot.data!.docs[index]['time'],
@@ -254,7 +254,7 @@ class Fitness extends StatelessWidget {
                               Container(
                                 margin: EdgeInsets.only(top: 20, left: 20, right: 20),
                                 child: GestureDetector(
-                                  child: ImageCardWithInternal(
+                                  child: AdsCard(
                                     image: streamSnapshot.data!.docs[index]['image'],
                                     title: streamSnapshot.data!.docs[index]['name'],
                                     price: streamSnapshot.data!.docs[index]['price'],
@@ -300,7 +300,7 @@ class Fitness extends StatelessWidget {
                               itemBuilder: (ctx, index) =>
                                 Container(
                                   margin: EdgeInsets.only(top: 20, left: 20, right: 20),
-                                  child: DailyTip(tip: new Tip(
+                                  child: TipCard(tip: new Tip(
                                       title: streamSnapshot.data!.docs[index]['title'],
                                       content: streamSnapshot.data!.docs[index]['content'],
                                       image: streamSnapshot.data!.docs[index]['image'])

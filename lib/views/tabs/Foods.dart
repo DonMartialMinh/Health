@@ -1,5 +1,5 @@
-import 'package:health/components/Header.dart';
-import 'package:health/components/tab_view_base.dart';
+import 'package:health/controllers/Header.dart';
+import 'package:health/controllers/tab_view_base.dart';
 import 'package:flutter/material.dart';
 
 class Foods extends StatelessWidget {

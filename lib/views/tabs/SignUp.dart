@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:health/components/google_sign_up.dart';
+import 'package:health/controllers/google_sign_up.dart';
 
 class SignUpWidget extends StatelessWidget {
   @override

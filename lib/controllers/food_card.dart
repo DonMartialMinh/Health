@@ -1,14 +1,14 @@
 import 'package:flutter/cupertino.dart';
 import 'package:health/models/food.dart';
 import 'package:flutter/material.dart';
-import 'package:health/components/detail_food_page.dart';
+import 'package:health/controllers/detail_food_page.dart';
 
-class ImageCardWithBasicFooter extends StatelessWidget {
+class FoodCard extends StatelessWidget {
   final Food food;
   final String tag;
   final double imageWidth;
 
-  ImageCardWithBasicFooter({
+  FoodCard({
     required this.food,
     required this.tag,
     required this.imageWidth,

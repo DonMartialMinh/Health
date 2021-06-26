@@ -1,6 +1,6 @@
-import 'package:health/components/next_step.dart';
+import 'package:health/controllers/next_step.dart';
 import 'package:health/models/exercise.dart';
-import 'package:health/components/activity_timer.dart';
+import 'package:health/controllers/activity_timer.dart';
 import 'package:flutter/material.dart';
 import 'package:health/models/program.dart';
 

@@ -4,7 +4,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:health/components/Header.dart';
+import 'package:health/controllers/Header.dart';
 import 'package:health/models/weight.dart';
 import 'package:intl/intl.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
@@ -92,7 +92,7 @@ class _WeightTracker extends State<WeightTracker> {
     });
   }
 
-  Future<dynamic> _getCurrentWeight() async {
+  Future<void> _getCurrentWeight() async {
     _list.clear();
     final query = FirebaseFirestore.instance
         .collection("User")

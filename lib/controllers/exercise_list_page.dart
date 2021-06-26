@@ -2,10 +2,10 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:health/components/detail_exercise_card.dart';
+import 'package:health/controllers/detail_exercise_card.dart';
 import 'package:health/models/exercise.dart';
 
-import 'fit_image_card.dart';
+import 'exercise_card.dart';
 
 class ExerciseListPage extends StatefulWidget {
   String kind;
@@ -56,7 +56,7 @@ class _MyAppState extends State<ExerciseListPage> {
                 (streamSnapshot.data!.docs[index]['title'].toLowerCase().contains(widget.searchQuery.trim().toLowerCase())) ? Container(
                   margin: EdgeInsets.only(top: 20, left: 20, right: 20),
                   child: GestureDetector(
-                    child: FitImageCard(
+                    child: ExerciseCard(
                       exercise: new Exercise(
                         title: streamSnapshot.data!.docs[index]['title'],
                         time: streamSnapshot.data!.docs[index]['time'],

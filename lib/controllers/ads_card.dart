@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
-class ImageCardWithInternal extends StatelessWidget {
+class AdsCard extends StatelessWidget {
   final String image, title, price, effect;
 
-  const ImageCardWithInternal({
+  const AdsCard({
     required this.image,
     required this.title,
     required this.price,
@@ -21,8 +21,8 @@ class ImageCardWithInternal extends StatelessWidget {
           Stack(
             children: [
               Container(
-                width: size.width* 0.9 ,
-                height: size.width * 0.6,
+                width: size.width* 0.4 ,
+                height: size.width * 0.3,
                 child: ClipRRect(
                   borderRadius: BorderRadius.circular(20),
                   child: Center(

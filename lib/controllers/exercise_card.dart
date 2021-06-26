@@ -2,12 +2,12 @@ import 'package:health/models/exercise.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-class FitImageCard extends StatelessWidget {
+class ExerciseCard extends StatelessWidget {
   final Exercise exercise;
   final String tag;
   final double imageWidth;
 
-  FitImageCard({
+  ExerciseCard({
     required this.exercise,
     required this.tag,
     required this.imageWidth,

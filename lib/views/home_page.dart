@@ -1,13 +1,14 @@
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
-import 'package:health/tabs/Settings.dart';
-import 'package:health/tabs/WeightTracker.dart';
-import 'tabs/Foods.dart';
-import 'package:health/tabs/Fitness.dart';
+import 'package:health/views/tabs/Settings.dart';
+import 'package:health/views/tabs/WeightTracker.dart';
+import '../views/tabs/Foods.dart';
+import 'package:health/views/tabs/Fitness.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:provider/provider.dart';
-import 'tabs/SignUp.dart';
-import 'provider/sign_in_provider.dart';
-import 'tabs/Settings.dart';
+import '../views/tabs/SignUp.dart';
+import '../provider/sign_in_provider.dart';
+import '../views/tabs/Settings.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);

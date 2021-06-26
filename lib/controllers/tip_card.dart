@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:health/models/tip.dart';
 
-class DailyTip extends StatelessWidget {
+class TipCard extends StatelessWidget {
   Tip tip;
-  DailyTip({required this.tip});
+  TipCard({required this.tip});
 
   @override
   Widget build(BuildContext context) {
@@ -14,17 +14,16 @@ class DailyTip extends StatelessWidget {
       children: <Widget>[
         Container(
           width: width,
-          height: 200.0,
+          height: 180.0,
           margin: EdgeInsets.only(
             bottom: 10.0,
             left: 20.0,
           ),
           child: ClipRRect(
-            borderRadius: BorderRadius.circular(40),
             child: Center(
               child: FadeInImage.assetNetwork(
-                    placeholder: 'assets/images/loading.gif',
-                    image: tip.image
+                  placeholder: 'assets/images/loading.gif',
+                  image: tip.image,
                 ),
             ),
           ),

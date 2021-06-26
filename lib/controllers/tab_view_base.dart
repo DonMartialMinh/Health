@@ -1,6 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:health/components/image_card_with_basic_footer.dart';
-import 'package:health/data/fake_data.dart';
+import 'package:health/controllers/food_card.dart';
 import 'package:flutter/material.dart';
 import 'package:health/models/food.dart';
 
@@ -29,7 +28,7 @@ class TabViewBase extends StatelessWidget {
             itemBuilder: (ctx, index) =>
               Container(
                 margin: EdgeInsets.all(20.0),
-                child: ImageCardWithBasicFooter(
+                child: FoodCard(
                   food: new Food(
                       name: streamSnapshot.data!.docs[index]['name'],
                       urlImage: streamSnapshot.data!.docs[index]['urlImage'],

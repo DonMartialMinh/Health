@@ -3,7 +3,7 @@
 import 'package:numberpicker/numberpicker.dart';
 import 'package:flutter/material.dart';
 import 'package:health/models/exercise.dart';
-import 'package:health/components/list_component.dart';
+import 'package:health/controllers/list_component.dart';
 
 import 'activity_timer.dart';
 
