@@ -36,7 +36,11 @@ class ExerciseCard extends StatelessWidget {
           child: Text(
             this.exercise.title,
             textAlign: TextAlign.left,
-            style: TextStyle(fontSize: 14.0),
+            style: TextStyle(
+              fontSize: 15.0,
+              fontWeight: FontWeight.bold,
+              color: Colors.redAccent
+            ),
           ),
         ),
         Container(
@@ -45,7 +49,7 @@ class ExerciseCard extends StatelessWidget {
           child: Text(
             '${this.exercise.time} sec    |    ${this.exercise.difficult}',
             style: TextStyle(
-              fontSize: 12.0,
+              fontSize: 14.0,
               color: Colors.black,
             ),
           ),

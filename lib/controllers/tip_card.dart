@@ -8,7 +8,7 @@ class TipCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
-    double width = size.width * 0.80;
+    double width = size.width * 0.8;
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
@@ -22,9 +22,10 @@ class TipCard extends StatelessWidget {
           child: ClipRRect(
             child: Center(
               child: FadeInImage.assetNetwork(
-                  placeholder: 'assets/images/loading.gif',
-                  image: tip.image,
-                ),
+                placeholder: 'assets/images/loading.gif',
+                image: tip.image,
+                fit: BoxFit.cover,
+              ),
             ),
           ),
         ),
@@ -32,7 +33,10 @@ class TipCard extends StatelessWidget {
           padding: EdgeInsets.only(left: 20),
           child: Text(
             this.tip.title,
-            style: TextStyle(fontSize: 14.0),
+            style: TextStyle(fontSize: 15.0,
+                fontWeight: FontWeight.bold,
+                color : Colors.redAccent
+            ),
           ),
         ),
         Container(
@@ -41,7 +45,7 @@ class TipCard extends StatelessWidget {
           child: Text(
             this.tip.content,
             style: TextStyle(
-              color: Colors.black45,
+              color: Colors.black,
               fontSize: 14.0,
             ),
           ),
