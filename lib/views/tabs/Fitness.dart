@@ -114,7 +114,7 @@ class Fitness extends StatelessWidget {
                   child: SectionTitle('Body focus'),
                 ),
                 Container(
-                  height: 230,
+                  height: 234,
                   child: StreamBuilder(
                     stream: FirebaseFirestore.instance
                         .collection('BodyFocus')
@@ -176,7 +176,7 @@ class Fitness extends StatelessWidget {
                   child: SectionTitle('Yoga'),
                 ),
                 Container(
-                  height: 230,
+                  height: 234,
                   child: StreamBuilder(
                     stream: FirebaseFirestore.instance
                         .collection('Exercise')
@@ -238,7 +238,7 @@ class Fitness extends StatelessWidget {
                     children: [
                       SectionTitle('Our products'),
                       Container(
-                        height: 332,
+                        height: 270,
                         child: StreamBuilder(
                           stream: FirebaseFirestore.instance
                               .collection('Ads')

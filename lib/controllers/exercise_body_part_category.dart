@@ -27,7 +27,7 @@ class ExcerciseBodyPartCategory extends StatelessWidget {
                 child: SectionTitle('Arm'),
               ),
               Container(
-                height: 230,
+                height: 234,
                 child: StreamBuilder(
                   stream: FirebaseFirestore.instance
                       .collection('BodyFocus')
@@ -90,7 +90,7 @@ class ExcerciseBodyPartCategory extends StatelessWidget {
                 child: SectionTitle('Leg'),
               ),
               Container(
-                height: 230,
+                height: 234,
                 child: StreamBuilder(
                   stream: FirebaseFirestore.instance
                       .collection('BodyFocus')
@@ -153,7 +153,7 @@ class ExcerciseBodyPartCategory extends StatelessWidget {
                 child: SectionTitle('Belly'),
               ),
               Container(
-                height: 230,
+                height: 234,
                 child: StreamBuilder(
                   stream: FirebaseFirestore.instance
                       .collection('BodyFocus')

@@ -27,7 +27,7 @@ class ExcerciseYogaCategory extends StatelessWidget {
                 child: SectionTitle('Beginners yoga poses'),
               ),
               Container(
-                height: 230,
+                height: 234,
                 child: StreamBuilder(
                   stream: FirebaseFirestore.instance
                       .collection('Exercise')
@@ -90,7 +90,7 @@ class ExcerciseYogaCategory extends StatelessWidget {
                 child: SectionTitle('Intermediate yoga poses'),
               ),
               Container(
-            height: 230,
+            height: 234,
             child: StreamBuilder(
               stream: FirebaseFirestore.instance
                   .collection('Exercise')
@@ -153,7 +153,7 @@ class ExcerciseYogaCategory extends StatelessWidget {
                 child: SectionTitle('Advanced yoga poses'),
               ),
               Container(
-                height: 230,
+                height: 234,
                 child: StreamBuilder(
                   stream: FirebaseFirestore.instance
                       .collection('Exercise')
