@@ -4,12 +4,11 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 class AdsCard extends StatelessWidget {
   final String image, title, price, effect;
 
-  const AdsCard({
-    required this.image,
-    required this.title,
-    required this.price,
-    required this.effect
-  });
+  const AdsCard(
+      {required this.image,
+      required this.title,
+      required this.price,
+      required this.effect});
 
   @override
   Widget build(BuildContext context) {
@@ -21,8 +20,8 @@ class AdsCard extends StatelessWidget {
           Stack(
             children: [
               Container(
-                width: size.width* 0.5,
-                height: size.height * 0.2,
+                width: size.width * 0.4,
+                height: size.height * 0.3,
                 child: ClipRRect(
                   borderRadius: BorderRadius.circular(20),
                   child: Center(
@@ -34,19 +33,21 @@ class AdsCard extends StatelessWidget {
                   ),
                 ),
               ),
-              // Positioned(
-              //   top: 10,left: 0,
-              //   child: Container(
-              //     padding: EdgeInsets.all(5),
-              //     decoration: BoxDecoration(
-              //         color: Colors.white54,
-              //         borderRadius: BorderRadius.circular(10),
-              //         border: Border.all(color: Colors.red, width: 2)
-              //     ),
-              //     child: Text(' ${this.effect}',
-              //           style: TextStyle(fontSize: 15, color: Colors.red),),
-              //   ),
-              // ),
+              Positioned(
+                top: 10,
+                left: 0,
+                child: Container(
+                  padding: EdgeInsets.all(5),
+                  decoration: BoxDecoration(
+                      color: Colors.white54,
+                      borderRadius: BorderRadius.circular(10),
+                      border: Border.all(color: Colors.red, width: 2)),
+                  child: Text(
+                    ' ${this.effect}',
+                    style: TextStyle(fontSize: 15, color: Colors.red),
+                  ),
+                ),
+              ),
             ],
           ),
           Container(
