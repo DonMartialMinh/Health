@@ -20,8 +20,8 @@ class AdsCard extends StatelessWidget {
           Stack(
             children: [
               Container(
-                width: size.width * 0.4,
-                height: size.height * 0.3,
+                width: size.width * 0.5,
+                height: size.height * 0.2,
                 child: ClipRRect(
                   borderRadius: BorderRadius.circular(20),
                   child: Center(
@@ -33,7 +33,7 @@ class AdsCard extends StatelessWidget {
                   ),
                 ),
               ),
-              Positioned(
+              /*Positioned(
                 top: 10,
                 left: 0,
                 child: Container(
@@ -47,7 +47,7 @@ class AdsCard extends StatelessWidget {
                     style: TextStyle(fontSize: 15, color: Colors.red),
                   ),
                 ),
-              ),
+              ),*/
             ],
           ),
           Container(
