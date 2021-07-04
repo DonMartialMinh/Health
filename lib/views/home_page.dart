@@ -58,7 +58,7 @@ class _HomePage extends State<HomePage> {
                   body: Center(
                     child: _widgetOptions.elementAt(_selectedIndex),
                   ),
-                  /*bottomNavigationBar: BottomNavigationBar(
+                  bottomNavigationBar: BottomNavigationBar(
                     items: const <BottomNavigationBarItem>[
                       BottomNavigationBarItem(
                         icon: Icon(Icons.fitness_center),
@@ -84,8 +84,8 @@ class _HomePage extends State<HomePage> {
                     currentIndex: _selectedIndex,
                     selectedItemColor: Colors.white,
                     onTap: _onItemTapped,
-                  ),*/
-                  bottomNavigationBar: CurvedNavigationBar(
+                  ),
+                  /*bottomNavigationBar: CurvedNavigationBar(
                     //backgroundColor: Colors.blueAccent,
                     items: <Widget>[
                       CircleAvatar(
@@ -122,7 +122,7 @@ class _HomePage extends State<HomePage> {
                       _onItemTapped(index);
                       //Handle button tap
                     },
-                  ),
+                  ),*/
                 );
               } else {
                 return SignUpWidget();
