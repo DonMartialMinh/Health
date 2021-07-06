@@ -42,9 +42,17 @@ class GoogleSignInProvider extends ChangeNotifier {
       .then((value) => {
         if (value.exists) {
         }
-        else {
+        else  {
           //currentUser _currentUser = new currentUser(name: firebaseUser.displayName!, image: firebaseUser.photoURL!);
-          documentReference.set(currentUser(name: firebaseUser.displayName!, image: firebaseUser.photoURL!, desireWeight: 0.0).toMap(),)
+          documentReference.set(currentUser(
+              phoneNumber: "0999999999",
+              name: firebaseUser.displayName!,
+              image: firebaseUser.photoURL!,
+              desireWeight: 0.0,
+              height: 0,
+              dateOfBirth: DateTime.now()
+            ).toMap(),
+          )
           .then((value) => print("user Added"))
           .catchError((error) => print("Failed to add user: $error"))
         }

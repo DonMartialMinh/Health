@@ -351,7 +351,7 @@ class _WeightTracker extends State<WeightTracker> {
                                                                   IconButton(
                                                                       icon: Icon(Icons.calendar_today),
                                                                       onPressed: () {
-                                                                        _openDatePickerWithDate(context, setState, streamSnapshot.data!.docs[index]['dateTime'].toDate());
+                                                                        _openDatePickerWithDate(context, setState, _currentDate);
                                                                       }
                                                                   )
                                                                 ],
@@ -392,14 +392,14 @@ class _WeightTracker extends State<WeightTracker> {
                                                   actions: <Widget>[
                                                     TextButton(
                                                       onPressed: () => Navigator.pop(context, 'Cancel'),
-                                                      child: const Text('Cancel', style: TextStyle(color: Colors.pinkAccent),),
+                                                      child: const Text('Cancel', style: TextStyle(fontSize: 20,color: Colors.pinkAccent),),
                                                     ),
                                                     TextButton(
                                                       onPressed: () => {
                                                         _removeFromList(streamSnapshot.data!.docs[index].id),
                                                         Navigator.pop(context),
                                                       },
-                                                      child: const Text('OK', style: TextStyle(color: Colors.pinkAccent),),
+                                                      child: const Text('OK' ,style: TextStyle( fontSize: 20,color: Colors.pinkAccent),),
                                                     ),
                                                   ],
                                                 )
