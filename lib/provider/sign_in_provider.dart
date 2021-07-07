@@ -45,11 +45,11 @@ class GoogleSignInProvider extends ChangeNotifier {
         else  {
           //currentUser _currentUser = new currentUser(name: firebaseUser.displayName!, image: firebaseUser.photoURL!);
           documentReference.set(currentUser(
-              phoneNumber: "0999999999",
+              phoneNumber: "0000000000",
               name: firebaseUser.displayName!,
               image: firebaseUser.photoURL!,
               desireWeight: 0.0,
-              height: 0,
+              height: 170,
               dateOfBirth: DateTime.now()
             ).toMap(),
           )

@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -22,8 +24,8 @@ class _SettingsState extends State<Settings> {
     image: "image",
     desireWeight: 0.0,
     dateOfBirth: DateTime.now(),
-    height: 0,
-    phoneNumber: "0999999999"
+    height: 1,
+    phoneNumber: "0000000000"
   );
   double currentWeight  = 0.0;
 
@@ -126,6 +128,11 @@ class _SettingsState extends State<Settings> {
     });
     _getData();
   }
+  
+  double roundDouble(double value, int places){
+    num mod = pow(10.0, places);
+    return ((value * mod).round().toDouble() / mod);
+  }
 
   @override
   void initState() {
@@ -141,6 +148,24 @@ class _SettingsState extends State<Settings> {
     final provider = Provider.of<GoogleSignInProvider>(context,listen: false);
     final user = FirebaseAuth.instance.currentUser;
     final width = MediaQuery.of(context).size.width;
+    final bmi = roundDouble(this.currentWeight/ pow((this._user.height/ 100).toDouble(), 2), 1);
+    var bmiColor = Colors.orange[100];
+    var bmiKind = "";
+
+    if (bmi > 0.0 && bmi < 18.5) {
+      bmiColor = Colors.orange[100];
+      bmiKind = "Underweight";
+    }else if (bmi >= 18.5 && bmi < 25.0){
+      bmiColor = Colors.green[100];
+      bmiKind = "Normal";
+    }else if (bmi >= 25.0 && bmi < 30.0){
+      bmiColor = Colors.orange[400];
+      bmiKind = "Overweight";
+    }else if (bmi >= 30){
+      bmiColor = Colors.red[400];
+      bmiKind = "Obese";
+    }
+
     // TODO: implement build
     return SafeArea(
       child: Scaffold(
@@ -418,6 +443,22 @@ class _SettingsState extends State<Settings> {
                   padding: EdgeInsets.symmetric(vertical: 5,horizontal: 20),
                   child: Column(
                     children: [
+                      Container(
+                        decoration: BoxDecoration(
+                          color: bmiColor,
+                          borderRadius: BorderRadius.circular(15.0),
+                        ),
+                        height: 80,
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Text("Your BMI is: ", style: TextStyle(fontSize: 20),),
+                            Text("$bmi", style: TextStyle(fontSize: 23, fontWeight: FontWeight.bold),),
+                            Text(" ($bmiKind)", style: TextStyle(fontSize: 20),)
+                          ],
+                        ),
+                      ),
+                      Padding(padding: EdgeInsets.only(bottom: 15)),
                       GestureDetector(
                         child: Container(
                           decoration: BoxDecoration(

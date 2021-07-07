@@ -47,7 +47,7 @@ class ExerciseCard extends StatelessWidget {
           width: this.imageWidth,
           margin: EdgeInsets.only(top: 5.0),
           child: Text(
-            '${this.exercise.time} sec    |    ${this.exercise.difficult}',
+            '${this.exercise.time} secs    |    ${this.exercise.difficult}',
             style: TextStyle(
               fontSize: 14.0,
               color: Colors.black,
