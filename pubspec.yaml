@@ -42,6 +42,7 @@ dependencies:
   flutter_native_splash: ^1.1.8+4
   numberpicker: ^2.1.1
   syncfusion_flutter_charts: ^19.1.69+1
+  introduction_screen: ^2.1.0
 
 flutter_native_splash:
   color: "#ffbd59"
@@ -74,6 +75,9 @@ flutter:
      - assets/images/loading.gif
      - assets/images/appicon.png
      - assets/images/image009.jpg
+     - assets/images/fitness.png
+     - assets/images/food.jpeg
+     - assets/images/bmi.png
 
 
   # An image asset can refer to one or more resolution-specific "variants", see
