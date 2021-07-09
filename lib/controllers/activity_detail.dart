@@ -28,7 +28,6 @@ class ActivityDetail extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var width = MediaQuery.of(context).size.width;
-    Exercise currentExercise = program.exercises[0];
     return SafeArea(child: Scaffold(
       body: SingleChildScrollView(
         child: Column(
@@ -129,12 +128,12 @@ class ActivityDetail extends StatelessWidget {
                                     ),
                                   ),
                                   Text(
-                                    currentExercise.difficult,
+                                    program.difficult,
                                     style: TextStyle(
                                       fontSize: 18.0,
                                       color: (
-                                          currentExercise.difficult == 'Beginner') ? Colors.lightBlue
-                                          : ((currentExercise.difficult == 'Intermediate') ? Colors.amber : Colors.red),
+                                          program.difficult == 'Beginner') ? Colors.lightBlue
+                                          : ((program.difficult == 'Intermediate') ? Colors.amber : Colors.red),
                                       fontWeight: FontWeight.w900,
                                     ),
                                   ),

@@ -11,12 +11,12 @@ import 'package:health/controllers/Header.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:intl/intl.dart';
 
-class Settings extends StatefulWidget{
+class Setting extends StatefulWidget{
   @override
   _SettingsState createState() => _SettingsState();
 }
 
-class _SettingsState extends State<Settings> {
+class _SettingsState extends State<Setting> {
   final firebaseUser = FirebaseAuth.instance.currentUser;
   late TextEditingController _controller;
   final currentUser _user = new currentUser(

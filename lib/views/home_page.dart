@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:health/views/tabs/Settings.dart';
@@ -29,7 +30,7 @@ class _HomePage extends State<HomePage> {
     Fitness(),
     Foods(),
     WeightTracker(),
-    Settings(),
+    Setting(),
   ];
 
   void _onItemTapped(int index) {
@@ -42,7 +43,13 @@ class _HomePage extends State<HomePage> {
   void initState() {
     // TODO: implement initState
     super.initState();
+    //_init();
   }
+
+  // Future _init() async {
+  //   FirebaseFirestore.instance.settings = Settings(persistenceEnabled: false);
+  //   FirebaseFirestore.instance.settings = Settings(cacheSizeBytes: Settings.CACHE_SIZE_UNLIMITED);
+  // }
 
   @override
   Widget build(BuildContext context) => Scaffold(

@@ -75,9 +75,6 @@ flutter:
      - assets/images/loading.gif
      - assets/images/appicon.png
      - assets/images/image009.jpg
-     - assets/images/fitness.png
-     - assets/images/food.jpeg
-     - assets/images/bmi.png
 
 
   # An image asset can refer to one or more resolution-specific "variants", see
