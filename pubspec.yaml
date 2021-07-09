@@ -43,6 +43,7 @@ dependencies:
   numberpicker: ^2.1.1
   syncfusion_flutter_charts: ^19.1.69+1
   introduction_screen: ^2.1.0
+  flutter_facebook_login: ^3.0.0
 
 flutter_native_splash:
   color: "#ffbd59"

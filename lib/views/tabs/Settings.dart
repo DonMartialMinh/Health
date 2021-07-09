@@ -145,7 +145,7 @@ class _SettingsState extends State<Setting> {
 
   @override
   Widget build(BuildContext context) {
-    final provider = Provider.of<GoogleSignInProvider>(context,listen: false);
+    final provider = Provider.of<SignInProvider>(context,listen: false);
     final user = FirebaseAuth.instance.currentUser;
     final width = MediaQuery.of(context).size.width;
     final bmi = roundDouble(this.currentWeight/ pow((this._user.height/ 100).toDouble(), 2), 1);

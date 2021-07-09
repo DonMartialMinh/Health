@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:health/controllers/facebook_sign_up.dart';
 import 'package:health/controllers/google_sign_up.dart';
 
 class SignUpWidget extends StatelessWidget {
@@ -38,6 +39,7 @@ class SignUpWidget extends StatelessWidget {
         ),
         Spacer(),
         GoogleSignUp(),
+        FacebookSignUp(),
         SizedBox(height: 10),
         Text(
           'Login to continue',

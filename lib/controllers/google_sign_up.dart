@@ -8,15 +8,15 @@ import 'package:provider/provider.dart';
 class GoogleSignUp extends StatelessWidget{
 
   Future<void> login(BuildContext context) async {
-    final provider = Provider.of<GoogleSignInProvider> (context, listen: false);
-    await provider.login();
+    final provider = Provider.of<SignInProvider> (context, listen: false);
+    await provider.loginWithGoogle();
   }
 
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
     return Container(
-      padding: EdgeInsets.all(20),
+      padding: EdgeInsets.only(left: 20, right: 20, top: 20),
       child: OutlinedButton.icon(
         style: ButtonStyle(backgroundColor: MaterialStateProperty.all<Color>(Colors.white)),
         onPressed: (){

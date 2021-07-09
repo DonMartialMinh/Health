@@ -54,11 +54,11 @@ class _HomePage extends State<HomePage> {
   @override
   Widget build(BuildContext context) => Scaffold(
         body: ChangeNotifierProvider(
-          create: (context) => GoogleSignInProvider(),
+          create: (context) => SignInProvider(),
           child: StreamBuilder(
             stream: FirebaseAuth.instance.authStateChanges(),
             builder: (context, snapshot) {
-              final provider = Provider.of<GoogleSignInProvider>(context);
+              final provider = Provider.of<SignInProvider>(context);
               if (provider.isSigningIn) {
                 return buildLoading();
               } else if (snapshot.hasData) {
