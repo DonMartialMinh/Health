@@ -20,7 +20,6 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePage extends State<HomePage> {
-  dynamic data;
   int _selectedIndex = 0;
   static const Color _colorFit = Colors.redAccent;
   static const Color _colorFood = Colors.green;
@@ -53,100 +52,62 @@ class _HomePage extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) => Scaffold(
-        body: ChangeNotifierProvider(
-          create: (context) => SignInProvider(),
-          child: StreamBuilder(
-            stream: FirebaseAuth.instance.authStateChanges(),
-            builder: (context, snapshot) {
-              final provider = Provider.of<SignInProvider>(context);
-              if (provider.isSigningIn) {
-                return buildLoading();
-              } else if (snapshot.hasData) {
-                return Scaffold(
-                  body: Center(
-                    child: _widgetOptions.elementAt(_selectedIndex),
+    body: ChangeNotifierProvider(
+      create: (context) => SignInProvider(),
+      child: StreamBuilder(
+        stream: FirebaseAuth.instance.authStateChanges(),
+        builder: (context, snapshot) {
+          final provider = Provider.of<SignInProvider>(context);
+          if (provider.isSigningIn) {
+            return buildLoading();
+          } else if (snapshot.hasData) {
+            return Scaffold(
+              body: Center(
+                child: _widgetOptions.elementAt(_selectedIndex),
+              ),
+              bottomNavigationBar: BottomNavigationBar(
+                items: const <BottomNavigationBarItem>[
+                  BottomNavigationBarItem(
+                    icon: Icon(Icons.fitness_center),
+                    label: 'Fitness',
+                    backgroundColor: _colorFit,
                   ),
-                  bottomNavigationBar: BottomNavigationBar(
-                    items: const <BottomNavigationBarItem>[
-                      BottomNavigationBarItem(
-                        icon: Icon(Icons.fitness_center),
-                        label: 'Fitness',
-                        backgroundColor: _colorFit,
-                      ),
-                      BottomNavigationBarItem(
-                        icon: Icon(Icons.food_bank),
-                        label: 'Food',
-                        backgroundColor: _colorFood,
-                      ),
-                      BottomNavigationBarItem(
-                        icon: Icon(Icons.favorite),
-                        label: 'Weight',
-                        backgroundColor: _colorFavorite,
-                      ),
-                      BottomNavigationBarItem(
-                        icon: Icon(Icons.settings),
-                        label: 'Settings',
-                        backgroundColor: _colorSettings,
-                      ),
-                    ],
-                    currentIndex: _selectedIndex,
-                    selectedItemColor: Colors.white,
-                    onTap: _onItemTapped,
+                  BottomNavigationBarItem(
+                    icon: Icon(Icons.food_bank),
+                    label: 'Food',
+                    backgroundColor: _colorFood,
                   ),
-                  /*bottomNavigationBar: CurvedNavigationBar(
-                    //backgroundColor: Colors.blueAccent,
-                    items: <Widget>[
-                      CircleAvatar(
-                        backgroundColor: _colorFit,
-                        child: Icon(
-                          Icons.fitness_center,
-                          color: Colors.white,
-                        ),
-                      ),
-                      CircleAvatar(
-                        backgroundColor: _colorFood,
-                        child: Icon(
-                          Icons.food_bank,
-                          color: Colors.white,
-                        ),
-                      ),
-                      CircleAvatar(
-                        backgroundColor: _colorFavorite,
-                        child: Icon(
-                          Icons.favorite,
-                          color: Colors.white,
-                        ),
-                      ),
-                      CircleAvatar(
-                        backgroundColor: _colorSettings,
-                        child: Icon(
-                          Icons.settings,
-                          color: Colors.white,
-                        ),
-                      ),
-                    ],
-                    //currentIndex: _selectedIndex,
-                    onTap: (index) {
-                      _onItemTapped(index);
-                      //Handle button tap
-                    },
-                  ),*/
-                );
-              } else {
-                return SignUpWidget();
-              }
-            },
-          ),
-        ),
-      );
+                  BottomNavigationBarItem(
+                    icon: Icon(Icons.favorite),
+                    label: 'Weight',
+                    backgroundColor: _colorFavorite,
+                  ),
+                  BottomNavigationBarItem(
+                    icon: Icon(Icons.settings),
+                    label: 'Settings',
+                    backgroundColor: _colorSettings,
+                  ),
+                ],
+                currentIndex: _selectedIndex,
+                selectedItemColor: Colors.white,
+                onTap: _onItemTapped,
+              ),
+            );
+          } else {
+            return SignUpWidget();
+          }
+        },
+      ),
+    ),
+  );
 
   Widget buildLoading() => Stack(
-        fit: StackFit.expand,
-        children: [
-          //CustomPaint(painter: BackgroundPainter()),
-          Center(child: CircularProgressIndicator()),
-        ],
-      );
+    fit: StackFit.expand,
+    children: [
+      //CustomPaint(painter: BackgroundPainter()),
+      Center(child: CircularProgressIndicator()),
+    ],
+  );
 }
 
 // class OnBoardingPage extends StatefulWidget {

@@ -27,7 +27,7 @@ class _SettingsState extends State<Setting> {
     height: 1,
     phoneNumber: "0000000000"
   );
-  double currentWeight  = 0.0;
+  double _currentWeight  = 0.0;
 
   Future<void> _getData() async {
     final document = FirebaseFirestore.instance
@@ -63,10 +63,10 @@ class _SettingsState extends State<Setting> {
       setState(() {
         if (snapshot.docs.isEmpty == false)
         {
-          this.currentWeight = snapshot.docs[0]['weight'];
+          this._currentWeight = snapshot.docs[0]['weight'];
         }
         else {
-          this.currentWeight = 0.0;
+          this._currentWeight = 0.0;
         }
       });
     });
@@ -148,7 +148,7 @@ class _SettingsState extends State<Setting> {
     final provider = Provider.of<SignInProvider>(context,listen: false);
     final user = FirebaseAuth.instance.currentUser;
     final width = MediaQuery.of(context).size.width;
-    final bmi = roundDouble(this.currentWeight/ pow((this._user.height/ 100).toDouble(), 2), 1);
+    final bmi = roundDouble(this._currentWeight/ pow((this._user.height/ 100).toDouble(), 2), 1);
     var bmiColor = Colors.orange[100];
     var bmiKind = "";
 
@@ -261,7 +261,7 @@ class _SettingsState extends State<Setting> {
                                     ),
                                   ),
                                   Text(
-                                    '${this.currentWeight} kg',
+                                    '${this._currentWeight} kg',
                                     style: TextStyle(
                                       fontSize: 23.0,
                                       color: Colors.black54,

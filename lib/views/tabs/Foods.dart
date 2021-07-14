@@ -3,6 +3,8 @@ import 'package:health/controllers/tab_view_base.dart';
 import 'package:flutter/material.dart';
 
 class Foods extends StatelessWidget {
+  final String _tabVet = "Vegetarian";
+  final String _tabNonVet = "NonVegetarian";
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -40,13 +42,13 @@ class Foods extends StatelessWidget {
                   Container(
                     height: 30.0,
                     child: Tab(
-                      text: 'Non-Vegetarian',
+                      text: _tabNonVet,
                     ),
                   ),
                   Container(
                     height: 30.0,
                     child: Tab(
-                      text: 'Vegetarian',
+                      text: _tabVet,
                     ),
                   ),
                 ],
@@ -60,10 +62,10 @@ class Foods extends StatelessWidget {
             body: TabBarView(
               children: <Widget>[
                 TabViewBase(
-                  tabName: 'NonVegetarian',
+                  tabName: _tabNonVet,
                 ),
                 TabViewBase(
-                  tabName: 'Vegetarian',
+                  tabName: _tabVet,
                 ),
               ],
             ),
