@@ -4,7 +4,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:health/controllers/Header.dart';
+import 'package:health/components/Header.dart';
 import 'package:health/models/weight.dart';
 import 'package:intl/intl.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
@@ -20,54 +20,88 @@ class WeightTracker extends StatefulWidget {
 
 class _WeightTracker extends State<WeightTracker> {
   double _currentWeight = 0.0;
-  DateTime _currentWeightTime = DateTime.now();
   double _desireWeight = 0.0;
-  late TextEditingController _controller;
+  DateTime _currentWeightTime = DateTime.now();
   DateTime _currentDate =  DateTime.now();
-  final firebaseUser = FirebaseAuth.instance.currentUser;
   List<Weight> _list = [];
-  late TooltipBehavior _tooltipBehavior;
 
-  double roundDouble(double value, int places){
+  final _firebaseUser = FirebaseAuth.instance.currentUser;
+
+  late TooltipBehavior _tooltipBehavior;
+  late TextEditingController _controller;
+
+  double _roundDouble(double value, int places){
     num mod = pow(10.0, places);
     return ((value * mod).round().toDouble() / mod);
   }
 
-  Future<void> _addToList(Weight weight) async {
-    await FirebaseFirestore.instance.collection('User').doc(firebaseUser!.uid)
+  // add
+  Future<void> _addWeightToList(Weight weight) async {
+    await FirebaseFirestore.instance.collection('User').doc(_firebaseUser!.uid)
         .collection('WeightHistory').doc('${weight.id}').set(weight.toMap());
     _getCurrentWeight();
   }
 
+  // get
+  Future<void> _getCurrentWeight() async {
+    _list.clear();
+    final query = FirebaseFirestore.instance
+        .collection("User")
+        .doc(_firebaseUser!.uid)
+        .collection('WeightHistory')
+        .orderBy('dateTime', descending: true);
+
+    await query.get().then((QuerySnapshot snapshot) async {
+      setState(() {
+        if (snapshot.docs.isEmpty == false)
+        {
+          this._currentWeight = snapshot.docs[0]['weight'];
+          this._currentWeightTime = snapshot.docs[0]['dateTime'].toDate();
+          snapshot.docs.forEach((element) {
+            _list.add(new Weight(weight: element['weight'], dateTime: element['dateTime'].toDate()));
+          });
+        }
+        else {
+          this._currentWeight = 0.0;
+          this._currentWeightTime = DateTime.now();
+        }
+      });
+    });
+  }
+  Future<void> _getDesireWeight() async {
+    final document = FirebaseFirestore.instance
+        .collection("User")
+        .doc(_firebaseUser!.uid);
+
+    await document.get().then((snapshot) async {
+      setState((){
+        this._desireWeight = snapshot.get('desireWeight').toDouble();
+      });
+    });
+  }
+
+  // update
   Future<void> _updateWeight(String id , double weight, DateTime dateTime) async {
-    await FirebaseFirestore.instance.collection('User').doc(firebaseUser!.uid)
+    await FirebaseFirestore.instance.collection('User').doc(_firebaseUser!.uid)
         .collection('WeightHistory').doc('$id').update({
       'weight' : weight,
       'dateTime' : dateTime
     });
     _getCurrentWeight();
   }
-
   Future<void> _updateDesireWeight(double weight) async {
     await FirebaseFirestore.instance.collection('User')
-        .doc(firebaseUser!.uid).update({
+        .doc(_firebaseUser!.uid).update({
       'desireWeight' : weight,
     });
     _getDesireWeight();
   }
 
-  Future<void> _removeFromList(String id) async {
-    await FirebaseFirestore.instance.collection('User').doc(firebaseUser!.uid)
+  // delete
+  Future<void> _removeWeightFromList(String id) async {
+    await FirebaseFirestore.instance.collection('User').doc(_firebaseUser!.uid)
         .collection('WeightHistory').doc('$id').delete();
     _getCurrentWeight();
-  }
-
-  void _clearData(BuildContext context) {
-    setState(() {
-      _controller.clear();
-      _currentDate = DateTime.now();
-      Navigator.pop(context);
-    });
   }
 
   Future<void> _openDatePicker(BuildContext context, setState) async {
@@ -92,41 +126,11 @@ class _WeightTracker extends State<WeightTracker> {
     });
   }
 
-  Future<void> _getCurrentWeight() async {
-    _list.clear();
-    final query = FirebaseFirestore.instance
-        .collection("User")
-        .doc(firebaseUser!.uid)
-        .collection('WeightHistory')
-        .orderBy('dateTime', descending: true);
-
-    await query.get().then((QuerySnapshot snapshot) async {
-      setState(() {
-        if (snapshot.docs.isEmpty == false)
-          {
-            this._currentWeight = snapshot.docs[0]['weight'];
-            this._currentWeightTime = snapshot.docs[0]['dateTime'].toDate();
-            snapshot.docs.forEach((element) {
-              _list.add(new Weight(weight: element['weight'], dateTime: element['dateTime'].toDate()));
-            });
-          }
-        else {
-          this._currentWeight = 0.0;
-          this._currentWeightTime = DateTime.now();
-        }
-      });
-    });
-  }
-
-  Future<void> _getDesireWeight() async {
-    final document = FirebaseFirestore.instance
-        .collection("User")
-        .doc(firebaseUser!.uid);
-
-    await document.get().then((snapshot) async {
-      setState((){
-        this._desireWeight = snapshot.get('desireWeight').toDouble();
-      });
+  void _clearData(BuildContext context) {
+    setState(() {
+      _controller.clear();
+      _currentDate = DateTime.now();
+      Navigator.pop(context);
     });
   }
 
@@ -141,6 +145,7 @@ class _WeightTracker extends State<WeightTracker> {
 
   @override
   Widget build(BuildContext context) {
+    final user = this._firebaseUser;
     return SafeArea(
         child: Scaffold(
           backgroundColor: Colors.white,
@@ -211,7 +216,7 @@ class _WeightTracker extends State<WeightTracker> {
                             children: [
                               Text('DESIRE WEIGHT', style: TextStyle(fontSize: 23),),
                               Text('${this._desireWeight} kg', style: TextStyle(fontSize: 30, color: Colors.pinkAccent),),
-                              Text('${(roundDouble((this._desireWeight - this._currentWeight),2)).abs()} kg difference remain', style: TextStyle(fontSize: 18),),
+                              Text('${(_roundDouble((this._desireWeight - this._currentWeight),2)).abs()} kg difference remain', style: TextStyle(fontSize: 18),),
                             ],
                           ),
                           onTap: () => {
@@ -296,7 +301,7 @@ class _WeightTracker extends State<WeightTracker> {
                               height: 170,
                               child: StreamBuilder(
                                 stream: FirebaseFirestore.instance.collection('User')
-                                    .doc(firebaseUser!.uid).collection('WeightHistory')
+                                    .doc(user!.uid).collection('WeightHistory')
                                     .orderBy('dateTime', descending: true).snapshots(),
                                 builder: (context, AsyncSnapshot<QuerySnapshot> streamSnapshot) {
                                   if (!streamSnapshot.hasData){
@@ -396,7 +401,7 @@ class _WeightTracker extends State<WeightTracker> {
                                                     ),
                                                     TextButton(
                                                       onPressed: () => {
-                                                        _removeFromList(streamSnapshot.data!.docs[index].id),
+                                                        _removeWeightFromList(streamSnapshot.data!.docs[index].id),
                                                         Navigator.pop(context),
                                                       },
                                                       child: const Text('OK' ,style: TextStyle( fontSize: 20,color: Colors.pinkAccent),),
@@ -510,7 +515,7 @@ class _WeightTracker extends State<WeightTracker> {
                           onPressed: () {
                             if (_controller.text.isEmpty == false)
                               {
-                                _addToList(new Weight(dateTime: _currentDate, weight: double.parse(_controller.text)));
+                                _addWeightToList(new Weight(dateTime: _currentDate, weight: double.parse(_controller.text)));
                                 _clearData(context);
                               }
                           },

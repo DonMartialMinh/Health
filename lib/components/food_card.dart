@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:health/models/food.dart';
 import 'package:flutter/material.dart';
-import 'package:health/controllers/detail_food_page.dart';
+import 'package:health/components/detail_food_page.dart';
 
 class FoodCard extends StatelessWidget {
   final Food food;

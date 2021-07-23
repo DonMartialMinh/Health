@@ -1,5 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:health/controllers/food_card.dart';
+import 'package:health/components/food_card.dart';
 import 'package:flutter/material.dart';
 import 'package:health/models/food.dart';
 

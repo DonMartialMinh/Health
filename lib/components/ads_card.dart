@@ -5,8 +5,7 @@ import 'package:url_launcher/url_launcher.dart';
 class AdsCard extends StatelessWidget {
   final Ads ads;
 
-  const AdsCard(
-      {required this.ads});
+  const AdsCard({required this.ads});
 
   _launchURL(String url) async {
     if (await canLaunch(url)) {

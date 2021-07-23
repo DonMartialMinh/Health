@@ -1,8 +1,6 @@
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:health/controllers/detail_exercise_card.dart';
 import 'package:health/models/exercise.dart';
 
 import 'exercise_card.dart';

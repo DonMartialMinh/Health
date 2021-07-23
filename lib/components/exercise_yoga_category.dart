@@ -1,7 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:health/controllers/section_title.dart';
-import 'package:health/controllers/exercise_list_page.dart';
+import 'package:health/components/section_title.dart';
+import 'package:health/components/exercise_list_page.dart';
 import 'package:health/models/exercise.dart';
 import 'exercise_card.dart';
 

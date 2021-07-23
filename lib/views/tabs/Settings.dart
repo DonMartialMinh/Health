@@ -1,5 +1,4 @@
 import 'dart:math';
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -7,7 +6,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:health/models/User.dart';
 import 'package:health/provider/sign_in_provider.dart';
 import 'package:provider/provider.dart';
-import 'package:health/controllers/Header.dart';
+import 'package:health/components/Header.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:intl/intl.dart';
 
@@ -17,22 +16,23 @@ class Setting extends StatefulWidget{
 }
 
 class _SettingsState extends State<Setting> {
-  final firebaseUser = FirebaseAuth.instance.currentUser;
-  late TextEditingController _controller;
-  final currentUser _user = new currentUser(
-    name: "Anonymous",
-    image: "image",
-    desireWeight: 0.0,
-    dateOfBirth: DateTime.now(),
-    height: 1,
-    phoneNumber: "0000000000"
-  );
   double _currentWeight  = 0.0;
+  final _firebaseUser = FirebaseAuth.instance.currentUser;
+  final currentUser _user = new currentUser(
+      name: "Anonymous",
+      image: "image",
+      desireWeight: 0.0,
+      dateOfBirth: DateTime.now(),
+      height: 1,
+      phoneNumber: "0000000000"
+  );
+  late TextEditingController _controller;
 
+  // get
   Future<void> _getData() async {
     final document = FirebaseFirestore.instance
         .collection("User")
-        .doc(firebaseUser!.uid);
+        .doc(_firebaseUser!.uid);
 
     try {
       await document.get().then((snapshot) async {
@@ -51,11 +51,10 @@ class _SettingsState extends State<Setting> {
       print(e); // Catches all types of `Exception` and `Error`.
     }
   }
-
   Future<void> _getCurrentWeight() async {
     final query = FirebaseFirestore.instance
         .collection("User")
-        .doc(firebaseUser!.uid)
+        .doc(_firebaseUser!.uid)
         .collection('WeightHistory')
         .orderBy('dateTime', descending: true).limit(1);
 
@@ -72,13 +71,7 @@ class _SettingsState extends State<Setting> {
     });
   }
 
-  void _clearData(BuildContext context) {
-    setState(() {
-      _controller.clear();
-      Navigator.pop(context);
-    });
-  }
-
+  // update
   Future<void> _updateDateOfBirth(BuildContext context, DateTime datetime) async {
     final DateTime temp = (
        await showDatePicker(
@@ -92,46 +85,49 @@ class _SettingsState extends State<Setting> {
       this._user.dateOfBirth = temp;
     });
     await FirebaseFirestore.instance.collection('User')
-        .doc(firebaseUser!.uid).update({
+        .doc(_firebaseUser!.uid).update({
       'dateOfBirth' : temp,
     });
   }
-
   Future<void> _updateHeight(double height) async {
     await FirebaseFirestore.instance.collection('User')
-        .doc(firebaseUser!.uid).update({
+        .doc(_firebaseUser!.uid).update({
       'height' : height,
     });
     _getData();
   }
-
   Future<void> _updateGoal(double goal) async {
     await FirebaseFirestore.instance.collection('User')
-        .doc(firebaseUser!.uid).update({
+        .doc(_firebaseUser!.uid).update({
       'desireWeight' : goal,
     });
     _getData();
   }
-
   Future<void> _updateName(String name) async {
     await FirebaseFirestore.instance.collection('User')
-        .doc(firebaseUser!.uid).update({
+        .doc(_firebaseUser!.uid).update({
       'name' : name,
     });
     _getData();
   }
-
   Future<void> _updatePhoneNumber(String phoneNumber) async {
     await FirebaseFirestore.instance.collection('User')
-        .doc(firebaseUser!.uid).update({
+        .doc(_firebaseUser!.uid).update({
       'phoneNumber' : phoneNumber,
     });
     _getData();
   }
   
-  double roundDouble(double value, int places){
+  double _roundDouble(double value, int places){
     num mod = pow(10.0, places);
     return ((value * mod).round().toDouble() / mod);
+  }
+
+  void _clearData(BuildContext context) {
+    setState(() {
+      _controller.clear();
+      Navigator.pop(context);
+    });
   }
 
   @override
@@ -146,12 +142,13 @@ class _SettingsState extends State<Setting> {
   @override
   Widget build(BuildContext context) {
     final provider = Provider.of<SignInProvider>(context,listen: false);
-    final user = FirebaseAuth.instance.currentUser;
     final width = MediaQuery.of(context).size.width;
-    final bmi = roundDouble(this._currentWeight/ pow((this._user.height/ 100).toDouble(), 2), 1);
+    final bmi = _roundDouble(this._currentWeight/ pow((this._user.height/ 100).toDouble(), 2), 1);
+    final user = this._firebaseUser;
     var bmiColor = Colors.orange[100];
     var bmiKind = "";
 
+    // check bmi
     if (bmi > 0.0 && bmi < 18.5) {
       bmiColor = Colors.orange[100];
       bmiKind = "Underweight";

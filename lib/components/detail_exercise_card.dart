@@ -1,17 +1,18 @@
 import 'package:numberpicker/numberpicker.dart';
 import 'package:flutter/material.dart';
 import 'package:health/models/exercise.dart';
-import 'package:health/controllers/list_component.dart';
+import 'package:health/components/list_component.dart';
 
 import 'activity_timer.dart';
 
 class DetailExerciseCard extends StatefulWidget{
   Exercise exercise;
-  late List <Exercise> list;
-  int _currentTimeValue = 0;
+  late int _currentTimeValue;
+  late List <Exercise> _list;
+
   DetailExerciseCard({required this.exercise}){
-    list = [];
-    list.add(exercise);
+    _list = [];
+    _list.add(exercise);
     _currentTimeValue = exercise.time;
   }
 
@@ -147,7 +148,7 @@ class _MyWidgetState extends State<DetailExerciseCard> {
                       onPressed: () => {
                         Navigator.pop(context),
                         Navigator.push(context,MaterialPageRoute(builder: (_) {
-                        return ActivityTimer(exercises: widget.list, time: widget._currentTimeValue );
+                        return ActivityTimer(exercises: widget._list, time: widget._currentTimeValue );
                          }),
                         ),
                       },

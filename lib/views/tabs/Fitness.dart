@@ -1,15 +1,15 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:health/controllers/Header.dart';
-import 'package:health/controllers/exercise_yoga_category.dart';
+import 'package:health/components/Header.dart';
+import 'package:health/components/exercise_yoga_category.dart';
 import 'package:health/models/ads.dart';
 import 'package:health/models/tip.dart';
-import 'package:health/controllers/exercise_body_part_category.dart';
-import 'package:health/controllers/tip_card.dart';
-import 'package:health/controllers/ads_card.dart';
-import 'package:health/controllers/main_card_programs.dart';
+import 'package:health/components/exercise_body_part_category.dart';
+import 'package:health/components/tip_card.dart';
+import 'package:health/components/ads_card.dart';
+import 'package:health/components/main_card_programs.dart';
 import 'package:health/models/exercise.dart';
-import 'package:health/controllers/exercise_card.dart';
-import 'package:health/controllers/section_title.dart';
+import 'package:health/components/exercise_card.dart';
+import 'package:health/components/section_title.dart';
 import 'package:health/models/program.dart';
 import 'package:flutter/material.dart';
 
@@ -17,7 +17,7 @@ class Fitness extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    double _cardWidth = MediaQuery.of(context).size.width * 2/3;
+    double cardWidth = MediaQuery.of(context).size.width * 2/3;
     return Scaffold(
       backgroundColor: Colors.white,
       body: SingleChildScrollView(
@@ -110,7 +110,7 @@ class Fitness extends StatelessWidget {
                                   caution: streamSnapshot.data!.docs[index]['caution'],
                                   steps: streamSnapshot.data!.docs[index]['steps'].cast<String>(),
                                 ),
-                                imageWidth: _cardWidth,
+                                imageWidth: cardWidth,
                               ),
                             ),
                       );
@@ -151,7 +151,7 @@ class Fitness extends StatelessWidget {
                                   caution: streamSnapshot.data!.docs[index]['caution'],
                                   steps: streamSnapshot.data!.docs[index]['steps'].cast<String>(),
                                 ),
-                                imageWidth: _cardWidth,
+                                imageWidth: cardWidth,
                               ),
                             ),
                       );
