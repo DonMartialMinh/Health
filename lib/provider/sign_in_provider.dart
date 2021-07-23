@@ -9,7 +9,7 @@ class SignInProvider extends ChangeNotifier {
   final googleSignIn = GoogleSignIn();
   final facebookLogin = FacebookLogin();
   late bool _isSigningIn;
-  String signInMethod = "";
+  String _signInMethod = "";
 
   SignInProvider() {
     _isSigningIn = false;
@@ -23,7 +23,7 @@ class SignInProvider extends ChangeNotifier {
   }
 
   Future loginWithFaceBook() async {
-    signInMethod = "facebook";
+    _signInMethod = "facebook";
     isSigningIn = true;
     final FacebookLoginResult result = await facebookLogin.logIn(['email']);
     print (result.status);
@@ -39,7 +39,7 @@ class SignInProvider extends ChangeNotifier {
           print("on");
           await handleLogin(result);
         } catch (e) {
-          print(e);
+          print("error: $e");
         }
         break;
     }
@@ -52,7 +52,30 @@ class SignInProvider extends ChangeNotifier {
     await FirebaseAuth.instance.signInWithCredential(credential);
     isSigningIn = false;
 
-    // Create User on db
+    createUserOnFireStore();
+  }
+
+  Future loginWithGoogle() async {
+    _signInMethod = "google";
+    isSigningIn = true;
+    final user = await googleSignIn.signIn();
+    if (user == null) {
+      isSigningIn = false;
+      return;
+    } else {
+      final googleAuth = await user.authentication;
+      final credential = GoogleAuthProvider.credential(
+        accessToken: googleAuth.accessToken,
+        idToken: googleAuth.idToken
+      );
+      await FirebaseAuth.instance.signInWithCredential(credential);
+      isSigningIn = false;
+
+      createUserOnFireStore();
+    }
+  }
+
+  void createUserOnFireStore() {
     final firebaseUser = FirebaseAuth.instance.currentUser;
     DocumentReference documentReference = FirebaseFirestore.instance.collection('User').doc(firebaseUser!.uid);
     documentReference.get()
@@ -60,7 +83,6 @@ class SignInProvider extends ChangeNotifier {
       if (value.exists) {
       }
       else  {
-        //currentUser _currentUser = new currentUser(name: firebaseUser.displayName!, image: firebaseUser.photoURL!);
         documentReference.set(currentUser(
             phoneNumber: "0000000000",
             name: firebaseUser.displayName!,
@@ -77,51 +99,8 @@ class SignInProvider extends ChangeNotifier {
     );
   }
 
-  Future loginWithGoogle() async {
-    signInMethod = "google";
-    isSigningIn = true;
-    final user = await googleSignIn.signIn();
-    if (user == null) {
-      isSigningIn = false;
-      return;
-    } else {
-      final googleAuth = await user.authentication;
-
-      final credential = GoogleAuthProvider.credential(
-        accessToken: googleAuth.accessToken,
-        idToken: googleAuth.idToken
-      );
-      await FirebaseAuth.instance.signInWithCredential(credential);
-      isSigningIn = false;
-
-      // Create User on db
-      final firebaseUser = FirebaseAuth.instance.currentUser;
-      DocumentReference documentReference = FirebaseFirestore.instance.collection('User').doc(firebaseUser!.uid);
-      documentReference.get()
-      .then((value) => {
-        if (value.exists) {
-        }
-        else  {
-          //currentUser _currentUser = new currentUser(name: firebaseUser.displayName!, image: firebaseUser.photoURL!);
-          documentReference.set(currentUser(
-              phoneNumber: "0000000000",
-              name: firebaseUser.displayName!,
-              image: firebaseUser.photoURL!,
-              desireWeight: 0.0,
-              height: 170,
-              dateOfBirth: DateTime.now()
-            ).toMap(),
-          )
-          .then((value) => print("user Added"))
-          .catchError((error) => print("Failed to add user: $error"))
-        }
-      }
-      );
-    }
-  }
-
   void logout() async {
-    if (signInMethod == "google")
+    if (_signInMethod == "google")
       await googleSignIn.disconnect();
     else
       await facebookLogin.logOut();

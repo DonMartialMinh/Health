@@ -6,7 +6,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:health/models/User.dart';
 import 'package:health/provider/sign_in_provider.dart';
 import 'package:provider/provider.dart';
-import 'package:health/components/Header.dart';
+import 'package:health/components/header.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:intl/intl.dart';
 
@@ -203,7 +203,7 @@ class _SettingsState extends State<Setting> {
                   ),
                 ),
                 Text('${user.displayName}', style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold)),
-                Text('${user.email}', style: TextStyle(fontSize: 18, color: Colors.black45)),
+                Text(user.email == null ? '' : '${user.email}', style: TextStyle(fontSize: 18, color: Colors.black45)),
                 OutlinedButton.icon(
                     onPressed: () => showDialog<String>(
                       context: context,

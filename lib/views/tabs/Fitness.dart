@@ -1,5 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:health/components/Header.dart';
+import 'package:health/components/header.dart';
 import 'package:health/components/exercise_yoga_category.dart';
 import 'package:health/models/ads.dart';
 import 'package:health/models/tip.dart';
