@@ -1,19 +1,25 @@
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:health/models/ads.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class AdsCard extends StatelessWidget {
-  final String image, title, price, effect;
+  final Ads ads;
 
   const AdsCard(
-      {required this.image,
-      required this.title,
-      required this.price,
-      required this.effect});
+      {required this.ads});
+
+  _launchURL(String url) async {
+    if (await canLaunch(url)) {
+      await launch(url);
+    } else {
+      throw 'Could not launch $url';
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
-    return Container(
+    return GestureDetector(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
@@ -27,33 +33,18 @@ class AdsCard extends StatelessWidget {
                   child: Center(
                     child: FadeInImage.assetNetwork(
                       placeholder: 'assets/images/loading.gif',
-                      image: this.image,
+                      image: this.ads.image,
                       fit: BoxFit.cover,
                     ),
                   ),
                 ),
               ),
-              /*Positioned(
-                top: 10,
-                left: 0,
-                child: Container(
-                  padding: EdgeInsets.all(5),
-                  decoration: BoxDecoration(
-                      color: Colors.white54,
-                      borderRadius: BorderRadius.circular(10),
-                      border: Border.all(color: Colors.red, width: 2)),
-                  child: Text(
-                    ' ${this.effect}',
-                    style: TextStyle(fontSize: 15, color: Colors.red),
-                  ),
-                ),
-              ),*/
             ],
           ),
           Container(
             margin: EdgeInsets.only(top: 10.0),
             child: Text(
-              '${this.title}',
+              '${this.ads.name}',
               textAlign: TextAlign.left,
               style: TextStyle(fontSize: 15.0),
             ),
@@ -61,7 +52,7 @@ class AdsCard extends StatelessWidget {
           Container(
             margin: EdgeInsets.only(top: 5.0),
             child: Text(
-              '${this.price}',
+              '${this.ads.price}',
               style: TextStyle(
                 fontSize: 15.0,
                 color: Colors.green,
@@ -70,6 +61,9 @@ class AdsCard extends StatelessWidget {
           ),
         ],
       ),
+      onTap: () {
+        _launchURL(this.ads.url);
+      },
     );
   }
 }

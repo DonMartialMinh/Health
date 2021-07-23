@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:health/controllers/section_title.dart';
 import 'package:health/controllers/exercise_list_page.dart';
 import 'package:health/models/exercise.dart';
-import 'detail_exercise_card.dart';
 import 'exercise_card.dart';
 
 class ExcerciseBodyPartCategory extends StatelessWidget {
@@ -43,38 +42,17 @@ class ExcerciseBodyPartCategory extends StatelessWidget {
                       itemBuilder: (ctx, index) =>
                           Container(
                             margin: EdgeInsets.only(top: 20, left: 20, right: 20),
-                            child: GestureDetector(
-                              child: ExerciseCard(
-                                exercise: new Exercise(
-                                  title: streamSnapshot.data!.docs[index]['title'],
-                                  time: streamSnapshot.data!.docs[index]['time'],
-                                  difficult: streamSnapshot.data!.docs[index]['difficult'],
-                                  image: streamSnapshot.data!.docs[index]['image'],
-                                  effect: streamSnapshot.data!.docs[index]['effect'],
-                                  caution: streamSnapshot.data!.docs[index]['caution'],
-                                  steps: streamSnapshot.data!.docs[index]['steps'].cast<String>(),
-                                ),
-                                tag: streamSnapshot.data!.docs[index].id,
-                                imageWidth: _cardWidth,
+                            child: ExerciseCard(
+                              exercise: new Exercise(
+                                title: streamSnapshot.data!.docs[index]['title'],
+                                time: streamSnapshot.data!.docs[index]['time'],
+                                difficult: streamSnapshot.data!.docs[index]['difficult'],
+                                image: streamSnapshot.data!.docs[index]['image'],
+                                effect: streamSnapshot.data!.docs[index]['effect'],
+                                caution: streamSnapshot.data!.docs[index]['caution'],
+                                steps: streamSnapshot.data!.docs[index]['steps'].cast<String>(),
                               ),
-                              onTap: () {
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                    builder: (_) {
-                                      return DetailExerciseCard(exercise: new Exercise(
-                                        title: streamSnapshot.data!.docs[index]['title'],
-                                        time: streamSnapshot.data!.docs[index]['time'],
-                                        difficult: streamSnapshot.data!.docs[index]['difficult'],
-                                        image: streamSnapshot.data!.docs[index]['image'],
-                                        effect: streamSnapshot.data!.docs[index]['effect'],
-                                        caution: streamSnapshot.data!.docs[index]['caution'],
-                                        steps: streamSnapshot.data!.docs[index]['steps'].cast<String>(),
-                                      ), tag: streamSnapshot.data!.docs[index].id);
-                                    },
-                                  ),
-                                );
-                              },
+                              imageWidth: _cardWidth,
                             ),
                           ),
                     );
@@ -106,38 +84,17 @@ class ExcerciseBodyPartCategory extends StatelessWidget {
                       itemBuilder: (ctx, index) =>
                           Container(
                             margin: EdgeInsets.only(top: 20, left: 20, right: 20),
-                            child: GestureDetector(
-                              child: ExerciseCard(
-                                exercise: new Exercise(
-                                  title: streamSnapshot.data!.docs[index]['title'],
-                                  time: streamSnapshot.data!.docs[index]['time'],
-                                  difficult: streamSnapshot.data!.docs[index]['difficult'],
-                                  image: streamSnapshot.data!.docs[index]['image'],
-                                  effect: streamSnapshot.data!.docs[index]['effect'],
-                                  caution: streamSnapshot.data!.docs[index]['caution'],
-                                  steps: streamSnapshot.data!.docs[index]['steps'].cast<String>(),
-                                ),
-                                tag: streamSnapshot.data!.docs[index].id,
-                                imageWidth: _cardWidth,
+                            child: ExerciseCard(
+                              exercise: new Exercise(
+                                title: streamSnapshot.data!.docs[index]['title'],
+                                time: streamSnapshot.data!.docs[index]['time'],
+                                difficult: streamSnapshot.data!.docs[index]['difficult'],
+                                image: streamSnapshot.data!.docs[index]['image'],
+                                effect: streamSnapshot.data!.docs[index]['effect'],
+                                caution: streamSnapshot.data!.docs[index]['caution'],
+                                steps: streamSnapshot.data!.docs[index]['steps'].cast<String>(),
                               ),
-                              onTap: () {
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                    builder: (_) {
-                                      return DetailExerciseCard(exercise: new Exercise(
-                                        title: streamSnapshot.data!.docs[index]['title'],
-                                        time: streamSnapshot.data!.docs[index]['time'],
-                                        difficult: streamSnapshot.data!.docs[index]['difficult'],
-                                        image: streamSnapshot.data!.docs[index]['image'],
-                                        effect: streamSnapshot.data!.docs[index]['effect'],
-                                        caution: streamSnapshot.data!.docs[index]['caution'],
-                                        steps: streamSnapshot.data!.docs[index]['steps'].cast<String>(),
-                                      ), tag: streamSnapshot.data!.docs[index].id);
-                                    },
-                                  ),
-                                );
-                              },
+                              imageWidth: _cardWidth,
                             ),
                           ),
                     );
@@ -169,38 +126,17 @@ class ExcerciseBodyPartCategory extends StatelessWidget {
                       itemBuilder: (ctx, index) =>
                           Container(
                             margin: EdgeInsets.only(top: 20, left: 20, right: 20),
-                            child: GestureDetector(
-                              child: ExerciseCard(
-                                exercise: new Exercise(
-                                  title: streamSnapshot.data!.docs[index]['title'],
-                                  time: streamSnapshot.data!.docs[index]['time'],
-                                  difficult: streamSnapshot.data!.docs[index]['difficult'],
-                                  image: streamSnapshot.data!.docs[index]['image'],
-                                  effect: streamSnapshot.data!.docs[index]['effect'],
-                                  caution: streamSnapshot.data!.docs[index]['caution'],
-                                  steps: streamSnapshot.data!.docs[index]['steps'].cast<String>(),
-                                ),
-                                tag: streamSnapshot.data!.docs[index].id,
-                                imageWidth: _cardWidth,
+                            child: ExerciseCard(
+                              exercise: new Exercise(
+                                title: streamSnapshot.data!.docs[index]['title'],
+                                time: streamSnapshot.data!.docs[index]['time'],
+                                difficult: streamSnapshot.data!.docs[index]['difficult'],
+                                image: streamSnapshot.data!.docs[index]['image'],
+                                effect: streamSnapshot.data!.docs[index]['effect'],
+                                caution: streamSnapshot.data!.docs[index]['caution'],
+                                steps: streamSnapshot.data!.docs[index]['steps'].cast<String>(),
                               ),
-                              onTap: () {
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                    builder: (_) {
-                                      return DetailExerciseCard(exercise: new Exercise(
-                                        title: streamSnapshot.data!.docs[index]['title'],
-                                        time: streamSnapshot.data!.docs[index]['time'],
-                                        difficult: streamSnapshot.data!.docs[index]['difficult'],
-                                        image: streamSnapshot.data!.docs[index]['image'],
-                                        effect: streamSnapshot.data!.docs[index]['effect'],
-                                        caution: streamSnapshot.data!.docs[index]['caution'],
-                                        steps: streamSnapshot.data!.docs[index]['steps'].cast<String>(),
-                                      ), tag: streamSnapshot.data!.docs[index].id);
-                                    },
-                                  ),
-                                );
-                              },
+                              imageWidth: _cardWidth,
                             ),
                           ),
                     );

@@ -20,8 +20,8 @@ class FoodCard extends StatelessWidget {
         onTap: () {
       Navigator.of(context).push(
           MaterialPageRoute(builder: (context) => DetailFoodPage(food: food, tag: this.tag,))
-      );
-    },
+        );
+      },
        child: Column(
          crossAxisAlignment: CrossAxisAlignment.start,
          children: [

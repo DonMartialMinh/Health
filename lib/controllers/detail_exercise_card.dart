@@ -1,5 +1,3 @@
-
-
 import 'package:numberpicker/numberpicker.dart';
 import 'package:flutter/material.dart';
 import 'package:health/models/exercise.dart';
@@ -9,10 +7,9 @@ import 'activity_timer.dart';
 
 class DetailExerciseCard extends StatefulWidget{
   Exercise exercise;
-  String tag;
   late List <Exercise> list;
   int _currentTimeValue = 0;
-  DetailExerciseCard({required this.exercise, required this.tag}){
+  DetailExerciseCard({required this.exercise}){
     list = [];
     list.add(exercise);
     _currentTimeValue = exercise.time;
@@ -43,7 +40,9 @@ class _MyWidgetState extends State<DetailExerciseCard> {
   Widget build(BuildContext context) {
     // TODO: implement build
     return SafeArea(child: Scaffold(
-      appBar: AppBar(title: Text('${widget.exercise.title}', style: TextStyle(fontSize: 25),),backgroundColor: Colors.redAccent,),
+      appBar: AppBar(
+        title: Text('${widget.exercise.title}', style: TextStyle(fontSize: 25)),
+        backgroundColor: Colors.redAccent,),
       body: SingleChildScrollView(
         child: Column(
           //crossAxisAlignment: CrossAxisAlignment.start,

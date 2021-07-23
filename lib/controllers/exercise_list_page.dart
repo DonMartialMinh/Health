@@ -55,38 +55,17 @@ class _MyAppState extends State<ExerciseListPage> {
                 itemBuilder: (ctx, index) =>
                 (streamSnapshot.data!.docs[index]['title'].toLowerCase().contains(widget.searchQuery.trim().toLowerCase())) ? Container(
                   margin: EdgeInsets.only(top: 20, left: 20, right: 20),
-                  child: GestureDetector(
-                    child: ExerciseCard(
-                      exercise: new Exercise(
-                        title: streamSnapshot.data!.docs[index]['title'],
-                        time: streamSnapshot.data!.docs[index]['time'],
-                        difficult: streamSnapshot.data!.docs[index]['difficult'],
-                        image: streamSnapshot.data!.docs[index]['image'],
-                        effect: streamSnapshot.data!.docs[index]['effect'],
-                        caution: streamSnapshot.data!.docs[index]['caution'],
-                        steps: streamSnapshot.data!.docs[index]['steps'].cast<String>(),
-                      ),
-                      tag: streamSnapshot.data!.docs[index].id,
-                      imageWidth: _cardWidth,
+                  child: ExerciseCard(
+                    exercise: new Exercise(
+                      title: streamSnapshot.data!.docs[index]['title'],
+                      time: streamSnapshot.data!.docs[index]['time'],
+                      difficult: streamSnapshot.data!.docs[index]['difficult'],
+                      image: streamSnapshot.data!.docs[index]['image'],
+                      effect: streamSnapshot.data!.docs[index]['effect'],
+                      caution: streamSnapshot.data!.docs[index]['caution'],
+                      steps: streamSnapshot.data!.docs[index]['steps'].cast<String>(),
                     ),
-                    onTap: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (_) {
-                            return DetailExerciseCard(exercise: new Exercise(
-                              title: streamSnapshot.data!.docs[index]['title'],
-                              time: streamSnapshot.data!.docs[index]['time'],
-                              difficult: streamSnapshot.data!.docs[index]['difficult'],
-                              image: streamSnapshot.data!.docs[index]['image'],
-                              effect: streamSnapshot.data!.docs[index]['effect'],
-                              caution: streamSnapshot.data!.docs[index]['caution'],
-                              steps: streamSnapshot.data!.docs[index]['steps'].cast<String>(),
-                            ), tag: streamSnapshot.data!.docs[index].id);
-                          },
-                        ),
-                      );
-                    },
+                    imageWidth: _cardWidth,
                   ),
                 ) : Container(),
               );

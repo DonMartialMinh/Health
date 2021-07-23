@@ -1,7 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:health/controllers//activity_detail.dart';
 import 'package:health/controllers/Header.dart';
 import 'package:health/controllers/exercise_yoga_category.dart';
+import 'package:health/models/ads.dart';
 import 'package:health/models/tip.dart';
 import 'package:health/controllers/exercise_body_part_category.dart';
 import 'package:health/controllers/tip_card.dart';
@@ -9,21 +9,11 @@ import 'package:health/controllers/ads_card.dart';
 import 'package:health/controllers/main_card_programs.dart';
 import 'package:health/models/exercise.dart';
 import 'package:health/controllers/exercise_card.dart';
-import 'package:health/controllers/detail_exercise_card.dart';
 import 'package:health/controllers/section_title.dart';
 import 'package:health/models/program.dart';
-import 'package:url_launcher/url_launcher.dart';
 import 'package:flutter/material.dart';
 
 class Fitness extends StatelessWidget {
-
-  _launchURL(String url) async {
-    if (await canLaunch(url)) {
-      await launch(url);
-    } else {
-      throw 'Could not launch $url';
-    }
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -74,32 +64,13 @@ class Fitness extends StatelessWidget {
                         itemBuilder: (ctx, index) =>
                           Container(
                             //margin: EdgeInsets.only(top: 20, left: 20, right: 20),
-                            child: GestureDetector(
-                              child: MainCardPrograms(program: new Program(
-                                  title: streamSnapshot.data!.docs[index]['title'],
-                                  time: streamSnapshot.data!.docs[index]['time'],
-                                  difficult: streamSnapshot.data!.docs[index]['difficult'],
-                                  image: streamSnapshot.data!.docs[index]['image'],
-                                  exercises: List<Exercise>.from(streamSnapshot.data!.docs[index]['exercises'].map((i) => Exercise.fromJson(i)))
-                              )
-                              ),
-                              onTap: () {
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                    builder: (_) {
-                                      return ActivityDetail(program: Program(
-                                          title: streamSnapshot.data!.docs[index]['title'],
-                                          time: streamSnapshot.data!.docs[index]['time'],
-                                          difficult: streamSnapshot.data!.docs[index]['difficult'],
-                                          image: streamSnapshot.data!.docs[index]['image'],
-                                          exercises: List<Exercise>.from(streamSnapshot.data!.docs[index]['exercises'].map((i) => Exercise.fromJson(i)))
-                                      ));
-                                    },
-                                  ),
-                                );
-                              },
-                            ),
+                            child: MainCardPrograms(program: new Program(
+                                title: streamSnapshot.data!.docs[index]['title'],
+                                time: streamSnapshot.data!.docs[index]['time'],
+                                difficult: streamSnapshot.data!.docs[index]['difficult'],
+                                image: streamSnapshot.data!.docs[index]['image'],
+                                exercises: List<Exercise>.from(streamSnapshot.data!.docs[index]['exercises'].map((i) => Exercise.fromJson(i)))
+                            )),
                           )
                       );
                     },
@@ -129,38 +100,17 @@ class Fitness extends StatelessWidget {
                         itemBuilder: (ctx, index) =>
                             Container(
                               margin: EdgeInsets.only(top: 20, left: 20, right: 20),
-                              child: GestureDetector(
-                                child: ExerciseCard(
-                                  exercise: new Exercise(
-                                    title: streamSnapshot.data!.docs[index]['title'],
-                                    time: streamSnapshot.data!.docs[index]['time'],
-                                    difficult: streamSnapshot.data!.docs[index]['difficult'],
-                                    image: streamSnapshot.data!.docs[index]['image'],
-                                    effect: streamSnapshot.data!.docs[index]['effect'],
-                                    caution: streamSnapshot.data!.docs[index]['caution'],
-                                    steps: streamSnapshot.data!.docs[index]['steps'].cast<String>(),
-                                  ),
-                                  tag: streamSnapshot.data!.docs[index].id,
-                                  imageWidth: _cardWidth,
+                              child: ExerciseCard(
+                                exercise: new Exercise(
+                                  title: streamSnapshot.data!.docs[index]['title'],
+                                  time: streamSnapshot.data!.docs[index]['time'],
+                                  difficult: streamSnapshot.data!.docs[index]['difficult'],
+                                  image: streamSnapshot.data!.docs[index]['image'],
+                                  effect: streamSnapshot.data!.docs[index]['effect'],
+                                  caution: streamSnapshot.data!.docs[index]['caution'],
+                                  steps: streamSnapshot.data!.docs[index]['steps'].cast<String>(),
                                 ),
-                                onTap: () {
-                                  Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                      builder: (_) {
-                                        return DetailExerciseCard(exercise: new Exercise(
-                                          title: streamSnapshot.data!.docs[index]['title'],
-                                          time: streamSnapshot.data!.docs[index]['time'],
-                                          difficult: streamSnapshot.data!.docs[index]['difficult'],
-                                          image: streamSnapshot.data!.docs[index]['image'],
-                                          effect: streamSnapshot.data!.docs[index]['effect'],
-                                          caution: streamSnapshot.data!.docs[index]['caution'],
-                                          steps: streamSnapshot.data!.docs[index]['steps'].cast<String>(),
-                                        ), tag: streamSnapshot.data!.docs[index].id);
-                                      },
-                                    ),
-                                  );
-                                },
+                                imageWidth: _cardWidth,
                               ),
                             ),
                       );
@@ -191,38 +141,17 @@ class Fitness extends StatelessWidget {
                         itemBuilder: (ctx, index) =>
                             Container(
                               margin: EdgeInsets.only(top: 20, left: 20, right: 20),
-                              child: GestureDetector(
-                                child: ExerciseCard(
-                                  exercise: new Exercise(
-                                      title: streamSnapshot.data!.docs[index]['title'],
-                                      time: streamSnapshot.data!.docs[index]['time'],
-                                      difficult: streamSnapshot.data!.docs[index]['difficult'],
-                                      image: streamSnapshot.data!.docs[index]['image'],
-                                      effect: streamSnapshot.data!.docs[index]['effect'],
-                                      caution: streamSnapshot.data!.docs[index]['caution'],
-                                      steps: streamSnapshot.data!.docs[index]['steps'].cast<String>(),
-                                  ),
-                                  tag: streamSnapshot.data!.docs[index].id,
-                                  imageWidth: _cardWidth,
+                              child: ExerciseCard(
+                                exercise: new Exercise(
+                                  title: streamSnapshot.data!.docs[index]['title'],
+                                  time: streamSnapshot.data!.docs[index]['time'],
+                                  difficult: streamSnapshot.data!.docs[index]['difficult'],
+                                  image: streamSnapshot.data!.docs[index]['image'],
+                                  effect: streamSnapshot.data!.docs[index]['effect'],
+                                  caution: streamSnapshot.data!.docs[index]['caution'],
+                                  steps: streamSnapshot.data!.docs[index]['steps'].cast<String>(),
                                 ),
-                                onTap: () {
-                                  Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                      builder: (_) {
-                                        return DetailExerciseCard(exercise: new Exercise(
-                                          title: streamSnapshot.data!.docs[index]['title'],
-                                          time: streamSnapshot.data!.docs[index]['time'],
-                                          difficult: streamSnapshot.data!.docs[index]['difficult'],
-                                          image: streamSnapshot.data!.docs[index]['image'],
-                                          effect: streamSnapshot.data!.docs[index]['effect'],
-                                          caution: streamSnapshot.data!.docs[index]['caution'],
-                                          steps: streamSnapshot.data!.docs[index]['steps'].cast<String>(),
-                                        ), tag: streamSnapshot.data!.docs[index].id);
-                                      },
-                                    ),
-                                  );
-                                },
+                                imageWidth: _cardWidth,
                               ),
                             ),
                       );
@@ -253,16 +182,12 @@ class Fitness extends StatelessWidget {
                               itemBuilder: (ctx, index) =>
                               Container(
                                 margin: EdgeInsets.only(top: 20, left: 20, right: 20),
-                                child: GestureDetector(
-                                  child: AdsCard(
-                                    image: streamSnapshot.data!.docs[index]['image'],
-                                    title: streamSnapshot.data!.docs[index]['name'],
+                                child: AdsCard( ads: new Ads(
+                                    name: streamSnapshot.data!.docs[index]['name'],
+                                    content:  streamSnapshot.data!.docs[index]['content'],
                                     price: streamSnapshot.data!.docs[index]['price'],
-                                    effect: streamSnapshot.data!.docs[index]['content']
-                                  ),
-                                  onTap: () {
-                                    _launchURL(streamSnapshot.data!.docs[index]['url']);
-                                  },
+                                    image: streamSnapshot.data!.docs[index]['image'],
+                                    url:  streamSnapshot.data!.docs[index]['url']),
                                 ),
                               ),
                             );
