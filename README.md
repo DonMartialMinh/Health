@@ -96,7 +96,7 @@ A Healthcare application focus on 3 activity support include Exercising, Eating 
   - flutter_facebook_login: ^3.0.0
 
 ## References
-- [fitness-ui](https://github.com/DonMartialMinh/fitness-ui)
+- [fitness-ui](https://github.com/feMoraes0/fitness-ui)
 - [Tự học Flutter 2020 - Nguyen Duc Hoang](https://www.youtube.com/watch?v=GkuKMSnERPE&list=PLWBrqglnjNl3DzS2RHds5KlanGqQ1uLNQ)
 
 ## Author
