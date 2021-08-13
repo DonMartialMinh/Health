@@ -11,6 +11,7 @@ A Healthcare application focus on 3 activity support include Exercising, Eating 
   * [User Profile](#user-profile)
 - [Technologies and libraries](#technologies-and-libraries)
 - [Author](#author)
+- [References](#references)
 - [License](#license)
 
 
@@ -50,6 +51,7 @@ A Healthcare application focus on 3 activity support include Exercising, Eating 
 - Have a wonderful ton of dishes help to improve your exercising
 - Keep track of calories absorption, time spending, how to cook in specific dish
 <p align="center">
+ <img src="https://user-images.githubusercontent.com/43954674/129366996-d5d992ea-e7d6-4fe8-9510-72c05b5621bb.jpg" width="300">
  <img src="https://user-images.githubusercontent.com/43954674/128592618-a20458b1-e780-42bb-80ea-1580dae434e0.jpg" width="300">
 </p>
 
@@ -66,7 +68,7 @@ A Healthcare application focus on 3 activity support include Exercising, Eating 
 - Calculate your Body Mass Index(BMI) by your weight and height
 - Store your personal data
 <p align="center">
- <img src="https://user-images.githubusercontent.com/43954674/128592615-642c9395-beed-41e2-983f-97a118eabe39.jpg" width="300">
+ <img src="https://user-images.githubusercontent.com/43954674/129367031-6b1f7dd2-7230-4f21-8519-3d1bc60e4654.jpg" width="300">
 </p>
 
 ## Technologies and libraries
@@ -93,8 +95,13 @@ A Healthcare application focus on 3 activity support include Exercising, Eating 
   - introduction_screen: ^2.1.0
   - flutter_facebook_login: ^3.0.0
 
+## References
+- [fitness-ui](https://github.com/DonMartialMinh/fitness-ui)
+- [Tự học Flutter 2020 - Nguyen Duc Hoang](https://www.youtube.com/watch?v=GkuKMSnERPE&list=PLWBrqglnjNl3DzS2RHds5KlanGqQ1uLNQ)
+
 ## Author
 - Võ Minh Đôn - 18520608@gm.uit.edu.vn
+
 ## License
 ```
 Copyright [2021] [fueledbyramental]
